@@ -1,0 +1,13 @@
+﻿@page "/Admin/EditComponentTemplate/{id:int}"
+@attribute [Authorize(Roles = "Admin,CoteStaff")]
+
+@if (DomainTemplate != null)
+{
+    <label for="title">Title</label>
+    <input id="title" type="text" @bind="DomainTemplate.DomainTitle" />
+
+    <label for="description">Description</label>
+    <input id="description" type="text" @bind="DomainTemplate.DomainDescription" />
+
+    <button @onclick="Save">Save Domain Template</button>
+}

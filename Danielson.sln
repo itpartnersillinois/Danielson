@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Danielson", "Danielson\Danielson.csproj", "{FDEBFF81-2D8B-4B24-BF41-028255B1D858}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Danielson.Data", "Danielson.Data\Danielson.Data.csproj", "{770267E9-45B3-4D6B-8624-3B6C5D3CA0FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9BE0954F-07DD-40DF-8F61-2345B5CFB62F}"
+	ProjectSection(SolutionItems) = preProject
+		README.MD = README.MD
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDEBFF81-2D8B-4B24-BF41-028255B1D858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDEBFF81-2D8B-4B24-BF41-028255B1D858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDEBFF81-2D8B-4B24-BF41-028255B1D858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDEBFF81-2D8B-4B24-BF41-028255B1D858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{770267E9-45B3-4D6B-8624-3B6C5D3CA0FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{770267E9-45B3-4D6B-8624-3B6C5D3CA0FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{770267E9-45B3-4D6B-8624-3B6C5D3CA0FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{770267E9-45B3-4D6B-8624-3B6C5D3CA0FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CD03FF0-A7B2-4D91-93B9-829FF9BB5B2F}
+	EndGlobalSection
+EndGlobal

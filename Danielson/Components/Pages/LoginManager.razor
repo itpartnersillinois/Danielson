@@ -1,0 +1,14 @@
+﻿@page "/Account/LoginPassthrough/{GuidString?}"
+<h1>Logging in...</h1>
+
+@if (UserAccess.IsTesting)
+{
+    <p>Note that testing mode is turned on, so login process will not be handled</p>
+    <h2>Testing URLs</h2>
+    <ul>
+        <li><a target="_blank" href="/Account/LoginPassthrough/be31303e-404a-471c-b7c0-dfdea01a4121">Sample Administrator</a></li>
+        <li><a target="_blank" href="/Account/LoginPassthrough/3784cb3c-681f-45b0-9b67-391ca17f5c0f">Sample Student</a></li>
+        <li><a target="_blank" href="/Account/LoginPassthrough/50924bd6-1494-4c5c-a064-81b8aabedfa2">Sample Supervisor</a></li>
+        <li><a target="_blank" href="/Account/LoginPassthrough/b1dfc3d3-b726-4946-a65f-9489d360662f">Sample COTE Staff</a></li>
+    </ul>
+}
