@@ -3,9 +3,9 @@ using Danielson.Data.DataModels;
 
 namespace Danielson.Data.Login {
 
-    public class UserAccess(FormRepository testRepository, string? testingString) {
+    public class UserAccess(FormRepository? testRepository, string? testingString) {
         private readonly bool _testing = (testingString ?? "") == "testing";
-        private readonly FormRepository _testRepository = testRepository;
+        private readonly FormRepository _testRepository = testRepository ?? throw new ArgumentNullException("testRepository");
         public bool IsTesting => _testing;
 
         public async Task<(string email, string username, RoleEnum role, string studentId)> Get(Guid guid) {

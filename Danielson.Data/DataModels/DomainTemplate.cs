@@ -7,6 +7,7 @@ namespace Danielson.Data.DataModels {
     public class DomainTemplate : BaseDataItem {
         public virtual ICollection<ComponentTemplate> ComponentTemplates { get; set; } = default!;
         public string DomainDescription { get; set; } = "";
+        public string DomainInternalTitle => (IsDefault ? "Default" : "Custom") + " " + DomainType.ToString();
         public string DomainTitle { get; set; } = "";
         public DomainEnum DomainType { get; set; }
         public virtual FormTemplate? FormTemplate { get; set; }

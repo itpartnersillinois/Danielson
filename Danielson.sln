@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Danielson.Data", "Danielson
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9BE0954F-07DD-40DF-8F61-2345B5CFB62F}"
 	ProjectSection(SolutionItems) = preProject
-		README.MD = README.MD
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global

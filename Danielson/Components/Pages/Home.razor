@@ -7,7 +7,6 @@ Welcome to your new app.
 
 <p>@Information</p>
 
-
 <AuthorizeView>
     <Authorized>
         <p>@context.User.Identity?.Name</p>
@@ -17,5 +16,6 @@ Welcome to your new app.
     </NotAuthorized>
 </AuthorizeView>
 
+<p><a href="/Account/LoginPassthrough">Generic Login Page</a></p>
 
-<button @onclick="UpdateHeading">Testing button</button>
+<p><a href="/Admin/EditDomainTemplate/-1">Edit Default Domain #1</a></p>

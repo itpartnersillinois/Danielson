@@ -29,3 +29,5 @@ If you run into the issue "The certificate chain was issued by an authority that
 For the application login, please run the following:
 
 ``Update-Database -Context ApplicationDbContext``
+
+Note that the Danielson tables are all built with a [danielson] schema. The ApplicationDbContext tables all start with AspNet
