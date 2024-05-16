@@ -147,6 +147,9 @@ namespace Danielson.Data.Migrations
                     b.Property<DateTime>("LastUpdated")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MinimumExpectedRating")
+                        .HasColumnType("int");
+
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
@@ -246,7 +249,7 @@ namespace Danielson.Data.Migrations
                             DomainType = 0,
                             IsActive = true,
                             IsDefault = true,
-                            LastUpdated = new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(432)
+                            LastUpdated = new DateTime(2024, 5, 16, 9, 26, 58, 60, DateTimeKind.Local).AddTicks(9961)
                         },
                         new
                         {
@@ -256,7 +259,7 @@ namespace Danielson.Data.Migrations
                             DomainType = 1,
                             IsActive = true,
                             IsDefault = true,
-                            LastUpdated = new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(581)
+                            LastUpdated = new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(773)
                         },
                         new
                         {
@@ -266,7 +269,7 @@ namespace Danielson.Data.Migrations
                             DomainType = 2,
                             IsActive = true,
                             IsDefault = true,
-                            LastUpdated = new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(593)
+                            LastUpdated = new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(831)
                         },
                         new
                         {
@@ -276,7 +279,7 @@ namespace Danielson.Data.Migrations
                             DomainType = 3,
                             IsActive = true,
                             IsDefault = true,
-                            LastUpdated = new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(601)
+                            LastUpdated = new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(876)
                         });
                 });
 
@@ -405,7 +408,7 @@ namespace Danielson.Data.Migrations
                             Email = "admin@illinois.edu",
                             Guid = new Guid("be31303e-404a-471c-b7c0-dfdea01a4121"),
                             IsActive = false,
-                            LastUpdated = new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(1063),
+                            LastUpdated = new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(1619),
                             Role = 99,
                             StudentId = 0,
                             Username = "admin"
@@ -416,7 +419,7 @@ namespace Danielson.Data.Migrations
                             Email = "student@illinois.edu",
                             Guid = new Guid("3784cb3c-681f-45b0-9b67-391ca17f5c0f"),
                             IsActive = false,
-                            LastUpdated = new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(1150),
+                            LastUpdated = new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(1691),
                             Role = 1,
                             StudentId = 0,
                             Username = "student"
@@ -427,7 +430,7 @@ namespace Danielson.Data.Migrations
                             Email = "supervisor@illinois.edu",
                             Guid = new Guid("50924bd6-1494-4c5c-a064-81b8aabedfa2"),
                             IsActive = false,
-                            LastUpdated = new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(1167),
+                            LastUpdated = new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(1731),
                             Role = 2,
                             StudentId = 0,
                             Username = "supervisor"
@@ -438,7 +441,7 @@ namespace Danielson.Data.Migrations
                             Email = "cotestaff@illinois.edu",
                             Guid = new Guid("b1dfc3d3-b726-4946-a65f-9489d360662f"),
                             IsActive = false,
-                            LastUpdated = new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(1198),
+                            LastUpdated = new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(1784),
                             Role = 4,
                             StudentId = 0,
                             Username = "cotestaff"

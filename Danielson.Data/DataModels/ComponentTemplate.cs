@@ -17,6 +17,7 @@ namespace Danielson.Data.DataModels {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public override int Id { get; set; }
 
+        public int MinimumExpectedRating { get; set; }
         public int Order { get; set; }
         public int SectionTemplateId { get; set; }
     }

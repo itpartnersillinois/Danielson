@@ -147,6 +147,7 @@ namespace Danielson.Data.Migrations
                     ComponentConsiderations = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ComponentTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DomainTemplateId = table.Column<int>(type: "int", nullable: false),
+                    MinimumExpectedRating = table.Column<int>(type: "int", nullable: false),
                     Order = table.Column<int>(type: "int", nullable: false),
                     SectionTemplateId = table.Column<int>(type: "int", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -236,10 +237,10 @@ namespace Danielson.Data.Migrations
                 columns: new[] { "Id", "DomainDescription", "DomainTitle", "DomainType", "FormId", "FormTemplateId", "IsActive", "IsDefault", "LastUpdated" },
                 values: new object[,]
                 {
-                    { -4, "", "Default 4", 3, null, null, true, true, new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(601) },
-                    { -3, "", "Default 3", 2, null, null, true, true, new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(593) },
-                    { -2, "", "Default 2", 1, null, null, true, true, new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(581) },
-                    { -1, "", "Default 1", 0, null, null, true, true, new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(432) }
+                    { -4, "", "Default 4", 3, null, null, true, true, new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(876) },
+                    { -3, "", "Default 3", 2, null, null, true, true, new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(831) },
+                    { -2, "", "Default 2", 1, null, null, true, true, new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(773) },
+                    { -1, "", "Default 1", 0, null, null, true, true, new DateTime(2024, 5, 16, 9, 26, 58, 60, DateTimeKind.Local).AddTicks(9961) }
                 });
 
             migrationBuilder.InsertData(
@@ -248,10 +249,10 @@ namespace Danielson.Data.Migrations
                 columns: new[] { "Id", "Email", "Guid", "IsActive", "LastUpdated", "Role", "StudentId", "Username" },
                 values: new object[,]
                 {
-                    { -4, "cotestaff@illinois.edu", new Guid("b1dfc3d3-b726-4946-a65f-9489d360662f"), false, new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(1198), 4, 0, "cotestaff" },
-                    { -3, "supervisor@illinois.edu", new Guid("50924bd6-1494-4c5c-a064-81b8aabedfa2"), false, new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(1167), 2, 0, "supervisor" },
-                    { -2, "student@illinois.edu", new Guid("3784cb3c-681f-45b0-9b67-391ca17f5c0f"), false, new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(1150), 1, 0, "student" },
-                    { -1, "admin@illinois.edu", new Guid("be31303e-404a-471c-b7c0-dfdea01a4121"), false, new DateTime(2024, 5, 10, 16, 41, 3, 780, DateTimeKind.Local).AddTicks(1063), 99, 0, "admin" }
+                    { -4, "cotestaff@illinois.edu", new Guid("b1dfc3d3-b726-4946-a65f-9489d360662f"), false, new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(1784), 4, 0, "cotestaff" },
+                    { -3, "supervisor@illinois.edu", new Guid("50924bd6-1494-4c5c-a064-81b8aabedfa2"), false, new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(1731), 2, 0, "supervisor" },
+                    { -2, "student@illinois.edu", new Guid("3784cb3c-681f-45b0-9b67-391ca17f5c0f"), false, new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(1691), 1, 0, "student" },
+                    { -1, "admin@illinois.edu", new Guid("be31303e-404a-471c-b7c0-dfdea01a4121"), false, new DateTime(2024, 5, 16, 9, 26, 58, 61, DateTimeKind.Local).AddTicks(1619), 99, 0, "admin" }
                 });
 
             migrationBuilder.CreateIndex(
