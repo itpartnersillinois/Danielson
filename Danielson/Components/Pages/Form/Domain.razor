@@ -1,0 +1,18 @@
+﻿@page "/Form/Domain/{FormId:int}"
+@attribute [Authorize(Roles = "Student,Supervisor,CooperatingTeacher,Admin,CoteStaff")]
+
+@if (DomainObject != null)
+{
+    <h2>@DomainObject.Title</h2>
+
+    <p>@DomainObject.DescriptionHtml</p>
+
+    @if (CurrentForm != null)
+    {
+        @foreach (var component in DomainObject.Components)
+        {
+            <ComponentItem Component="component" FormId="FormId" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@CurrentForm.ShowNotObserved" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)"></ComponentItem>
+        }
+
+    }
+}

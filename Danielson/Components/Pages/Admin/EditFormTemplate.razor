@@ -1,0 +1,42 @@
+﻿@page "/Admin/EditFormTemplate/{id:int?}"
+@attribute [Authorize(Roles = "Admin,CoteStaff")]
+
+<PageTitle>Add / Edit Form Template</PageTitle>
+<h1>Add / Edit Form Template</h1>
+
+<div>
+Title: 
+<input type="text" @bind="FormTemplate.Title" class="form-control" placeholder="Name" />
+</div>
+
+<div>
+    Form Title:
+    <input type="text" @bind="FormTemplate.FormTitle" class="form-control" placeholder="Name" />
+</div>
+
+<div>
+Description: 
+<input type="text" @bind="FormTemplate.FormDescription" class="form-control"/>
+</div>
+
+<div>
+Internal Lookup String: 
+<input type="text" @bind="FormTemplate.InternalLookupString" class="form-control" />
+</div>
+
+<h2>Final Answers</h2>
+<textarea @bind="FormTemplate.FinalAnswerOptions" class="form-control" placeholder="Answer"></textarea>
+
+<p><button @onclick="Save">Save Changes</button></p>
+
+<h2>Considerations</h2>
+@foreach (var domain in DomainList.Domains.OrderBy(d => d.DomainEnum))
+{
+    <h3>@domain.Title</h3>
+
+    @foreach (var component in domain.Components.OrderBy(c => c.ComponentOrder))
+    {
+        <Danielson.Components.Controls.ConsiderationEditor Title="@component.Title" ConsiderationTemplate="FormTemplate.GetConsiderationTemplate(domain.DomainEnum, component.ComponentOrder)" OnChangeCallback="e => SaveConsideration(e)" />
+    }
+
+}

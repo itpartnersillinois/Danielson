@@ -19,10 +19,7 @@ namespace Danielson.Data.Data {
 
         public DbSet<ComponentAnswer> ComponentAnswers { get; set; }
 
-        public DbSet<ComponentOptionTemplate> ComponentOptionTemplates { get; set; }
-        public DbSet<ComponentTemplate> ComponentTemplates { get; set; }
-        public DbSet<Domain> Domains { get; set; }
-        public DbSet<DomainTemplate> DomainTemplates { get; set; }
+        public DbSet<ConsiderationTemplate> ConsiderationTemplates { get; set; }
         public DbSet<Form> Forms { get; set; }
         public DbSet<FormTemplate> FormTemplates { get; set; }
         public DbSet<User> Users { get; set; }
@@ -39,13 +36,6 @@ namespace Danielson.Data.Data {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             Debug.WriteLine($"{_id} context starting initial setup.");
-            _ = modelBuilder.Entity<DomainTemplate>().HasData(new List<DomainTemplate>
-            {
-                new() { Id = -1, IsActive = true, IsDefault = true, FormTemplateId = null, DomainType = DomainEnum.One, DomainTitle = "Default 1" },
-                new() { Id = -2, IsActive = true, IsDefault = true, FormTemplateId = null, DomainType = DomainEnum.Two, DomainTitle = "Default 2" },
-                new() { Id = -3, IsActive = true, IsDefault = true, FormTemplateId = null, DomainType = DomainEnum.Three, DomainTitle = "Default 3" },
-                new() { Id = -4, IsActive = true, IsDefault = true, FormTemplateId = null, DomainType = DomainEnum.Four, DomainTitle = "Default 4" }
-            });
             _ = modelBuilder.Entity<User>().HasData(new List<User> {
                 new() { Id = -1, Email = "admin@illinois.edu", Guid = Guid.Parse("BE31303E-404A-471C-B7C0-DFDEA01A4121"), IsActive = false, LastUpdated = DateTime.Now, Role = RoleEnum.Admin, Username = "admin" },
                 new() { Id = -2, Email = "student@illinois.edu", Guid = Guid.Parse("3784cb3c-681f-45b0-9b67-391ca17f5c0f"), IsActive = false, LastUpdated = DateTime.Now, Role = RoleEnum.Student, Username = "student" },

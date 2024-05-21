@@ -1,16 +1,18 @@
-﻿namespace Danielson.Components.Pages {
+﻿using Danielson.Data.DataAccess;
+using Danielson.Data.DataModels;
+using Microsoft.AspNetCore.Components;
+
+namespace Danielson.Components.Pages {
 
     public partial class Home {
-        protected string Information { get; set; } = "";
 
-        public async Task<bool> ClickMe() {
-            _ = await Task.Run(() => Information = "Testing click button");
-            StateHasChanged();
-            return true;
-        }
+        [Inject]
+        private FormTemplateAccess FormTemplateAccess { get; set; } = default!;
 
-        private void UpdateHeading() {
-            Information = $"New heading ({DateTime.Now})";
+        private List<FormTemplate> FormTemplates { get; set; } = default!;
+
+        protected override async Task OnInitializedAsync() {
+            FormTemplates = await FormTemplateAccess.GetAll();
         }
     }
 }

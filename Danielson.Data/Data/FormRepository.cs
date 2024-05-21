@@ -56,12 +56,12 @@ namespace Danielson.Data.Data {
             return await context.SaveChangesAsync();
         }
 
-        public T Read<T>(Func<FormContext, T> work) where T : BaseDataItem {
+        public T Read<T>(Func<FormContext, T> work) {
             var context = _factory.CreateDbContext();
             return work(context);
         }
 
-        public async Task<T> ReadAsync<T>(Func<FormContext, T> work) where T : BaseDataItem? {
+        public async Task<T> ReadAsync<T>(Func<FormContext, T> work) {
             var context = _factory.CreateDbContext();
             return await Task.Run(() => work(context));
         }

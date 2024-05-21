@@ -5,8 +5,6 @@
 
 Welcome to your new app.
 
-<p>@Information</p>
-
 <AuthorizeView>
     <Authorized>
         <p>@context.User.Identity?.Name</p>
@@ -18,4 +16,15 @@ Welcome to your new app.
 
 <p><a href="/Account/LoginPassthrough">Generic Login Page</a></p>
 
-<p><a href="/Admin/EditDomainTemplate/-1">Edit Default Domain #1</a></p>
+@if (FormTemplates != null)
+{
+    <h2>Form Templates</h2>
+    <ul>
+        @foreach (var formTemplate in FormTemplates) {
+            <li><a href="/Admin/EditFormTemplate/@formTemplate.Id">@formTemplate.Title</a></li>
+        }
+    </ul>
+    <p><a href="/Admin/EditFormTemplate">Add New Form</a></p>
+}
+
+<p><a href="/Form/Domain/1">Form ID #1</a></p>

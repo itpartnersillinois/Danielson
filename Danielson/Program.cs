@@ -23,7 +23,8 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStat
 builder.Services.AddDbContextFactory<FormContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnection")).EnableSensitiveDataLogging(true));
 builder.Services.AddScoped<FormRepository>();
 builder.Services.AddScoped(s => new UserAccess(s.GetService<FormRepository>(), builder.Configuration["Testing"]));
-builder.Services.AddScoped<DomainHelper>();
+builder.Services.AddScoped<FormTemplateAccess>();
+builder.Services.AddScoped<ComponentAnswerHandler>();
 
 builder.Services.AddAuthentication(options => {
     options.DefaultScheme = IdentityConstants.ApplicationScheme;
