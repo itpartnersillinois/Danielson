@@ -34,6 +34,10 @@ namespace Danielson.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ComponentDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ComponentOrder")
                         .HasColumnType("int");
 
@@ -104,6 +108,44 @@ namespace Danielson.Data.Migrations
                     b.ToTable("ConsiderationTemplate", "danielson");
                 });
 
+            modelBuilder.Entity("Danielson.Data.DataModels.DomainAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("DateCompleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DomainItem")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FormId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NextSteps")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Strengths")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormId");
+
+                    b.ToTable("DomainAnswer", "danielson");
+                });
+
             modelBuilder.Entity("Danielson.Data.DataModels.Form", b =>
                 {
                     b.Property<int>("Id")
@@ -164,6 +206,9 @@ namespace Danielson.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("ShowComponents")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("ShowNotObserved")
                         .HasColumnType("bit");
 
@@ -187,6 +232,34 @@ namespace Danielson.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Form", "danielson");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AssignmentId = 0,
+                            DateEvaluated = new DateTime(2024, 5, 22, 8, 3, 18, 107, DateTimeKind.Local).AddTicks(3586),
+                            DateSubmitted = new DateTime(2024, 5, 22, 8, 3, 18, 107, DateTimeKind.Local).AddTicks(3593),
+                            Email = "test@illinois.edu",
+                            FinalScore = 0.0,
+                            FinalScoreText = "",
+                            FinalSummary = "",
+                            FormTemplateInternalLookupString = "default",
+                            IsActive = true,
+                            IsMidterm = false,
+                            LastUpdated = new DateTime(2024, 5, 22, 8, 3, 18, 107, DateTimeKind.Local).AddTicks(3598),
+                            PlacementType = "",
+                            Position = "",
+                            ProgramId = 0,
+                            SemesterDate = "",
+                            ShowComponents = true,
+                            ShowNotObserved = true,
+                            ShowQuantitativeAnswer = true,
+                            Student = "",
+                            StudentEvaluationId = 0,
+                            StudentId = 0,
+                            Title = "Test form"
+                        });
                 });
 
             modelBuilder.Entity("Danielson.Data.DataModels.FormTemplate", b =>
@@ -270,7 +343,7 @@ namespace Danielson.Data.Migrations
                             Email = "admin@illinois.edu",
                             Guid = new Guid("be31303e-404a-471c-b7c0-dfdea01a4121"),
                             IsActive = false,
-                            LastUpdated = new DateTime(2024, 5, 21, 17, 33, 53, 689, DateTimeKind.Local).AddTicks(6844),
+                            LastUpdated = new DateTime(2024, 5, 22, 8, 3, 18, 107, DateTimeKind.Local).AddTicks(3458),
                             Role = 99,
                             StudentId = 0,
                             Username = "admin"
@@ -281,7 +354,7 @@ namespace Danielson.Data.Migrations
                             Email = "student@illinois.edu",
                             Guid = new Guid("3784cb3c-681f-45b0-9b67-391ca17f5c0f"),
                             IsActive = false,
-                            LastUpdated = new DateTime(2024, 5, 21, 17, 33, 53, 689, DateTimeKind.Local).AddTicks(6855),
+                            LastUpdated = new DateTime(2024, 5, 22, 8, 3, 18, 107, DateTimeKind.Local).AddTicks(3468),
                             Role = 1,
                             StudentId = 0,
                             Username = "student"
@@ -292,7 +365,7 @@ namespace Danielson.Data.Migrations
                             Email = "supervisor@illinois.edu",
                             Guid = new Guid("50924bd6-1494-4c5c-a064-81b8aabedfa2"),
                             IsActive = false,
-                            LastUpdated = new DateTime(2024, 5, 21, 17, 33, 53, 689, DateTimeKind.Local).AddTicks(6861),
+                            LastUpdated = new DateTime(2024, 5, 22, 8, 3, 18, 107, DateTimeKind.Local).AddTicks(3474),
                             Role = 2,
                             StudentId = 0,
                             Username = "supervisor"
@@ -303,7 +376,7 @@ namespace Danielson.Data.Migrations
                             Email = "cotestaff@illinois.edu",
                             Guid = new Guid("b1dfc3d3-b726-4946-a65f-9489d360662f"),
                             IsActive = false,
-                            LastUpdated = new DateTime(2024, 5, 21, 17, 33, 53, 689, DateTimeKind.Local).AddTicks(6866),
+                            LastUpdated = new DateTime(2024, 5, 22, 8, 3, 18, 107, DateTimeKind.Local).AddTicks(3479),
                             Role = 4,
                             StudentId = 0,
                             Username = "cotestaff"
@@ -332,9 +405,22 @@ namespace Danielson.Data.Migrations
                     b.Navigation("FormTemplate");
                 });
 
+            modelBuilder.Entity("Danielson.Data.DataModels.DomainAnswer", b =>
+                {
+                    b.HasOne("Danielson.Data.DataModels.Form", "Form")
+                        .WithMany("DomainAnswers")
+                        .HasForeignKey("FormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Form");
+                });
+
             modelBuilder.Entity("Danielson.Data.DataModels.Form", b =>
                 {
                     b.Navigation("ComponentAnswers");
+
+                    b.Navigation("DomainAnswers");
                 });
 
             modelBuilder.Entity("Danielson.Data.DataModels.FormTemplate", b =>

@@ -12,6 +12,8 @@ namespace Danielson.Data.DataModels {
 
         public DateTime? DateSubmitted { get; set; } = null;
 
+        public virtual ICollection<DomainAnswer> DomainAnswers { get; set; } = default!;
+
         public string Email { get; set; } = "";
 
         public double FinalScore { get; set; }
@@ -36,6 +38,8 @@ namespace Danielson.Data.DataModels {
 
         public string SemesterDate { get; set; } = "";
 
+        public bool ShowComponents { get; set; }
+
         public bool ShowNotObserved { get; set; }
 
         public bool ShowQuantitativeAnswer { get; set; }
@@ -48,6 +52,24 @@ namespace Danielson.Data.DataModels {
 
         public string Title { get; set; } = "";
 
-        public ComponentAnswer GetComponentAnswer(DomainEnum domain, int componentOrder) => ComponentAnswers == null ? new ComponentAnswer { DomainItem = domain, ComponentOrder = componentOrder } : ComponentAnswers.FirstOrDefault(x => x.DomainItem == domain && x.ComponentOrder == componentOrder) ?? new ComponentAnswer { DomainItem = domain, ComponentOrder = componentOrder };
+        public void AddComponentAnswerToForm(ComponentAnswer componentAnswer) {
+            if (ComponentAnswers == null) {
+                ComponentAnswers = [componentAnswer];
+            } else if (!ComponentAnswers.Any(c => c.DomainItem == componentAnswer.DomainItem && c.ComponentOrder == componentAnswer.ComponentOrder)) {
+                ComponentAnswers.Add(componentAnswer);
+            }
+        }
+
+        public void AddDomainAnswerToForm(DomainAnswer domainAnswer) {
+            if (DomainAnswers == null) {
+                DomainAnswers = [domainAnswer];
+            } else if (!DomainAnswers.Any(c => c.DomainItem == domainAnswer.DomainItem)) {
+                DomainAnswers.Add(domainAnswer);
+            }
+        }
+
+        public ComponentAnswer GetComponentAnswer(DomainEnum domain, int componentOrder) => ComponentAnswers == null ? new ComponentAnswer { DomainItem = domain, ComponentOrder = componentOrder, FormId = Id } : ComponentAnswers.FirstOrDefault(x => x.DomainItem == domain && x.ComponentOrder == componentOrder) ?? new ComponentAnswer { DomainItem = domain, ComponentOrder = componentOrder, FormId = Id };
+
+        public DomainAnswer GetDomainAnswer(DomainEnum domain) => DomainAnswers == null ? new DomainAnswer { DomainItem = domain, FormId = Id } : DomainAnswers.FirstOrDefault(x => x.DomainItem == domain) ?? new DomainAnswer { DomainItem = domain, FormId = Id };
     }
 }

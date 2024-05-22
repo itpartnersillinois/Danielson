@@ -6,7 +6,7 @@ namespace Danielson.Data.DataModels {
     [Table("DomainAnswer", Schema = "danielson")]
     public class DomainAnswer : BaseDataItem {
         public DateTime? DateCompleted { get; set; }
-        public DomainEnum DomainType { get; set; }
+        public DomainEnum DomainItem { get; set; }
         public virtual Form Form { get; set; } = default!;
 
         public int FormId { get; set; }

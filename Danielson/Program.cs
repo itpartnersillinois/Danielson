@@ -24,7 +24,7 @@ builder.Services.AddDbContextFactory<FormContext>(options => options.UseSqlServe
 builder.Services.AddScoped<FormRepository>();
 builder.Services.AddScoped(s => new UserAccess(s.GetService<FormRepository>(), builder.Configuration["Testing"]));
 builder.Services.AddScoped<FormTemplateAccess>();
-builder.Services.AddScoped<ComponentAnswerHandler>();
+builder.Services.AddScoped<FormAccess>();
 
 builder.Services.AddAuthentication(options => {
     options.DefaultScheme = IdentityConstants.ApplicationScheme;

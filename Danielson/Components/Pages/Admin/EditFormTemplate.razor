@@ -25,7 +25,7 @@ Internal Lookup String:
 </div>
 
 <h2>Final Answers</h2>
-<textarea @bind="FormTemplate.FinalAnswerOptions" class="form-control" placeholder="Answer"></textarea>
+<textarea @bind="FormTemplate.FinalAnswerOptions" class="admin-textarea" placeholder="Answer"></textarea>
 
 <p><button @onclick="Save">Save Changes</button></p>
 
@@ -36,7 +36,7 @@ Internal Lookup String:
 
     @foreach (var component in domain.Components.OrderBy(c => c.ComponentOrder))
     {
-        <Danielson.Components.Controls.ConsiderationEditor Title="@component.Title" ConsiderationTemplate="FormTemplate.GetConsiderationTemplate(domain.DomainEnum, component.ComponentOrder)" OnChangeCallback="e => SaveConsideration(e)" />
+        <ConsiderationEditor Title="@component.Title" ConsiderationTemplate="FormTemplate.GetConsiderationTemplate(domain.DomainEnum, component.ComponentOrder)" OnChangeCallback="e => SaveConsideration(e)" />
     }
 
 }

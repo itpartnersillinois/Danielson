@@ -1,0 +1,12 @@
+﻿<details>
+    <summary>@Title</summary>
+    @foreach (var component in ComponentAnswers) {
+        <p>@component.QualitativeScore</p>
+        <p>@component.QuantitativeScore</p>
+        <p>@component.ComponentDescription</p>
+        <p>@component.ComponentConsiderations</p>
+    }
+    <p>Strengths: @DomainAnswer.Strengths</p>
+    <p>Next Steps: @DomainAnswer.NextSteps</p>
+
+</details>

@@ -1,4 +1,5 @@
-﻿using Danielson.Data.DataAccess;
+﻿using Danielson.Data.Answers;
+using Danielson.Data.DataAccess;
 using Danielson.Data.DataModels;
 using Danielson.Data.Domains;
 using Microsoft.AspNetCore.Components;
@@ -21,6 +22,11 @@ namespace Danielson.Components.Controls {
         [Parameter]
         public string FormTemplateCode { get; set; } = "";
 
+        public int NumberColumns { get; set; }
+
+        [Parameter]
+        public EventCallback<ComponentAnswer> OnChangeCallback { get; set; }
+
         [Parameter]
         public bool ShowNotObserved { get; set; }
 
@@ -28,26 +34,30 @@ namespace Danielson.Components.Controls {
         public bool ShowQuantitativeAnswer { get; set; }
 
         [Inject]
-        private ComponentAnswerHandler ComponentAnswerHandler { get; set; } = default!;
+        private FormAccess FormAccess { get; set; } = default!;
 
         [Inject]
         private FormTemplateAccess FormTemplateAccess { get; set; } = default!;
 
         protected override async Task OnInitializedAsync() {
             ConsiderationValues = (await FormTemplateAccess.Get(FormTemplateCode)).GetConsiderationTemplate(Component.DomainEnum, Component.ComponentOrder).ConsiderationText.Split('\n');
+            // TODO Need to review for more variations
+            NumberColumns = AnswerList.Answers.Count(a => (!a.NotObserved || ShowNotObserved) && a.NumberColumns > 0) * 2;
         }
 
-        protected async Task SaveAnswer(int? answer, string answerText) {
+        protected async Task SaveAnswer(int? answer, string answerText, string answerDescription) {
             ComponentAnswer ??= new ComponentAnswer();
             ComponentAnswer.ComponentConsiderations = string.Join(". ", ConsiderationValues);
             ComponentAnswer.ComponentOrder = Component.ComponentOrder;
             ComponentAnswer.ComponentTitle = Component.Title;
+            ComponentAnswer.ComponentDescription = answerDescription;
             ComponentAnswer.DateCompleted = DateTime.Now;
             ComponentAnswer.DomainItem = Component.DomainEnum;
             ComponentAnswer.QualitativeScore = answerText;
             ComponentAnswer.QuantitativeScore = answer;
             ComponentAnswer.FormId = FormId;
-            _ = await ComponentAnswerHandler.Save(ComponentAnswer);
+            _ = await FormAccess.Save(ComponentAnswer);
+            await OnChangeCallback.InvokeAsync(ComponentAnswer);
         }
     }
 }

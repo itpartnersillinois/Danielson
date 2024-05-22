@@ -19,8 +19,6 @@ namespace Danielson.Components.Controls {
         [Parameter]
         public string Title { get; set; } = default!;
 
-        public async Task Save() {
-            await OnChangeCallback.InvokeAsync(ConsiderationTemplate);
-        }
+        public async Task Save() => await OnChangeCallback.InvokeAsync(ConsiderationTemplate);
     }
 }

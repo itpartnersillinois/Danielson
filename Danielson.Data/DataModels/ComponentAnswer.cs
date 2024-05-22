@@ -7,6 +7,8 @@ namespace Danielson.Data.DataModels {
     public class ComponentAnswer : BaseDataItem {
         public string ComponentConsiderations { get; set; } = "";
 
+        public string ComponentDescription { get; set; } = "";
+
         public int ComponentOrder { get; set; }
         public string ComponentTitle { get; set; } = "";
 

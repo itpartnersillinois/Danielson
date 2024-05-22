@@ -1,3 +1,52 @@
+textarea.admin-textarea {
+    height: 300px;
+    width: 600px;
+}
+
+fieldset {
+    display: grid;
+}
+
+    fieldset.fieldset-6 {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    fieldset.fieldset-8 {
+        grid-template-columns: repeat(8, 1fr);
+    }
+
+.first, .second {
+    border: thin solid black;
+}
+
+    .first.first-1 {
+        grid-column: span 2;
+    }
+
+    .second.second-1 {
+        grid-column: span 2;
+    }
+
+    .second.second-2 {
+        grid-column: span 2;
+    }
+
+.strengths-next-steps {
+    display: flex;
+    column-gap: 20px;
+}
+
+    .strengths-next-steps div {
+        flex-grow: 1;
+    }
+
+    .strengths-next-steps textarea {
+        width: 100%;
+        height: 300px;
+    }
+
+/* Blazor formatting */
+
 h1:focus {
     outline: none;
 }

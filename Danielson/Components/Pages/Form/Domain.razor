@@ -1,18 +1,43 @@
 ﻿@page "/Form/Domain/{FormId:int}"
 @attribute [Authorize(Roles = "Student,Supervisor,CooperatingTeacher,Admin,CoteStaff")]
 
-@if (DomainObject != null)
+<ul>
+    @foreach (var domain in DomainList.Domains)
+    {
+        <li><button @onclick="() => ChangePage(domain.DomainEnum, false)">@domain.Title</button></li>
+    }
+    <li><button @onclick="() => ChangePage(null, true)">Final Summary</button></li>
+</ul>
+
+@if (DomainObject != null && CurrentForm != null && !ShowFinal)
 {
     <h2>@DomainObject.Title</h2>
 
     <p>@DomainObject.DescriptionHtml</p>
 
-    @if (CurrentForm != null)
+    @if (CurrentForm.ShowComponents)
     {
         @foreach (var component in DomainObject.Components)
         {
-            <ComponentItem Component="component" FormId="FormId" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@CurrentForm.ShowNotObserved" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)"></ComponentItem>
+            <ComponentItem Component="component" FormId="FormId" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@CurrentForm.ShowNotObserved" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
         }
-
     }
+    <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
 }
+@if (ShowFinal)
+{
+    <h2>Final Summary</h2>
+    <p>Please review your responses below. Ensure you have completed all four domains before selecting a final summary score, signing, and submitting.</p>
+
+    @foreach (var domain in DomainList.Domains)
+    {
+        <DomainReview DomainEnum="domain.DomainEnum" Form="CurrentForm" Title="@domain.Title"></DomainReview>
+    }
+
+    <p>TODO Need to add signature and grade</p>
+}
+
+<button @onclick="ChangePagePrevious">Previous</button>
+
+<button @onclick="ChangePageNext">Next</button>
+

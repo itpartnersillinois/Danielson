@@ -18,8 +18,8 @@ namespace Danielson.Data.Data {
         }
 
         public DbSet<ComponentAnswer> ComponentAnswers { get; set; }
-
         public DbSet<ConsiderationTemplate> ConsiderationTemplates { get; set; }
+        public DbSet<DomainAnswer> DomainAnswers { get; set; }
         public DbSet<Form> Forms { get; set; }
         public DbSet<FormTemplate> FormTemplates { get; set; }
         public DbSet<User> Users { get; set; }
@@ -41,6 +41,9 @@ namespace Danielson.Data.Data {
                 new() { Id = -2, Email = "student@illinois.edu", Guid = Guid.Parse("3784cb3c-681f-45b0-9b67-391ca17f5c0f"), IsActive = false, LastUpdated = DateTime.Now, Role = RoleEnum.Student, Username = "student" },
                 new() { Id = -3, Email = "supervisor@illinois.edu", Guid = Guid.Parse("50924bd6-1494-4c5c-a064-81b8aabedfa2"), IsActive = false, LastUpdated = DateTime.Now, Role = RoleEnum.Supervisor, Username = "supervisor" },
                 new() { Id = -4, Email = "cotestaff@illinois.edu", Guid = Guid.Parse("b1dfc3d3-b726-4946-a65f-9489d360662f"), IsActive = false, LastUpdated = DateTime.Now, Role = RoleEnum.CoteStaff, Username = "cotestaff" },
+            });
+            _ = modelBuilder.Entity<Form>().HasData(new List<Form> {
+                new() { Id = 1, DateEvaluated = DateTime.Now, DateSubmitted = DateTime.Now, FormTemplateInternalLookupString = "default", Email = "test@illinois.edu", IsActive = true, LastUpdated = DateTime.Now, ShowComponents = true, ShowNotObserved = true, ShowQuantitativeAnswer = true, Title = "Test form"},
             });
 
             Debug.WriteLine($"{_id} context finishing initial setup.");
