@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Danielson.Data\Danielson.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\Account\Shared\" />
+  </ItemGroup>
+
 </Project>
