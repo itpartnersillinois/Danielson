@@ -16,5 +16,7 @@ namespace Danielson.Data.DataAccess {
         public async Task<int> Save(DomainAnswer domainAnswer) => domainAnswer.Id > 0
                 ? await _formRepository.UpdateAsync(domainAnswer)
                 : await _formRepository.CreateAsync(domainAnswer);
+
+        public async Task<int> Save(Form form) => await _formRepository.UpdateAsync(form);
     }
 }

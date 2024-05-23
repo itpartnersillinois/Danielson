@@ -20,6 +20,14 @@ namespace Danielson.Components.Pages.Form {
         [Inject]
         protected FormTemplateAccess FormTemplateAccess { get; set; } = default!;
 
+        [Inject]
+        protected NavigationManager NavigationManager { get; set; } = default!;
+
+        public void ChangeFormType(bool isMidterm) {
+            CurrentForm.IsMidterm = isMidterm;
+            NavigationManager.NavigateTo(NavigationManager.Uri, true);
+        }
+
         protected void AddComponentAnswerToForm(ComponentAnswer componentAnswer) => CurrentForm.AddComponentAnswerToForm(componentAnswer);
 
         protected void AddDomainAnswerToForm(DomainAnswer domainAnswer) => CurrentForm.AddDomainAnswerToForm(domainAnswer);

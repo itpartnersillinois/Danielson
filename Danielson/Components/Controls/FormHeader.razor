@@ -1,0 +1,9 @@
+﻿<div>
+    <fieldset class="heading">
+        <legend>Form</legend>
+        <input type="radio" name="formtype" id="formtype-midterm" value="midterm" checked="@IsMidterm" @onchange="e => SaveChange(true)" />
+        <label for="formtype-midterm">Midterm</label>
+        <input type="radio" name="formtype" id="formtype-final" value="final" checked="@(!IsMidterm)" @onchange="e => SaveChange(false)" />
+        <label for="formtype-final">Final</label>
+    </fieldset>
+</div>

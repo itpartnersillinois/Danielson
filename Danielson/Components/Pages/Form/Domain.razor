@@ -1,14 +1,17 @@
 ﻿@page "/Form/Domain/{FormId:int}"
 @attribute [Authorize(Roles = "Student,Supervisor,CooperatingTeacher,Admin,CoteStaff")]
 
-<ul>
-    @foreach (var domain in DomainList.Domains)
-    {
-        <li><button @onclick="() => ChangePage(domain.DomainEnum, false)">@domain.Title</button></li>
-    }
-    <li><button @onclick="() => ChangePage(null, true)">Final Summary</button></li>
-</ul>
-
+@if (DomainObject != null && CurrentForm != null)
+{
+    <FormHeader FormId="CurrentForm.Id" IsMidterm="CurrentForm.IsMidterm" OnChangeCallback="ChangeFormType"></FormHeader>
+    <ul>
+        @foreach (var domain in DomainList.Domains)
+        {
+            <li><button @onclick="() => ChangePage(domain.DomainEnum, false)">@domain.Title</button></li>
+        }
+        <li><button @onclick="() => ChangePage(null, true)">Final Summary</button></li>
+    </ul>
+}
 @if (DomainObject != null && CurrentForm != null && !ShowFinal)
 {
     <h2>@DomainObject.Title</h2>
@@ -19,7 +22,7 @@
     {
         @foreach (var component in DomainObject.Components)
         {
-            <ComponentItem Component="component" FormId="FormId" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@CurrentForm.ShowNotObserved" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
+            <ComponentItem Component="component" FormId="FormId" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@(CurrentForm.ShowNotObserved && !CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
         }
     }
     <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
