@@ -2,8 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="dns-prefetch" href="https://cdn.toolkit.illinois.edu">
+    <link rel="icon" href="https://cdn.brand.illinois.edu/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.toolkit.illinois.edu/2.16/toolkit.css" media="all">
+    <script src="https://cdn.toolkit.illinois.edu/2.16/toolkit.js"></script>
     <base href="/" />
     <link rel="stylesheet" href="app.css" />
     <link rel="stylesheet" href="Danielson.styles.css" />
@@ -11,8 +15,24 @@
 </head>
 
 <body>
+    <il-header>
+        <div slot="wordmark">
+            <il-unit-wordmark>
+                <p class="il-primary-unit"><a href="https://cote.illinois.edu/cote-portal-access">CoTE Portal</a></p>
+                <h1 class="il-secondary-unit"><a href="/">Danielson Form</a></h1>
+            </il-unit-wordmark>
+        </div>
+        <nav slot="links" aria-label="top right quick links" class="il-links">
+            <ul>
+                <li><a href="/cote-portal-access">Portal Login</a></li>
+                <li><a href="https://help.uillinois.edu/TDClient/44/Portal/Requests/TicketRequests/NewForm?ID=3W3AlrEyvw8_&RequestorType=Service">Need Help?</a></li>
+            </ul>
+        </nav>
+    </il-header>
+    <main class="il-formatted">
     <Routes @rendermode="InteractiveServer" />
     <script src="_framework/blazor.web.js"></script>
+    </main>
 </body>
 
 </html>

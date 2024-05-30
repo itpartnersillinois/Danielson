@@ -1,37 +1,57 @@
 ﻿@page "/Form/Domain/{FormId:int}"
 @attribute [Authorize(Roles = "Student,Supervisor,CooperatingTeacher,Admin,CoteStaff")]
 
-@if (DomainObject != null && CurrentForm != null)
+@if (DomainObject != null && CurrentForm != null && FormExportInformation != null)
 {
-    <FormHeader FormId="CurrentForm.Id" IsMidterm="CurrentForm.IsMidterm" OnChangeCallback="ChangeFormType"></FormHeader>
-    <ul>
-        @foreach (var domain in DomainList.Domains)
-        {
-            <li><button @onclick="() => ChangePage(domain.DomainEnum, false)">@domain.Title</button></li>
-        }
-        <li><button @onclick="() => ChangePage(null, true)">Final Summary</button></li>
-    </ul>
+    <div class="danielson-name">
+    <h1>@FormExportInformation.Title</h1>
+        <FormHeader FormId="CurrentForm.Id" IsMidterm="CurrentForm.IsMidterm" EvaluatedBy="@FormExportInformation.EvaluatedBy" EvaluationDate="@CurrentForm.DateEvaluatedString"
+                    FormType="@CurrentForm.Title" Semester="@CurrentForm.SemesterDate" OnChangeCallback="ChangeFormType"></FormHeader>
+    </div>
 }
 @if (DomainObject != null && CurrentForm != null && !ShowFinal)
 {
-    <h2>@DomainObject.Title</h2>
+    <div class="danielson-title">
+        <ul>
+            @foreach (var domain in DomainList.Domains)
+            {
+                <li><button class="@(domain.DomainEnum == DomainObject.DomainEnum ? DomainObject.DomainEnum.ToString() : "")" @onclick="() => ChangePage(domain.DomainEnum, false)">@domain.Title</button></li>
+            }
+            <li><button @onclick="() => ChangePage(null, true)">Final Summary</button></li>
+        </ul>
+        <div>
+            <h2>@DomainObject.Title</h2>
+            <p>@DomainObject.DescriptionHtml</p>
+        </div>
+    </div>
 
-    <p>@DomainObject.DescriptionHtml</p>
-
-    @if (CurrentForm.ShowComponents)
-    {
-        @foreach (var component in DomainObject.Components)
+    <div class="danielson-components @DomainObject.DomainEnum.ToString()">
+        @if (CurrentForm.ShowComponents)
         {
-            <ComponentItem Component="component" FormId="FormId" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@(CurrentForm.ShowNotObserved && !CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
+            @foreach (var component in DomainObject.Components)
+            {
+                <ComponentItem Component="component" FormId="FormId" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@(CurrentForm.ShowNotObserved && !CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
+            }
         }
-    }
-    <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
+        <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
+    </div>
 }
 @if (ShowFinal)
 {
-    <h2>Final Summary</h2>
-    <p>Please review your responses below. Ensure you have completed all four domains before selecting a final summary score, signing, and submitting.</p>
+    <div class="danielson-title">
+        <ul>
+            @foreach (var domain in DomainList.Domains)
+            {
+                <li><button @onclick="() => ChangePage(domain.DomainEnum, false)">@domain.Title</button></li>
+            }
+                <li><button class="Final" @onclick="() => ChangePage(null, true)">Final Summary</button></li>
+        </ul>
 
+        <div>
+            <h2>Final Summary</h2>
+            <p>Please review your responses below. Ensure you have completed all four domains before selecting a final summary score, signing, and submitting.</p>
+        </div>
+    </div>
     @foreach (var domain in DomainList.Domains)
     {
         <DomainReview DomainEnum="domain.DomainEnum" Form="CurrentForm" Title="@domain.Title"></DomainReview>
@@ -40,7 +60,8 @@
     <p>TODO Need to add signature and grade</p>
 }
 
-<button @onclick="ChangePagePrevious">Previous</button>
-
-<button @onclick="ChangePageNext">Next</button>
+<div class="danielson-button-footer">
+    <button class="il-button il-theme-white" @onclick="ChangePagePrevious" style="float: left;">Previous</button>
+    <button class="il-button il-theme-white" @onclick="ChangePageNext" style="float: right;">Next</button>
+</div>
 

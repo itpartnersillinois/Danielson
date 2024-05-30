@@ -1,3 +1,13 @@
+body {
+    margin: 0;
+}
+
+main {
+    padding: 30px;
+    margin: 0 auto;
+    max-width: 1140px;
+}
+
 textarea.admin-textarea {
     height: 300px;
     width: 600px;
@@ -5,10 +15,24 @@ textarea.admin-textarea {
 
 fieldset {
     display: grid;
+    border: none;
 }
+
+    fieldset legend {
+        position: absolute !important;
+        left: -9999px !important;
+        top: auto !important;
+        display: block !important;
+        text-align: left !important;
+        text-indent: -9999em !important;
+        width: 1px !important;
+        height: 1px !important;
+        overflow: hidden !important;
+    }
 
     fieldset.heading {
         display: block;
+        padding-left: 20px;
     }
 
     fieldset.fieldset-6 {
@@ -18,6 +42,156 @@ fieldset {
     fieldset.fieldset-8 {
         grid-template-columns: repeat(8, 1fr);
     }
+
+    fieldset.fieldset-x div {
+        text-align: center;
+        padding: 10px;
+    }
+
+    fieldset.fieldset-x label {
+        display: block;
+        font-weight: 700;
+    }
+
+.danielson-name {
+    column-gap: 20px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+    .danielson-name > h1 {
+        flex-grow: 1;
+    }
+
+    .danielson-name > div {
+        flex: 600px 0 0;
+        border: thin solid #929292;
+    }
+
+.danielson-title-details {
+    gap: 5px;
+    column-count: 2;
+    column-gap: 4px;
+    padding: 20px 20px 0 20px;
+    gap: 5px;
+}
+
+    .danielson-title-details > div {
+        padding: 0 0 5px 0;
+    }
+
+.danielson-title {
+    display: flex;
+    column-gap: 20px;
+    margin-bottom: 20px;
+}
+
+    .danielson-title ul {
+        width: 300px;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+    }
+
+        .danielson-title ul li {
+            width: 100%;
+            border: thin solid #929292;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            .danielson-title ul li button {
+                width: 100%;
+                height: 100%;
+                background-color: transparent;
+                border: none;
+                padding: 10px;
+                font-size: .9rem;
+            }
+
+                .danielson-title ul li button.One {
+                    border-left: 3px solid #7292C7;
+                }
+
+                .danielson-title ul li button.Two {
+                    border-left: 3px solid #FA9441;
+                }
+
+                .danielson-title ul li button.Three {
+                    border-left: 3px solid #AC849E;
+                }
+
+                .danielson-title ul li button.Four {
+                    border-left: 3px solid #5ABF95;
+                }
+
+                .danielson-title ul li button.Final {
+                    border-left: 3px solid #929292;
+                }
+
+                .danielson-title ul li button:hover, .danielson-title ul li button:focus {
+                    background-color: #d0d0d0;
+                }
+
+    .danielson-title > div {
+        flex: 1 0 0;
+        margin-left: 20px;
+    }
+
+    .danielson-title h2 {
+        padding-top: 0;
+        margin-top: 0;
+    }
+
+.danielson-component {
+    margin-top: 10px;
+    padding: 15px 10px 15px 20px;
+}
+
+    .danielson-component h3 {
+        margin-top: 0;
+    }
+
+.il-formatted .danielson-component details {
+    margin: 0;
+    padding-left: 0;
+}
+
+    .il-formatted .danielson-component details summary {
+        background: transparent;
+        margin: 0;
+        padding-left: 0;
+    }
+
+.danielson-components.One .danielson-component {
+    background: #ECF1F7;
+}
+
+.danielson-components.Two .danielson-component {
+    background: #FEF2E4;
+}
+
+.danielson-components.Three .danielson-component {
+    background: #F3EDF1;
+}
+
+.danielson-components.Four .danielson-component {
+    background: #DBF6ED;
+}
+
+.il-formatted .danielson-component-options .title {
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    text-decoration-line: underline;
+    margin-top: 20px;
+}
 
 .first, .second {
     border: thin solid black;
@@ -47,10 +221,48 @@ fieldset {
     .strengths-next-steps textarea {
         width: 100%;
         height: 300px;
+        font-size: 1.2rem;
+        font-family: var(--il-font-sans);
     }
 
-/* Blazor formatting */
+.danielson-answer .title {
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    padding: 10px;
+    background-color: var(--il-storm-lighter-4);
+}
 
+.danielson-answer .table {
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+}
+
+    .danielson-answer .table > div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 5px 50px;
+        vertical-align: middle;
+        justify-content: center;
+        border: thin solid black;
+    }
+
+        .danielson-answer .table > div:first-child {
+            flex: 250px 0 0;
+            border-right: none;
+        }
+
+        .danielson-answer .table > div:last-child {
+            flex: 1;
+        }
+
+.danielson-answer p {
+    margin-bottom: 30px;
+}
+/* Blazor formatting */
 h1:focus {
     outline: none;
 }

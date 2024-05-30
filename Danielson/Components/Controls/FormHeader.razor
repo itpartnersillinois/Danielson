@@ -1,6 +1,21 @@
 ﻿<div>
+    <div class="danielson-title-details">
+        <div>
+            <strong>Evaluated By: </strong> @EvaluatedBy
+        </div>
+        <div>
+            <strong>Evaluation Date: </strong> @EvaluationDate
+        </div>
+        <div>
+            <strong>Form Type: </strong> @FormType
+        </div>
+        <div>
+            <strong>Semester: </strong> @Semester
+        </div>
+    </div>
     <fieldset class="heading">
         <legend>Form</legend>
+        <strong>Form: </strong>
         <input type="radio" name="formtype" id="formtype-midterm" value="midterm" checked="@IsMidterm" @onchange="e => SaveChange(true)" />
         <label for="formtype-midterm">Midterm</label>
         <input type="radio" name="formtype" id="formtype-final" value="final" checked="@(!IsMidterm)" @onchange="e => SaveChange(false)" />

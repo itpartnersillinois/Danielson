@@ -1,12 +1,27 @@
-﻿<details>
+﻿<details class="danielson-answer-@DomainAnswer.DomainItem.ToString().ToLower()">
     <summary>@Title</summary>
     @foreach (var component in ComponentAnswers) {
-        <p>@component.QualitativeScore</p>
-        <p>@component.QuantitativeScore</p>
-        <p>@component.ComponentDescription</p>
-        <p>@component.ComponentConsiderations</p>
+        <div class="danielson-answer">
+            <p class="title">@component.ComponentTitle</p>
+            <div class="table">
+                <div>
+                    <div>@component.QuantitativeScore</div>
+                    <div>@component.QualitativeScore</div>
+                </div>
+                <div>
+                    <div>@component.ComponentDescription</div>
+                </div>
+            </div>
+        </div>
     }
-    <p>Strengths: @DomainAnswer.Strengths</p>
-    <p>Next Steps: @DomainAnswer.NextSteps</p>
+    <div class="danielson-answer">
+        <p class="title">Strengths</p>
+        <p>@DomainAnswer.Strengths</p>
+    </div>
+
+    <div class="danielson-answer">
+        <p class="title">Next Steps</p>
+        <p>@DomainAnswer.NextSteps</p>
+    </div>
 
 </details>

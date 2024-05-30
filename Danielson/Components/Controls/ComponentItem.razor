@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div class="danielson-component">
 <h3>@Component.Title</h3>
 @if (ConsiderationValues != null)
 {
@@ -15,12 +15,12 @@
 </div>
 @if (AnswerList.Answers != null)
 {
-    <div>
+    <div class="danielson-component-options">
     <p class="title">@Component.Code Continuum of Practice:</p>
     <p>@Component.ContinuumOfPracticeHtml</p>
     </div>
 
-     <fieldset class="fieldset-@NumberColumns">
+     <fieldset class="fieldset-x fieldset-@NumberColumns">
         <legend>@Component.Code Continuum of Practice Options</legend>
         @foreach (var answer in AnswerList.Answers.Where(a => !a.NotObserved || ShowNotObserved).Select((value, i) => new { i, value }))
         {

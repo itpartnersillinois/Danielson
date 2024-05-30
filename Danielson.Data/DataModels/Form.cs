@@ -10,6 +10,8 @@ namespace Danielson.Data.DataModels {
 
         public DateTime? DateEvaluated { get; set; } = null;
 
+        public string DateEvaluatedString => DateEvaluated?.ToString("MM/dd/yyyy") ?? "In progress";
+
         public DateTime? DateSubmitted { get; set; } = null;
 
         public virtual ICollection<DomainAnswer> DomainAnswers { get; set; } = default!;

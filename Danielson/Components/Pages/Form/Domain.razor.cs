@@ -1,13 +1,16 @@
 ﻿using Danielson.Data.DataAccess;
 using Danielson.Data.DataModels;
 using Danielson.Data.Domains;
+using Danielson.Data.PortalTranslator;
 using Microsoft.AspNetCore.Components;
 
 namespace Danielson.Components.Pages.Form {
 
     public partial class Domain {
         public Data.DataModels.Form CurrentForm { get; set; } = default!;
+
         public DomainObject DomainObject { get; set; } = default!;
+        public FormExportInformation FormExportInformation { get; set; } = default!;
 
         [Parameter]
         public int FormId { get; set; }
@@ -89,6 +92,12 @@ namespace Danielson.Components.Pages.Form {
             ShowFinal = false;
 
             CurrentForm = await ComponentAnswerHandler.GetForm(FormId);
+
+            //TODO Add export pull
+            FormExportInformation = new FormExportInformation {
+                EvaluatedBy = "Talbott, Susan",
+                Title = "CI-410: Acello, Grace"
+            };
             //TODO Add authentication
 
             await base.OnInitializedAsync();
