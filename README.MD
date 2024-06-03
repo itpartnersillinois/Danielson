@@ -30,4 +30,10 @@ For the application login, please run the following:
 
 ``Update-Database -Context ApplicationDbContext``
 
-Note that the Danielson tables are all built with a [danielson] schema. The ApplicationDbContext tables all start with AspNet
+Note that the Danielson tables are all built with a [danielson] schema. The ApplicationDbContext tables all start with AspNet.
+
+## Updating the form
+
+The form template information is built as a .NET document outside of the database. This is because the form template is fixed for all forms, and adding it to the database seemed like a lot of unneeded complexity.
+
+You can edit these in Danielson.Data/Domains section, under DomainList. 

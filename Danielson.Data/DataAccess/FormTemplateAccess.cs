@@ -13,6 +13,8 @@ namespace Danielson.Data.DataAccess {
 
         public async Task<List<FormTemplate>> GetAll() => [.. (await _formRepository.ReadAsync(d => d.FormTemplates.OrderBy(a => a.Title)))];
 
+        public async Task<List<string>> GetFinalAnswerOptions(int? id) => id.HasValue ? (await _formRepository.ReadAsync(f => f.FormTemplates.FirstOrDefault(f => f.Id == id)?.FinalAnswerOptions) ?? "").Split('\n').Select(c => c.Trim(' ', '.')).ToList() ?? [] : [];
+
         public async Task<int> Save(FormTemplate formTemplate) => formTemplate.Id > 0 ? await _formRepository.UpdateAsync(formTemplate) : await _formRepository.CreateAsync(formTemplate);
     }
 }

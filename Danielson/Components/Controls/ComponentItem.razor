@@ -25,7 +25,7 @@
         @foreach (var answer in AnswerList.Answers.Where(a => !a.NotObserved || ShowNotObserved).Select((value, i) => new { i, value }))
         {
             <div class="first first-@answer.value.NumberColumns first-mobilerow-@answer.i">
-                <input type="radio" name="@Component.Code" id="@Component.Code-@answer.value.QuantitativeAnswer" value="@answer.value.QuantitativeAnswer" checked="@(ComponentAnswer == null ? false : answer.value.QuantitativeAnswer == ComponentAnswer.QuantitativeScore)" @onchange="e => SaveAnswer(answer.value.QuantitativeAnswer, answer.value.QualitativeAnswer, answer.value.Description)" />
+                <input type="radio" name="@Component.Code" id="@Component.Code-@answer.value.QuantitativeAnswer" aria-describedby="@answer.value.Description" value="@answer.value.QuantitativeAnswer" checked="@(ComponentAnswer == null ? false : answer.value.QuantitativeAnswer == ComponentAnswer.QuantitativeScore)" @onchange="e => SaveAnswer(answer.value.QuantitativeAnswer, answer.value.QualitativeAnswer, answer.value.Description)" />
                 <label for="@Component.Code-@answer.value.QuantitativeAnswer">@answer.value.Answer(ShowQuantitativeAnswer)</label>
             </div>
         }

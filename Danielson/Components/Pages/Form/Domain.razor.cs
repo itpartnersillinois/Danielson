@@ -10,6 +10,7 @@ namespace Danielson.Components.Pages.Form {
         public Data.DataModels.Form CurrentForm { get; set; } = default!;
 
         public DomainObject DomainObject { get; set; } = default!;
+        public List<string> FinalAnswers { get; set; } = default!;
         public FormExportInformation FormExportInformation { get; set; } = default!;
 
         [Parameter]
@@ -87,11 +88,16 @@ namespace Danielson.Components.Pages.Form {
             }
         }
 
+        protected void CheckFinal() {
+            CurrentForm.DateEvaluated = CurrentForm.DateEvaluated.HasValue ? null : DateTime.Now;
+        }
+
         protected override async Task OnInitializedAsync() {
             DomainObject = DomainList.Domains.First();
             ShowFinal = false;
 
             CurrentForm = await ComponentAnswerHandler.GetForm(FormId);
+            FinalAnswers = await FormTemplateAccess.GetFinalAnswerOptions(CurrentForm.Id);
 
             //TODO Add export pull
             FormExportInformation = new FormExportInformation {
@@ -101,6 +107,10 @@ namespace Danielson.Components.Pages.Form {
             //TODO Add authentication
 
             await base.OnInitializedAsync();
+        }
+
+        protected async Task SaveForm() {
+            _ = await ComponentAnswerHandler.Save(CurrentForm);
         }
     }
 }

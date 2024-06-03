@@ -30,13 +30,13 @@
         {
             @foreach (var component in DomainObject.Components)
             {
-                <ComponentItem Component="component" FormId="FormId" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@(CurrentForm.ShowNotObserved && !CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
+                <ComponentItem Component="component" FormId="FormId" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@(CurrentForm.ShowNotObserved && CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
             }
         }
         <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
     </div>
 }
-@if (ShowFinal)
+@if (ShowFinal && CurrentForm != null)
 {
     <div class="danielson-title">
         <ul>
@@ -57,7 +57,27 @@
         <DomainReview DomainEnum="domain.DomainEnum" Form="CurrentForm" Title="@domain.Title"></DomainReview>
     }
 
-    <p>TODO Need to add signature and grade</p>
+    <div class="danielson-final">
+        <div>
+            <label for="final-summary" class="data-required">Final Summary</label>
+            <select id="final-summary" aria-required="true" @bind="CurrentForm.FinalSummary">
+                    <option value="">Select</option>
+                @foreach (var final in FinalAnswers)
+                    {
+                    <option value="@final">@final</option>
+                    }
+            </select>
+            <p>You must select a final summary to submit.</p>
+        </div>
+        <div>
+            <label for="final-signature" class="data-required">Signature</label>
+            <input id="final-signature" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormExportInformation?.EvaluatedBy</span>
+            <p>You must sign to submit.</p>
+        </div>
+        <div>
+            <button class="il-button il-theme-white" @onclick="SaveForm">Submit</button>
+        </div>
+    </div>
 }
 
 <div class="danielson-button-footer">

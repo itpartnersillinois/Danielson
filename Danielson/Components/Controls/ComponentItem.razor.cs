@@ -40,7 +40,7 @@ namespace Danielson.Components.Controls {
         private FormTemplateAccess FormTemplateAccess { get; set; } = default!;
 
         protected override async Task OnInitializedAsync() {
-            ConsiderationValues = (await FormTemplateAccess.Get(FormTemplateCode)).GetConsiderationTemplate(Component.DomainEnum, Component.ComponentOrder).ConsiderationText.Split('\n');
+            ConsiderationValues = (await FormTemplateAccess.Get(FormTemplateCode)).GetConsiderationTemplate(Component.DomainEnum, Component.ComponentOrder).ConsiderationText.Split('\n').Select(c => c.Trim(' ', '.')).ToArray();
             // TODO Need to review for more variations
             NumberColumns = AnswerList.Answers.Count(a => (!a.NotObserved || ShowNotObserved) && a.NumberColumns > 0) * 2;
         }

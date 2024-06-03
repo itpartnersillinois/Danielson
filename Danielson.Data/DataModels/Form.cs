@@ -32,6 +32,8 @@ namespace Danielson.Data.DataModels {
 
         public bool IsMidterm { get; set; }
 
+        public bool IsSigned => DateEvaluated.HasValue;
+
         public string PlacementType { get; set; } = "";
 
         public string Position { get; set; } = "";

@@ -13,6 +13,20 @@ textarea.admin-textarea {
     width: 600px;
 }
 
+.il-formatted input:focus, .il-formatted textarea:focus, .il-formatted select:focus, .il-formatted input:focus-visible, .il-formatted textarea:focus-visible, .il-formatted select:focus-visible, .il-formatted input:hover, .il-formatted textarea:hover, .il-formatted select:hover {
+    background: var(--il-cloud);
+    outline: 3px solid var(--il-altgeld);
+}
+
+.il-formatted .data-required:before {
+    content: '*';
+    font-size: 1rem;
+    vertical-align: middle;
+    vertical-align: -moz-middle-with-baseline;
+    padding-right: 2px;
+    color: var(--il-altgeld);
+}
+
 fieldset {
     display: grid;
     border: none;
@@ -225,43 +239,77 @@ fieldset {
         font-family: var(--il-font-sans);
     }
 
-.danielson-answer .title {
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 28px;
-    padding: 10px;
-    background-color: var(--il-storm-lighter-4);
+.danielson-answer {
+    margin-top: 10px;
 }
 
-.danielson-answer .table {
-    display: flex;
-    margin: 10px;
-    padding: 10px;
-}
-
-    .danielson-answer .table > div {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        padding: 5px 50px;
-        vertical-align: middle;
-        justify-content: center;
-        border: thin solid black;
+    .danielson-answer .title {
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 28px;
+        padding: 10px;
+        background-color: var(--il-storm-lighter-4);
+        margin-bottom: 0;
     }
 
-        .danielson-answer .table > div:first-child {
-            flex: 250px 0 0;
-            border-right: none;
+    .danielson-answer .table {
+        display: flex;
+        margin: 10px 10px 30px 10px;
+        padding: 10px;
+    }
+
+        .danielson-answer .table > div {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 5px 50px;
+            vertical-align: middle;
+            justify-content: center;
+            border: thin solid black;
         }
 
-        .danielson-answer .table > div:last-child {
-            flex: 1;
-        }
+            .danielson-answer .table > div:first-child {
+                flex: 250px 0 0;
+                border-right: none;
+            }
 
-.danielson-answer p {
-    margin-bottom: 30px;
+            .danielson-answer .table > div:last-child {
+                flex: 1;
+            }
+
+    .danielson-answer p {
+        margin-bottom: 30px;
+    }
+
+.danielson-final {
+    margin-top: 40px;
 }
+
+    .danielson-final label {
+        display: block;
+        font-weight: 700;
+        font-size: 1.4rem;
+    }
+
+    .danielson-final p {
+        display: block;
+        margin-top: 0;
+        padding-top: 0;
+        margin-bottom: 20px;
+        color: var(--il-storm)
+    }
+
+    .danielson-final select {
+        margin: 0;
+        border-radius: 5px;
+        padding: 10px;
+        font: 16px / 18px var(--il-source-sans);
+        background-color: #fff;
+        border: thin var(--il-blue) solid;
+        width: 200px;
+    }
+
 /* Blazor formatting */
 h1:focus {
     outline: none;
