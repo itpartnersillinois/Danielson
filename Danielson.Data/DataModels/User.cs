@@ -14,7 +14,7 @@ namespace Danielson.Data.DataModels {
         public override int Id { get; set; }
 
         public RoleEnum Role { get; set; }
-        public int StudentId { get; set; }
+        public int StudentEvaluationId { get; set; }
         public string Username { get; set; } = "";
     }
 }

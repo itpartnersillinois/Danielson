@@ -14,7 +14,7 @@ namespace Danielson.Data.Login {
                 return ("", "", RoleEnum.None, "");
             }
             _ = await _testRepository.ChangeActiveAsync(user, false);
-            return (user.Email, user.Username, user.Role, user.StudentId.ToString());
+            return (user.Email, user.Username, user.Role, user.StudentEvaluationId.ToString());
         }
 
         public async Task<(string email, string username, RoleEnum role)> GetByName(string username) {
