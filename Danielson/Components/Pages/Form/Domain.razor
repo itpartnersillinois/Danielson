@@ -24,7 +24,6 @@
             <p>@DomainObject.DescriptionHtml</p>
         </div>
     </div>
-
     <div class="danielson-components @DomainObject.DomainEnum.ToString()">
         @if (CurrentForm.ShowComponents)
         {
@@ -35,6 +34,10 @@
         }
         <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
     </div>
+    <div class="danielson-button-footer">
+        <button class="il-button il-theme-white" @onclick="ChangePagePrevious" style="float: left;">Previous</button>
+        <button class="il-button il-theme-white" @onclick="ChangePageNext" style="float: right;">Next</button>
+    </div>
 }
 @if (ShowFinal && CurrentForm != null)
 {
@@ -44,13 +47,17 @@
             {
                 <li><button @onclick="() => ChangePage(domain.DomainEnum, false)">@domain.Title</button></li>
             }
-                <li><button class="Final" @onclick="() => ChangePage(null, true)">Final Summary</button></li>
+            <li><button class="Final" @onclick="() => ChangePage(null, true)">Final Summary</button></li>
         </ul>
 
         <div>
             <h2>Final Summary</h2>
             <p>Please review your responses below. Ensure you have completed all four domains before selecting a final summary score, signing, and submitting.</p>
         </div>
+    </div>
+    <div class="danielson-title">
+        <button class="il-button il-theme-white" @onclick="ExpandAll">Expand All</button>
+        <button class="il-button il-theme-white" @onclick="CollapseAll">Collapse All</button>
     </div>
     @foreach (var domain in DomainList.Domains)
     {
@@ -79,9 +86,3 @@
         </div>
     </div>
 }
-
-<div class="danielson-button-footer">
-    <button class="il-button il-theme-white" @onclick="ChangePagePrevious" style="float: left;">Previous</button>
-    <button class="il-button il-theme-white" @onclick="ChangePageNext" style="float: right;">Next</button>
-</div>
-

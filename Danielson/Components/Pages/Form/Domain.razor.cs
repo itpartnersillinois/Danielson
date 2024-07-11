@@ -3,6 +3,7 @@ using Danielson.Data.DataModels;
 using Danielson.Data.Domains;
 using Danielson.Data.PortalTranslator;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace Danielson.Components.Pages.Form {
 
@@ -25,6 +26,9 @@ namespace Danielson.Components.Pages.Form {
         protected FormTemplateAccess FormTemplateAccess { get; set; } = default!;
 
         [Inject]
+        protected IJSRuntime JsRuntime { get; set; } = default!;
+
+        [Inject]
         protected NavigationManager NavigationManager { get; set; } = default!;
 
         public void ChangeFormType(bool isMidterm) {
@@ -36,28 +40,29 @@ namespace Danielson.Components.Pages.Form {
 
         protected void AddDomainAnswerToForm(DomainAnswer domainAnswer) => CurrentForm.AddDomainAnswerToForm(domainAnswer);
 
-        protected void ChangePage(DomainEnum? domainEnum, bool finish) {
+        protected async Task ChangePage(DomainEnum? domainEnum, bool finish) {
             ShowFinal = finish;
             DomainObject = DomainList.Domains.First(d => d.DomainEnum == (finish ? DomainEnum.Four : domainEnum ?? DomainEnum.One));
             StateHasChanged();
+            await JsRuntime.InvokeVoidAsync("OnScrollEvent");
         }
 
-        protected void ChangePageNext() {
+        protected async Task ChangePageNext() {
             switch (DomainObject.DomainEnum) {
                 case DomainEnum.One:
-                    ChangePage(DomainEnum.Two, false);
+                    await ChangePage(DomainEnum.Two, false);
                     break;
 
                 case DomainEnum.Two:
-                    ChangePage(DomainEnum.Three, false);
+                    await ChangePage(DomainEnum.Three, false);
                     break;
 
                 case DomainEnum.Three:
-                    ChangePage(DomainEnum.Four, false);
+                    await ChangePage(DomainEnum.Four, false);
                     break;
 
                 case DomainEnum.Four:
-                    ChangePage(DomainEnum.Four, true);
+                    await ChangePage(DomainEnum.Four, true);
                     break;
 
                 default:
@@ -65,21 +70,21 @@ namespace Danielson.Components.Pages.Form {
             }
         }
 
-        protected void ChangePagePrevious() {
+        protected async Task ChangePagePrevious() {
             if (ShowFinal) {
-                ChangePage(DomainEnum.Four, false);
+                await ChangePage(DomainEnum.Four, false);
             } else {
                 switch (DomainObject.DomainEnum) {
                     case DomainEnum.Two:
-                        ChangePage(DomainEnum.One, false);
+                        await ChangePage(DomainEnum.One, false);
                         break;
 
                     case DomainEnum.Three:
-                        ChangePage(DomainEnum.Two, false);
+                        await ChangePage(DomainEnum.Two, false);
                         break;
 
                     case DomainEnum.Four:
-                        ChangePage(DomainEnum.Three, false);
+                        await ChangePage(DomainEnum.Three, false);
                         break;
 
                     default:
@@ -90,6 +95,14 @@ namespace Danielson.Components.Pages.Form {
 
         protected void CheckFinal() {
             CurrentForm.DateEvaluated = CurrentForm.DateEvaluated.HasValue ? null : DateTime.Now;
+        }
+
+        protected async Task CollapseAll() {
+            await JsRuntime.InvokeVoidAsync("CollapseAll");
+        }
+
+        protected async Task ExpandAll() {
+            await JsRuntime.InvokeVoidAsync("ExpandAll");
         }
 
         protected override async Task OnInitializedAsync() {

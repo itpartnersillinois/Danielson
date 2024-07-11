@@ -25,11 +25,15 @@ textarea.admin-textarea {
     vertical-align: -moz-middle-with-baseline;
     padding-right: 2px;
     color: var(--il-altgeld);
+    text-decoration-line: none;
+    font-weight: initial;
 }
 
 fieldset {
     display: grid;
     border: none;
+    padding: 0;
+    margin: 20px 0;
 }
 
     fieldset legend {
@@ -97,7 +101,7 @@ fieldset {
 .danielson-title {
     display: flex;
     column-gap: 20px;
-    margin-bottom: 20px;
+    margin: 40px 0;
 }
 
     .danielson-title ul {
@@ -149,7 +153,8 @@ fieldset {
                 }
 
                 .danielson-title ul li button:hover, .danielson-title ul li button:focus {
-                    background-color: #d0d0d0;
+                    background-color: #F4F4F4;
+                    text-decoration: underline;
                 }
 
     .danielson-title > div {
@@ -164,7 +169,7 @@ fieldset {
 
 .danielson-component {
     margin-top: 10px;
-    padding: 15px 10px 15px 20px;
+    padding: 15px 10px 0 20px;
 }
 
     .danielson-component h3 {

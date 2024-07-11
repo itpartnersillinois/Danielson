@@ -11,6 +11,21 @@
     <base href="/" />
     <link rel="stylesheet" href="app.css" />
     <link rel="stylesheet" href="Danielson.styles.css" />
+    <script>
+        function OnScrollEvent() {
+            document.documentElement.scrollTop = 0;
+        }
+        function ExpandAll() {
+            document.querySelectorAll("details").forEach((detail) => {
+                detail.open = true;
+            });
+        }
+        function CollapseAll() {
+            document.querySelectorAll("details").forEach((detail) => {
+                detail.open = false;
+            });
+        }
+    </script>
     <HeadOutlet />
 </head>
 
