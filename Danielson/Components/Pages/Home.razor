@@ -16,15 +16,18 @@ Welcome to your new app.
 
 <p><a href="/Account/LoginPassthrough">Generic Login Page</a></p>
 
+<h2>Testing accessing a form</h2>
+
+<p><a href="/Form/Domain/1">Form ID #1</a> (for testing purposes only)</p>
+
 @if (FormTemplates != null)
 {
     <h2>Form Templates</h2>
     <ul>
         @foreach (var formTemplate in FormTemplates) {
-            <li><a href="/Admin/EditFormTemplate/@formTemplate.Id">@formTemplate.Title</a></li>
+            <li><a href="/Admin/EditFormTemplate/@formTemplate.Id">Edit <strong>@formTemplate.Title</strong> Template</a></li>
         }
+        <li><a href="/Admin/EditFormTemplate">Add New Form Template</a></li>
     </ul>
-    <p><a href="/Admin/EditFormTemplate">Add New Form</a></p>
+    
 }
-
-<p><a href="/Form/Domain/1">Form ID #1</a></p>

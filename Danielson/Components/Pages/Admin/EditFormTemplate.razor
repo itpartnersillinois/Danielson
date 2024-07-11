@@ -4,35 +4,30 @@
 <PageTitle>Add / Edit Form Template</PageTitle>
 <h1>Add / Edit Form Template</h1>
 
+<p>This is to handle form template infomration -- what considerations and final summary options the end user sees. </p>
+
 <div>
-Title: 
-<input type="text" @bind="FormTemplate.Title" class="form-control" placeholder="Name" />
+    Title (for your reference): <br />
+    <input type="text" @bind="FormTemplate.Title" class="form-control" style="width: 100%; border-radius: 5px; padding: 10px; font: 16px / 18px var(--il-source-sans); border: thin var(--il-blue) solid;" />
 </div>
 
 <div>
-    Form Title:
-    <input type="text" @bind="FormTemplate.FormTitle" class="form-control" placeholder="Name" />
+    Internal Lookup String (this is an internal value; please contact IT to determine what this should be): <br />
+    <input type="text" @bind="FormTemplate.InternalLookupString" class="form-control" style="width: 100%; border-radius: 5px; padding: 10px; font: 16px / 18px var(--il-source-sans); border: thin var(--il-blue) solid;" />
 </div>
 
-<div>
-Description: 
-<input type="text" @bind="FormTemplate.FormDescription" class="form-control"/>
-</div>
-
-<div>
-Internal Lookup String: 
-<input type="text" @bind="FormTemplate.InternalLookupString" class="form-control" />
-</div>
-
-<h2>Final Answers</h2>
+<h2>"Final Summary" Options</h2>
+<p>Put each option on a single line. Do not use numbers, astericks, or bullets to put them in a list. These will be automatically updated to the dropdown the user can choose as the final summary.</p>
+<div class="strengths-next-steps">
 <textarea @bind="FormTemplate.FinalAnswerOptions" class="admin-textarea" placeholder="Answer"></textarea>
-
-<p><button @onclick="Save">Save Changes</button></p>
+</div>
 
 <h2>Considerations</h2>
 @foreach (var domain in DomainList.Domains.OrderBy(d => d.DomainEnum))
 {
     <h3>@domain.Title</h3>
+    <p>Put each consideration on a single line. Do not use numbers, astericks, or bullets to put them in a list. These will be automatically added as a bulletted list to the form.</p>
+    <p>If you need to add, remove, or change components, please contact IT.</p>
 
     @foreach (var component in domain.Components.OrderBy(c => c.ComponentOrder))
     {
@@ -40,3 +35,5 @@ Internal Lookup String:
     }
 
 }
+
+<p><button class="il-button" @onclick="Save">Save Changes</button></p>

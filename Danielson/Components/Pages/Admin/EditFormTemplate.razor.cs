@@ -13,12 +13,16 @@ namespace Danielson.Components.Pages.Admin {
         [Inject]
         private FormTemplateAccess FormTemplateAccess { get; set; } = default!;
 
+        [Inject]
+        private NavigationManager NavigationManager { get; set; } = default!;
+
         protected override async Task OnInitializedAsync() {
             FormTemplate = await FormTemplateAccess.Get(Id) ?? new FormTemplate();
         }
 
         protected async Task Save() {
             _ = await FormTemplateAccess.Save(FormTemplate);
+            NavigationManager.NavigateTo("/");
         }
 
         protected void SaveConsideration(ConsiderationTemplate c) {
