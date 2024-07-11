@@ -5,7 +5,7 @@
 {
     <div class="danielson-name">
     <h1>@FormExportInformation.Title</h1>
-        <FormHeader FormId="CurrentForm.Id" IsMidterm="CurrentForm.IsMidterm" EvaluatedBy="@FormExportInformation.EvaluatedBy" EvaluationDate="@CurrentForm.DateEvaluatedString"
+        <FormHeader FormId="CurrentForm.AssignmentId" IsMidterm="CurrentForm.IsMidterm" EvaluatedBy="@FormExportInformation.EvaluatedBy" EvaluationDate="@CurrentForm.DateEvaluatedString"
                     FormType="@CurrentForm.Title" Semester="@CurrentForm.SemesterDate" OnChangeCallback="ChangeFormType"></FormHeader>
     </div>
 }
@@ -29,7 +29,7 @@
         {
             @foreach (var component in DomainObject.Components)
             {
-                <ComponentItem Component="component" FormId="FormId" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@(CurrentForm.ShowNotObserved && CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
+                <ComponentItem Component="component" FormId="CurrentForm.Id" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@(CurrentForm.ShowNotObserved && CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
             }
         }
         <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>

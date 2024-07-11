@@ -5,6 +5,7 @@ using Danielson.Data;
 using Danielson.Data.Data;
 using Danielson.Data.DataAccess;
 using Danielson.Data.Login;
+using Danielson.Data.PortalTranslator;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ builder.Services.AddScoped<FormRepository>();
 builder.Services.AddScoped(s => new UserAccess(s.GetService<FormRepository>(), builder.Configuration["Testing"]));
 builder.Services.AddScoped<FormTemplateAccess>();
 builder.Services.AddScoped<FormAccess>();
+builder.Services.AddScoped(s => new FormExport(builder.Configuration.GetConnectionString("AppConnection")));
 
 builder.Services.AddAuthentication(options => {
     options.DefaultScheme = IdentityConstants.ApplicationScheme;

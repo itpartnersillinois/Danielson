@@ -258,6 +258,17 @@ fieldset {
         margin-bottom: 0;
     }
 
+    .danielson-answer .title-alert {
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 28px;
+        padding: 10px;
+        background-color: var(--il-altgeld);
+        color: white;
+        margin-bottom: 0;
+    }
+
     .danielson-answer .table {
         display: flex;
         margin: 10px 10px 30px 10px;

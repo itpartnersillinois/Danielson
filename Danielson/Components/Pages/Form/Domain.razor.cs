@@ -3,6 +3,7 @@ using Danielson.Data.DataModels;
 using Danielson.Data.Domains;
 using Danielson.Data.PortalTranslator;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 
 namespace Danielson.Components.Pages.Form {
@@ -11,7 +12,9 @@ namespace Danielson.Components.Pages.Form {
         public Data.DataModels.Form CurrentForm { get; set; } = default!;
 
         public DomainObject DomainObject { get; set; } = default!;
+
         public List<string> FinalAnswers { get; set; } = default!;
+
         public FormExportInformation FormExportInformation { get; set; } = default!;
 
         [Parameter]
@@ -20,7 +23,13 @@ namespace Danielson.Components.Pages.Form {
         public bool ShowFinal { get; set; }
 
         [Inject]
+        protected AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
+
+        [Inject]
         protected FormAccess ComponentAnswerHandler { get; set; } = default!;
+
+        [Inject]
+        protected FormExport FormExport { get; set; } = default!;
 
         [Inject]
         protected FormTemplateAccess FormTemplateAccess { get; set; } = default!;
@@ -109,16 +118,33 @@ namespace Danielson.Components.Pages.Form {
             DomainObject = DomainList.Domains.First();
             ShowFinal = false;
 
+            var email = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name;
+            FormExportInformation = FormExport.Get(FormId);
+
             CurrentForm = await ComponentAnswerHandler.GetForm(FormId);
-            FinalAnswers = await FormTemplateAccess.GetFinalAnswerOptions(CurrentForm.Id);
-
-            //TODO Add export pull
-            FormExportInformation = new FormExportInformation {
-                EvaluatedBy = "Talbott, Susan",
-                Title = "CI-410: Acello, Grace"
-            };
-            //TODO Add authentication
-
+            if (CurrentForm.Id == 0) {
+                CurrentForm = new Data.DataModels.Form {
+                    AssignmentId = FormId,
+                    FormTemplateInternalLookupString = FormExportInformation.FormTemplateInternalLookupString,
+                    IsMidterm = FormExportInformation.IsMidterm,
+                    Email = email ?? "-------------",
+                    PlacementType = FormExportInformation.PlacementType,
+                    Position = FormExportInformation.Position,
+                    SemesterDate = FormExportInformation.Semester,
+                    ShowComponents = FormExportInformation.ShowComponents,
+                    ShowNotObserved = FormExportInformation.ShowNotObserved,
+                    ShowQuantitativeAnswer = FormExportInformation.ShowQuantitativeAnswer,
+                    Student = FormExportInformation.StudentName,
+                    Title = FormExportInformation.Title,
+                    IsActive = true,
+                    LastUpdated = DateTime.Now
+                };
+                _ = await ComponentAnswerHandler.Create(CurrentForm);
+            } else if (CurrentForm.Email != email) {
+                throw new Exception("Emails do not match");
+            }
+            FinalAnswers = await FormTemplateAccess.GetFinalAnswerOptions(FormExportInformation.FormTemplateInternalLookupString);
+            StateHasChanged();
             await base.OnInitializedAsync();
         }
 
