@@ -1,11 +1,11 @@
 ﻿@page "/Form/Domain/{FormId:int}"
 @attribute [Authorize(Roles = "Student,Supervisor,CooperatingTeacher,Admin,CoteStaff")]
 
-@if (DomainObject != null && CurrentForm != null && FormExportInformation != null)
+@if (DomainObject != null && CurrentForm != null && FormImportInformation != null)
 {
     <div class="danielson-name">
-    <h1>@FormExportInformation.Title</h1>
-        <FormHeader FormId="CurrentForm.AssignmentId" IsMidterm="CurrentForm.IsMidterm" EvaluatedBy="@FormExportInformation.EvaluatedBy" EvaluationDate="@CurrentForm.DateEvaluatedString"
+        <h1>@FormImportInformation.Title</h1>
+        <FormHeader FormId="CurrentForm.AssignmentId" IsMidterm="CurrentForm.IsMidterm" EvaluatedBy="@FormImportInformation.EvaluatedBy" EvaluationDate="@CurrentForm.DateEvaluatedString"
                     FormType="@CurrentForm.Title" Semester="@CurrentForm.SemesterDate" OnChangeCallback="ChangeFormType"></FormHeader>
     </div>
 }
@@ -78,7 +78,7 @@
         </div>
         <div>
             <label for="final-signature" class="data-required">Signature</label>
-            <input id="final-signature" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormExportInformation?.EvaluatedBy</span>
+            <input id="final-signature" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
             <p>You must sign to submit.</p>
         </div>
         <div>

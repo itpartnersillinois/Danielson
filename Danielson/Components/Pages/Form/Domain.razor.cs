@@ -15,11 +15,10 @@ namespace Danielson.Components.Pages.Form {
 
         public List<string> FinalAnswers { get; set; } = default!;
 
-        public FormExportInformation FormExportInformation { get; set; } = default!;
-
         [Parameter]
         public int FormId { get; set; }
 
+        public FormImportInformation FormImportInformation { get; set; } = default!;
         public bool ShowFinal { get; set; }
 
         [Inject]
@@ -29,7 +28,7 @@ namespace Danielson.Components.Pages.Form {
         protected FormAccess ComponentAnswerHandler { get; set; } = default!;
 
         [Inject]
-        protected FormExport FormExport { get; set; } = default!;
+        protected FormImport FormImport { get; set; } = default!;
 
         [Inject]
         protected FormTemplateAccess FormTemplateAccess { get; set; } = default!;
@@ -119,23 +118,24 @@ namespace Danielson.Components.Pages.Form {
             ShowFinal = false;
 
             var email = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name;
-            FormExportInformation = FormExport.Get(FormId);
+            FormImportInformation = FormImport.Get(FormId);
 
             CurrentForm = await ComponentAnswerHandler.GetForm(FormId);
             if (CurrentForm.Id == 0) {
                 CurrentForm = new Data.DataModels.Form {
                     AssignmentId = FormId,
-                    FormTemplateInternalLookupString = FormExportInformation.FormTemplateInternalLookupString,
-                    IsMidterm = FormExportInformation.IsMidterm,
+                    FormTemplateInternalLookupString = FormImportInformation.FormTemplateInternalLookupString,
+                    IsMidterm = FormImportInformation.IsMidterm,
                     Email = email ?? "-------------",
-                    PlacementType = FormExportInformation.PlacementType,
-                    Position = FormExportInformation.Position,
-                    SemesterDate = FormExportInformation.Semester,
-                    ShowComponents = FormExportInformation.ShowComponents,
-                    ShowNotObserved = FormExportInformation.ShowNotObserved,
-                    ShowQuantitativeAnswer = FormExportInformation.ShowQuantitativeAnswer,
-                    Student = FormExportInformation.StudentName,
-                    Title = FormExportInformation.Title,
+                    PlacementType = FormImportInformation.PlacementType,
+                    Position = FormImportInformation.Position,
+                    SemesterDate = FormImportInformation.Semester,
+                    ShowComponents = FormImportInformation.ShowComponents,
+                    ShowNotObserved = FormImportInformation.ShowNotObserved,
+                    ShowQuantitativeAnswer = FormImportInformation.ShowQuantitativeAnswer,
+                    Student = FormImportInformation.StudentName,
+                    StudentEvaluationId = FormImportInformation.StudentEvaluationId,
+                    Title = FormImportInformation.Title,
                     IsActive = true,
                     LastUpdated = DateTime.Now
                 };
@@ -143,13 +143,15 @@ namespace Danielson.Components.Pages.Form {
             } else if (CurrentForm.Email != email) {
                 throw new Exception("Emails do not match");
             }
-            FinalAnswers = await FormTemplateAccess.GetFinalAnswerOptions(FormExportInformation.FormTemplateInternalLookupString);
+            FinalAnswers = await FormTemplateAccess.GetFinalAnswerOptions(FormImportInformation.FormTemplateInternalLookupString);
             StateHasChanged();
             await base.OnInitializedAsync();
         }
 
         protected async Task SaveForm() {
             _ = await ComponentAnswerHandler.Save(CurrentForm);
+            var email = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
+            _ = await FormImport.Save(CurrentForm, email);
         }
     }
 }

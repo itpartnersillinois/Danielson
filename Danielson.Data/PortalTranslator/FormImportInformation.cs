@@ -1,6 +1,6 @@
 ﻿namespace Danielson.Data.PortalTranslator {
 
-    public class FormExportInformation {
+    public class FormImportInformation {
         public string EvaluatedBy => $"{EvaluatorFirstName} {EvaluatorLastName}";
         public string EvaluatorFirstName { get; set; } = "";
         public string EvaluatorLastName { get; set; } = "";
@@ -12,6 +12,7 @@
         public bool ShowComponents { get; set; }
         public bool ShowNotObserved { get; set; }
         public bool ShowQuantitativeAnswer { get; set; }
+        public int StudentEvaluationId { get; set; }
         public string StudentName { get; set; } = "";
         public string Title { get; set; } = "";
     }
