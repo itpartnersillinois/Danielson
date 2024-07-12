@@ -13,6 +13,7 @@
         public bool ShowNotObserved { get; set; }
         public bool ShowQuantitativeAnswer { get; set; }
         public int StudentEvaluationId { get; set; }
+        public int StudentId { get; set; }
         public string StudentName { get; set; } = "";
         public string Title { get; set; } = "";
     }

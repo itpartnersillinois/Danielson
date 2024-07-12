@@ -134,6 +134,7 @@ namespace Danielson.Components.Pages.Form {
                     ShowNotObserved = FormImportInformation.ShowNotObserved,
                     ShowQuantitativeAnswer = FormImportInformation.ShowQuantitativeAnswer,
                     Student = FormImportInformation.StudentName,
+                    StudentId = FormImportInformation.StudentId,
                     StudentEvaluationId = FormImportInformation.StudentEvaluationId,
                     Title = FormImportInformation.Title,
                     IsActive = true,
