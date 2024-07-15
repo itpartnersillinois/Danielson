@@ -88,6 +88,13 @@ namespace Danielson.Data.Domains {
                         Code = "2d",
                         ContinuumOfPracticeHtml = (MarkupString)"",
                     },
+                    new() {
+                        DomainEnum = DomainEnum.Two,
+                        ComponentOrder = 5,
+                        Title = "Component 2e: Organizing Spaces for Learning",
+                        Code = "2e",
+                        ContinuumOfPracticeHtml = (MarkupString)"",
+                    },
                 ],
             },
             new() {
@@ -98,7 +105,7 @@ namespace Danielson.Data.Domains {
                     new() {
                         DomainEnum = DomainEnum.Three,
                         ComponentOrder = 1,
-                        Title = "Component 3a: Communicating with Students",
+                        Title = "Component 3a: Communicating About Purpose and Content",
                         Code = "3a",
                         ContinuumOfPracticeHtml = (MarkupString)"",
                     },
@@ -119,22 +126,15 @@ namespace Danielson.Data.Domains {
                     new() {
                         DomainEnum = DomainEnum.Three,
                         ComponentOrder = 4,
-                        Title = "Component 3d: Using Assessment in Instruction",
+                        Title = "Component 3d: Using Assessment for Learning",
                         Code = "3d",
                         ContinuumOfPracticeHtml = (MarkupString)"",
                     },
                     new() {
                         DomainEnum = DomainEnum.Three,
                         ComponentOrder = 5,
-                        Title = "Component 3e: Demonstrating Flexibility and Responsiveness",
+                        Title = "Component 3e: Responding Flexibly to Student Needs",
                         Code = "3e",
-                        ContinuumOfPracticeHtml = (MarkupString)"",
-                    },
-                    new() {
-                        DomainEnum = DomainEnum.Three,
-                        ComponentOrder = 6,
-                        Title = "Component 3f: Demonstrating Knowledge of Resources",
-                        Code = "3f",
                         ContinuumOfPracticeHtml = (MarkupString)"",
                     }
                 ]

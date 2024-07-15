@@ -8,7 +8,7 @@ namespace Danielson.Data.Login {
         private readonly FormRepository _testRepository = testRepository ?? throw new ArgumentNullException("testRepository");
         public bool IsTesting => _testing;
 
-        public async Task<(string email, string username, RoleEnum role, string studentId)> Get(Guid guid) {
+        public async Task<(string email, string username, RoleEnum role, string studentEvaluationId)> Get(Guid guid) {
             var user = await _testRepository.ReadAsync(r => r.Users.FirstOrDefault(u => u.Guid == guid && (_testing || u.IsActive)));
             if (user == null) {
                 return ("", "", RoleEnum.None, "");

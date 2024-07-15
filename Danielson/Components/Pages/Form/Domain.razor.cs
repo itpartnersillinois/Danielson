@@ -151,8 +151,8 @@ namespace Danielson.Components.Pages.Form {
 
         protected async Task SaveForm() {
             _ = await ComponentAnswerHandler.Save(CurrentForm);
-            var email = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
-            _ = await FormImport.Save(CurrentForm, email);
+            var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
+            _ = await FormImport.Save(CurrentForm, username);
         }
     }
 }

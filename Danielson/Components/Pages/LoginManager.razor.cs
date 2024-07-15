@@ -27,10 +27,10 @@ namespace Danielson.Components.Pages {
 
         protected override async Task OnInitializedAsync() {
             if (!string.IsNullOrWhiteSpace(GuidString)) {
-                var (newResult, role, studentId) = await ((CustomAuthenticationStateProvider) CustomAuthenticationStateProvider).PullManually(Guid.Parse(GuidString));
-                var appUser = new ApplicationUser { Email = newResult.Email, UserName = newResult.Email };
-                await SignInManager.SignInWithClaimsAsync(appUser, true, [new(ClaimTypes.Role, role), new(ClaimConstants.StudentId, studentId)]);
-                NavigationManager.NavigateTo("/");
+                var (newResult, role, studentEvaluationId) = await ((CustomAuthenticationStateProvider) CustomAuthenticationStateProvider).PullManually(Guid.Parse(GuidString));
+                var appUser = new ApplicationUser { Email = newResult.Email, UserName = newResult.UserName };
+                await SignInManager.SignInWithClaimsAsync(appUser, true, [new(ClaimTypes.Role, role), new(ClaimConstants.StudentEvaluationId, studentEvaluationId)]);
+                NavigationManager.NavigateTo("/Form/Domain/" + studentEvaluationId);
             }
         }
     }

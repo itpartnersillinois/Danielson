@@ -29,10 +29,10 @@ namespace Danielson.Authentication {
             return new AuthenticationState(user);
         }
 
-        public async Task<(IdentityUser, string role, string studentId)> PullManually(Guid guid) {
+        public async Task<(IdentityUser, string role, string studentEvaluationId)> PullManually(Guid guid) {
             var userFromDatabase = await _userAccess.Get(guid);
             var identity = userFromDatabase.username == "" ? new IdentityUser() : new IdentityUser(userFromDatabase.username) { Email = userFromDatabase.email };
-            return (identity, userFromDatabase.role.ToString(), userFromDatabase.studentId);
+            return (identity, userFromDatabase.role.ToString(), userFromDatabase.studentEvaluationId);
         }
     }
 }
