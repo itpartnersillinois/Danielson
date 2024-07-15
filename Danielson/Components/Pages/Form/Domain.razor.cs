@@ -142,7 +142,7 @@ namespace Danielson.Components.Pages.Form {
                 };
                 _ = await ComponentAnswerHandler.Create(CurrentForm);
             } else if (CurrentForm.Email != email) {
-                throw new Exception("Emails do not match");
+                // TODO see what we should do besides throw new Exception("Emails do not match");
             }
             FinalAnswers = await FormTemplateAccess.GetFinalAnswerOptions(FormImportInformation.FormTemplateInternalLookupString);
             StateHasChanged();

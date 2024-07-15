@@ -26,9 +26,11 @@ namespace Danielson.Components.Pages.Admin {
         }
 
         protected void SaveConsideration(ConsiderationTemplate c) {
+            c.IsActive = true;
             var existing = FormTemplate.GetConsiderationTemplate(c.DomainItem, c.ComponentOrder);
             if (existing != null && existing.Id > 0) {
                 existing.ConsiderationText = c.ConsiderationText;
+                existing.IsActive = true;
             } else {
                 FormTemplate.ConsiderationTemplates.Add(c);
             }
