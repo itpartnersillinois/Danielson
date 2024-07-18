@@ -15,6 +15,11 @@ namespace Danielson.Components.Controls {
         [Parameter]
         public string Title { get; set; } = default!;
 
+        [Parameter]
+        public bool ShowErrors { get; set; }
+
+        [Parameter]
+        public bool ShowQuantitativeAnswer { get; set; }
         protected bool AreAllCompnentsAnswered => ComponentsNotChosen.Count == 0;
         protected List<ComponentAnswer> ComponentAnswers { get; set; } = default!;
 

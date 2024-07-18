@@ -5,6 +5,13 @@ namespace Danielson.Data.DataModels {
 
     [Table("Form", Schema = "danielson")]
     public class Form : BaseDataItem {
+
+        private readonly Dictionary<string, string> _position = new() {
+            {  "U", "Supervisor" },
+            {  "T", "Student" },
+            {  "C", "Cooperating Teacher" }
+        };
+
         public int AssignmentId { get; set; }
         public virtual ICollection<ComponentAnswer> ComponentAnswers { get; set; } = default!;
 
@@ -26,12 +33,13 @@ namespace Danielson.Data.DataModels {
 
         public string FormTemplateInternalLookupString { get; set; } = "";
 
+        public string FormType => $"{PlacementType} - {(_position.ContainsKey(Position) ? _position[Position] : "")}";
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public override int Id { get; set; }
 
         public bool IsMidterm { get; set; }
-
         public bool IsSigned => DateEvaluated.HasValue;
 
         public string PlacementType { get; set; } = "";

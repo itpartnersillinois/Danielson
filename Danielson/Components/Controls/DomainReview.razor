@@ -5,7 +5,7 @@
             <p class="title">@component.ComponentTitle</p>
             <div class="table">
                 <div>
-                    @if (component.QuantitativeScore >= 0)
+                    @if (component.QuantitativeScore >= 0 && ShowQuantitativeAnswer)
                     {
                         <div>@component.QuantitativeScore</div>
                     }
@@ -17,7 +17,7 @@
             </div>
         </div>
     }
-    @if (!AreAllCompnentsAnswered)
+    @if (!AreAllCompnentsAnswered && ShowErrors)
     {
         <div class="danielson-answer">
         <p class="title-alert">Not all components have been answered</p>

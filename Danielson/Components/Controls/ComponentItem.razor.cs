@@ -14,13 +14,11 @@ namespace Danielson.Components.Controls {
         [Parameter]
         public ComponentAnswer? ComponentAnswer { get; set; } = default!;
 
+        [Parameter]
         public string[] ConsiderationValues { get; set; } = default!;
 
         [Parameter]
         public int FormId { get; set; }
-
-        [Parameter]
-        public string FormTemplateCode { get; set; } = "";
 
         public int NumberColumns { get; set; }
 
@@ -36,12 +34,7 @@ namespace Danielson.Components.Controls {
         [Inject]
         private FormAccess FormAccess { get; set; } = default!;
 
-        [Inject]
-        private FormTemplateAccess FormTemplateAccess { get; set; } = default!;
-
         protected override async Task OnInitializedAsync() {
-            ConsiderationValues = (await FormTemplateAccess.Get(FormTemplateCode)).GetConsiderationTemplate(Component.DomainEnum, Component.ComponentOrder).ConsiderationText.Split('\n').Select(c => c.Trim(' ', '.', '\n', '\r')).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
-
             // TODO Need to review for more variations
             NumberColumns = AnswerList.Answers.Count(a => (!a.NotObserved || ShowNotObserved) && a.NumberColumns > 0) * 2;
         }
