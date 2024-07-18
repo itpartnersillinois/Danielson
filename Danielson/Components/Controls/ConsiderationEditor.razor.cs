@@ -6,6 +6,9 @@ namespace Danielson.Components.Controls {
     public partial class ConsiderationEditor {
 
         [Parameter]
+        public string ConsiderationId { get; set; } = default!;
+
+        [Parameter]
         public ConsiderationTemplate ConsiderationTemplate { get; set; } = default!;
 
         public string ConsiderationText {

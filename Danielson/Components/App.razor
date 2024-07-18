@@ -48,6 +48,25 @@
     <Routes @rendermode="InteractiveServer" />
     <script src="_framework/blazor.web.js"></script>
     </main>
+    <il-footer>
+        <div slot="contact" class="il-footer-contact uofi_address">
+            <p><a href="https://cote.illinois.edu/cote-portal-access">CoTE Portal</a></p>
+        </div>
+        <div class="il-footer-navigation">
+            <div style="grid-column-start: 1; grid-column-end: 3;">
+                Adapted from - ©️ 2022 <a href="http://www.danielsongroup.org/">The Danielson Group, Inc.</a> All Rights Reserved <br />
+                Labels for continuum of practice adapted by and considerations authored by University of Illinois at Urbana-Champaign.
+            </div>
+        </div>
+        <nav slot="links" class="il-footer-links" aria-label="Legal notices">
+            <ul>
+                <li><button data-il="cookies"></button></li>
+                <li><a data-il="privacy"></a></li>
+                <li><a data-il="copyright"></a></li>
+                <li><a data-il="accessibility"></a></li>
+            </ul>
+        </nav>
+    </il-footer>
 </body>
 
 </html>

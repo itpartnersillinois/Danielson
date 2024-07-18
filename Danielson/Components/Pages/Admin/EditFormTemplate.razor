@@ -16,12 +16,6 @@
     <input type="text" @bind="FormTemplate.InternalLookupString" class="form-control" style="width: 100%; border-radius: 5px; padding: 10px; font: 16px / 18px var(--il-source-sans); border: thin var(--il-blue) solid;" />
 </div>
 
-<h2>"Final Summary" Options</h2>
-<p>Put each option on a single line. Do not use numbers, astericks, or bullets to put them in a list. These will be automatically updated to the dropdown the user can choose as the final summary.</p>
-<div class="strengths-next-steps">
-<textarea @bind="FormTemplate.FinalAnswerOptions" class="admin-textarea" placeholder="Answer"></textarea>
-</div>
-
 <h2>Considerations</h2>
 @foreach (var domain in DomainList.Domains.OrderBy(d => d.DomainEnum))
 {
@@ -31,7 +25,7 @@
 
     @foreach (var component in domain.Components.OrderBy(c => c.ComponentOrder))
     {
-        <ConsiderationEditor Title="@component.Title" ConsiderationTemplate="FormTemplate.GetConsiderationTemplate(domain.DomainEnum, component.ComponentOrder)" OnChangeCallback="e => SaveConsideration(e)" />
+        <ConsiderationEditor Title="@component.Title" ConsiderationId="@component.Code" ConsiderationTemplate="FormTemplate.GetConsiderationTemplate(domain.DomainEnum, component.ComponentOrder)" OnChangeCallback="e => SaveConsideration(e)" />
     }
 
 }

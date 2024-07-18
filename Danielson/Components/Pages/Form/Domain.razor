@@ -1,15 +1,16 @@
 ﻿@page "/Form/Domain/{FormId:int}"
 @attribute [Authorize(Roles = "Student,Supervisor,CooperatingTeacher,Admin,CoteStaff")]
+<PageTitle>Danielson Form | Illinois</PageTitle>
 
 @if (DomainObject != null && CurrentForm != null && FormImportInformation != null)
 {
     <div class="danielson-name">
         <h1>@FormImportInformation.Title</h1>
         <FormHeader FormId="CurrentForm.AssignmentId" IsMidterm="CurrentForm.IsMidterm" EvaluatedBy="@FormImportInformation.EvaluatedBy" EvaluationDate="@CurrentForm.DateEvaluatedString"
-                    FormType="@CurrentForm.Title" Semester="@CurrentForm.SemesterDate" OnChangeCallback="ChangeFormType"></FormHeader>
+                    FormType="@CurrentForm.FormType" Semester="@CurrentForm.SemesterDate" OnChangeCallback="ChangeFormType"></FormHeader>
     </div>
 }
-@if (DomainObject != null && CurrentForm != null && !ShowFinal)
+@if (DomainObject != null && CurrentForm != null && CurrentFormTemplate != null && !ShowFinal)
 {
     <div class="danielson-title">
         <ul>
@@ -29,7 +30,7 @@
         {
             @foreach (var component in DomainObject.Components)
             {
-                <ComponentItem Component="component" FormId="CurrentForm.Id" FormTemplateCode="@CurrentForm.FormTemplateInternalLookupString" ShowNotObserved="@(CurrentForm.ShowNotObserved && CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
+                <ComponentItem Component="component" FormId="CurrentForm.Id" ShowNotObserved="@(CurrentForm.ShowNotObserved && CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ConsiderationValues="@CurrentFormTemplate.ConsiderationValues(DomainObject.DomainEnum, component.ComponentOrder)" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
             }
         }
         <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
@@ -61,7 +62,7 @@
     </div>
     @foreach (var domain in DomainList.Domains)
     {
-        <DomainReview DomainEnum="domain.DomainEnum" Form="CurrentForm" Title="@domain.Title"></DomainReview>
+        <DomainReview DomainEnum="domain.DomainEnum" Form="CurrentForm" Title="@domain.Title" ShowErrors="CurrentForm.ShowComponents" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer"></DomainReview>
     }
 
     <div class="danielson-final">

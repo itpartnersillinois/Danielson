@@ -4,7 +4,7 @@ body {
 
 main {
     padding: 30px;
-    margin: 0 auto;
+    margin: 0 auto 50px auto;
     max-width: 1140px;
 }
 
@@ -179,12 +179,18 @@ fieldset {
 .il-formatted .danielson-component details {
     margin: 0;
     padding-left: 0;
+    padding-bottom: 20px;
 }
 
     .il-formatted .danielson-component details summary {
         background: transparent;
         margin: 0;
+        padding-bottom: 0;
         padding-left: 0;
+    }
+
+    .il-formatted .danielson-component details ul {
+        margin-top: 20px;
     }
 
 .danielson-components.One .danielson-component {
@@ -313,7 +319,7 @@ fieldset {
         margin-top: 0;
         padding-top: 0;
         margin-bottom: 20px;
-        color: var(--il-storm)
+        color: var(--il-storm-darker-2)
     }
 
     .danielson-final select {

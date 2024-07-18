@@ -1,6 +1,7 @@
 ﻿using Danielson.Data.DataAccess;
 using Danielson.Data.DataModels;
 using Danielson.Data.Domains;
+using Danielson.Data.FinalAnswers;
 using Danielson.Data.PortalTranslator;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -10,6 +11,8 @@ namespace Danielson.Components.Pages.Form {
 
     public partial class Domain {
         public Data.DataModels.Form CurrentForm { get; set; } = default!;
+
+        public FormTemplate CurrentFormTemplate { get; set; } = default!;
 
         public DomainObject DomainObject { get; set; } = default!;
 
@@ -52,6 +55,7 @@ namespace Danielson.Components.Pages.Form {
             ShowFinal = finish;
             DomainObject = DomainList.Domains.First(d => d.DomainEnum == (finish ? DomainEnum.Four : domainEnum ?? DomainEnum.One));
             StateHasChanged();
+            await JsRuntime.InvokeVoidAsync("CollapseAll");
             await JsRuntime.InvokeVoidAsync("OnScrollEvent");
         }
 
@@ -144,7 +148,8 @@ namespace Danielson.Components.Pages.Form {
             } else if (CurrentForm.Email != email) {
                 // TODO see what we should do besides throw new Exception("Emails do not match");
             }
-            FinalAnswers = await FormTemplateAccess.GetFinalAnswerOptions(FormImportInformation.FormTemplateInternalLookupString);
+            CurrentFormTemplate = await FormTemplateAccess.Get(FormImportInformation.FormTemplateInternalLookupString);
+            FinalAnswers = FinalAnswerGenerator.GetFinalAnswers(CurrentForm);
             StateHasChanged();
             await base.OnInitializedAsync();
         }
@@ -153,6 +158,7 @@ namespace Danielson.Components.Pages.Form {
             _ = await ComponentAnswerHandler.Save(CurrentForm);
             var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
             _ = await FormImport.Save(CurrentForm, username);
+            await ChangePage(DomainEnum.One, false);
         }
     }
 }

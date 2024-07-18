@@ -1,5 +1,5 @@
-﻿<p>@Title</p>
+﻿<label for="consid-@ConsiderationId">@Title</label>
 <div class="strengths-next-steps">
-<textarea @bind="ConsiderationText" @bind:event="onchange" @bind:after="Save" class="admin-textarea"></textarea>
+<textarea id="consid-@ConsiderationId" @bind="ConsiderationText" @bind:event="onchange" @bind:after="Save" class="admin-textarea"></textarea>
 </div>
 <hr />
