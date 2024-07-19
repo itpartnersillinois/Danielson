@@ -1,9 +1,9 @@
 ﻿@page "/Form/Domain/{FormId:int}"
 @attribute [Authorize(Roles = "Student,Supervisor,CooperatingTeacher,Admin,CoteStaff")]
-<PageTitle>Danielson Form | Illinois</PageTitle>
 
 @if (DomainObject != null && CurrentForm != null && FormImportInformation != null)
 {
+    <PageTitle>@FormImportInformation.Title | Danielson Form | Illinois</PageTitle>
     <div class="danielson-name">
         <h1>@FormImportInformation.Title</h1>
         <FormHeader FormId="CurrentForm.AssignmentId" IsMidterm="CurrentForm.IsMidterm" EvaluatedBy="@FormImportInformation.EvaluatedBy" EvaluationDate="@CurrentForm.DateEvaluatedString"
@@ -50,7 +50,6 @@
             }
             <li><button class="Final" @onclick="() => ChangePage(null, true)">Final Summary</button></li>
         </ul>
-
         <div>
             <h2>Final Summary</h2>
             <p>Please review your responses below. Ensure you have completed all four domains before selecting a final summary score, signing, and submitting.</p>
@@ -66,22 +65,25 @@
     }
 
     <div class="danielson-final">
-        <div>
-            <label for="final-summary" class="data-required">Final Summary</label>
-            <select id="final-summary" aria-required="true" @bind="CurrentForm.FinalSummary">
-                    <option value="">Select</option>
-                @foreach (var final in FinalAnswers)
-                    {
-                    <option value="@final">@final</option>
-                    }
-            </select>
-            <p>You must select a final summary to submit.</p>
-        </div>
-        <div>
-            <label for="final-signature" class="data-required">Signature</label>
-            <input id="final-signature" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
-            <p>You must sign to submit.</p>
-        </div>
+        @if (CurrentForm.ShowComponents)
+        {
+            <div>
+                <label for="final-summary" class="data-required">Final Summary</label>
+                <select id="final-summary" aria-required="true" @bind="CurrentForm.FinalSummary">
+                        <option value="">Select</option>
+                    @foreach (var final in FinalAnswers)
+                        {
+                        <option value="@final">@final</option>
+                        }
+                </select>
+                <p>You must select a final summary to submit.</p>
+            </div>
+            <div>
+                <label for="final-signature" class="data-required">Signature</label>
+                <input id="final-signature" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
+                <p>You must sign to submit.</p>
+            </div>
+        }
         <div>
             <button class="il-button il-theme-white" @onclick="SaveForm">Submit</button>
         </div>

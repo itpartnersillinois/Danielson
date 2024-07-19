@@ -145,8 +145,19 @@ namespace Danielson.Components.Pages.Form {
                     LastUpdated = DateTime.Now
                 };
                 _ = await ComponentAnswerHandler.Create(CurrentForm);
-            } else if (CurrentForm.Email != email) {
-                // TODO see what we should do besides throw new Exception("Emails do not match");
+            } else {
+                CurrentForm.SemesterDate = FormImportInformation.Semester;
+                CurrentForm.FormTemplateInternalLookupString = FormImportInformation.FormTemplateInternalLookupString;
+                CurrentForm.Email = email ?? "-------------";
+                CurrentForm.PlacementType = FormImportInformation.PlacementType;
+                CurrentForm.Position = FormImportInformation.Position;
+                CurrentForm.SemesterDate = FormImportInformation.Semester;
+                CurrentForm.ShowComponents = FormImportInformation.ShowComponents;
+                CurrentForm.ShowNotObserved = FormImportInformation.ShowNotObserved;
+                CurrentForm.ShowQuantitativeAnswer = FormImportInformation.ShowQuantitativeAnswer;
+                CurrentForm.Student = FormImportInformation.StudentName;
+                CurrentForm.StudentId = FormImportInformation.StudentId;
+                CurrentForm.Title = FormImportInformation.Title;
             }
             CurrentFormTemplate = await FormTemplateAccess.Get(FormImportInformation.FormTemplateInternalLookupString);
             FinalAnswers = FinalAnswerGenerator.GetFinalAnswers(CurrentForm);

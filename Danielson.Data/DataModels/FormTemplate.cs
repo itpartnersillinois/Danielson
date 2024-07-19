@@ -20,7 +20,7 @@ namespace Danielson.Data.DataModels {
         public string InternalLookupString { get; set; } = "";
         public string Title { get; set; } = "";
 
-        public string[] ConsiderationValues(DomainEnum domain, int componentOrder) => GetConsiderationTemplate(domain, componentOrder).ConsiderationText.Split('\n').Select(c => c.Trim(' ', '.', '\n', '\r')).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
+        public string[] ConsiderationValues(DomainEnum domain, int componentOrder) => GetConsiderationTemplate(domain, componentOrder).ConsiderationText.Split('\n').Select(c => c.Trim(' ', '\n', '\r')).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
 
         public ConsiderationTemplate GetConsiderationTemplate(DomainEnum domain, int componentOrder) => ConsiderationTemplates == null ? new ConsiderationTemplate { DomainItem = domain, ComponentOrder = componentOrder, ConsiderationText = "" } : ConsiderationTemplates.FirstOrDefault(x => x.DomainItem == domain && x.ComponentOrder == componentOrder) ?? new ConsiderationTemplate { DomainItem = domain, ComponentOrder = componentOrder, ConsiderationText = "" };
     }
