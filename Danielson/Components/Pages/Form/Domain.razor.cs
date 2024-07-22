@@ -10,8 +10,8 @@ using Microsoft.JSInterop;
 namespace Danielson.Components.Pages.Form {
 
     public partial class Domain {
+        public List<string> ComponentsNotAnswered { get; set; } = default!;
         public Data.DataModels.Form CurrentForm { get; set; } = default!;
-
         public FormTemplate CurrentFormTemplate { get; set; } = default!;
 
         public DomainObject DomainObject { get; set; } = default!;
@@ -41,6 +41,11 @@ namespace Danielson.Components.Pages.Form {
 
         [Inject]
         protected NavigationManager NavigationManager { get; set; } = default!;
+
+        public bool AreAllComponentsAnswered() {
+            ComponentsNotAnswered = DomainList.Domains.SelectMany(d => d.Components).Where(c => !CurrentForm.ComponentAnswers.ToList().Select(ca => ca.ComponentOrder).Contains(c.ComponentOrder)).Select(c => c.Title).ToList();
+            return ComponentsNotAnswered.Count == 0;
+        }
 
         public void ChangeFormType(bool isMidterm) {
             CurrentForm.IsMidterm = isMidterm;
