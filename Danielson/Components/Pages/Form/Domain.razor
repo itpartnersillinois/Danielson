@@ -67,26 +67,65 @@
     <div class="danielson-final">
         @if (CurrentForm.ShowComponents)
         {
-            <div>
-                <label for="final-summary" class="data-required">Final Summary</label>
-                <select id="final-summary" aria-required="true" @bind="CurrentForm.FinalSummary">
+            @if (AreAllComponentsAnswered())
+            {
+                <div>
+                    <label for="final-summary" class="data-required">Final Summary</label>
+                    <select id="final-summary" aria-required="true" @bind="CurrentForm.FinalSummary">
                         <option value="">Select</option>
-                    @foreach (var final in FinalAnswers)
+                        @foreach (var final in FinalAnswers)
                         {
-                        <option value="@final">@final</option>
+                            <option value="@final">@final</option>
                         }
-                </select>
-                <p>You must select a final summary to submit.</p>
-            </div>
+                    </select>
+                    <p>You must select a final summary to submit.</p>
+                </div>
+                <div>
+                    <label for="final-signature" class="data-required">Signature</label>
+                    <input id="final-signature" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
+                    <p>You must sign to submit.</p>
+                </div>
+                <div>
+                    <button class="il-button il-theme-white" @onclick="SaveForm">Submit</button>
+                </div>
+            }
+            else
+            {
+                <div class="danielson-answer" style="margin-bottom: 20px;">
+                    <p class="title-alert">Not all components have been answered. Please complete all components before selecting a final summary and signing.</p>
+                    <ul>
+                        @foreach (var componentTitle in ComponentsNotAnswered)
+                        {
+                            <li>@componentTitle</li>
+                        }
+                    </ul>
+
+                </div>
+                <div>
+                    <label for="final-summary" class="data-required">Final Summary</label>
+                    <select id="final-summary" disabled="true" @bind="CurrentForm.FinalSummary">
+                        <option value="">Select</option>
+                        @foreach (var final in FinalAnswers)
+                        {
+                            <option value="@final">@final</option>
+                        }
+                    </select>
+                    <p>You must select a final summary to submit.</p>
+                </div>
+                <div>
+                    <label for="final-signature" class="data-required">Signature</label>
+                    <input id="final-signature" disabled type="checkbox" checked="@CurrentForm.IsSigned"> <span>@FormImportInformation?.EvaluatedBy</span>
+                    <p>You must sign to submit.</p>
+                </div>
+                <div>
+                    <button class="il-button il-theme-white" disabled @onclick="SaveForm" style="background-color: var(--il-gray-1); color: black; border: 2px solid var(--il-button-border-color);">Submit</button>
+                </div>
+            }
+        } else {
             <div>
-                <label for="final-signature" class="data-required">Signature</label>
-                <input id="final-signature" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
-                <p>You must sign to submit.</p>
+                <button class="il-button il-theme-white" @onclick="SaveForm">Submit</button>
             </div>
         }
-        <div>
-            <button class="il-button il-theme-white" @onclick="SaveForm">Submit</button>
-        </div>
         <div id="update-alert" role="alert"><span id="update-alert-message">Danielson Form has been submitted</span><button onclick="removeAlertOnScreen();">X</button></div>
     </div>
 }
