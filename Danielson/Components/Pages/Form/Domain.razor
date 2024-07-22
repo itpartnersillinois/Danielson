@@ -35,6 +35,7 @@
         }
         <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
     </div>
+    <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
     <div class="danielson-button-footer">
         <button class="il-button il-theme-white" @onclick="ChangePagePrevious" style="float: left;">Previous</button>
         <button class="il-button il-theme-white" @onclick="ChangePageNext" style="float: right;">Next</button>
@@ -85,6 +86,7 @@
                     <input id="final-signature" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
                     <p>You must sign to submit.</p>
                 </div>
+                <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
                 <div>
                     <button class="il-button il-theme-white" @onclick="SaveForm">Submit</button>
                 </div>
@@ -117,11 +119,13 @@
                     <input id="final-signature" disabled type="checkbox" checked="@CurrentForm.IsSigned"> <span>@FormImportInformation?.EvaluatedBy</span>
                     <p>You must sign to submit.</p>
                 </div>
+                <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
                 <div>
                     <button class="il-button il-theme-white" disabled @onclick="SaveForm" style="background-color: var(--il-gray-1); color: black; border: 2px solid var(--il-button-border-color);">Submit</button>
                 </div>
             }
         } else {
+            <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
             <div>
                 <button class="il-button il-theme-white" @onclick="SaveForm">Submit</button>
             </div>
