@@ -176,6 +176,7 @@ namespace Danielson.Components.Pages.Form {
                 CurrentForm.Title = FormImportInformation.Title;
                 CurrentForm.FinalSummary = FormImportInformation.FinalScoreText;
                 CurrentForm.DateEvaluated = FormImportInformation.DateEvaluated;
+                CurrentForm.LastUpdated = FormImportInformation.LastUpdated;
             }
             CurrentFormTemplate = await FormTemplateAccess.Get(FormImportInformation.FormTemplateInternalLookupString);
             FinalAnswers = FinalAnswerGenerator.GetFinalAnswers(CurrentForm);

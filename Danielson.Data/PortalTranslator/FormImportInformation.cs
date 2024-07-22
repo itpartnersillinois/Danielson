@@ -8,6 +8,7 @@
         public string FinalScoreText { get; set; } = "";
         public string FormTemplateInternalLookupString { get; set; } = "";
         public bool IsMidterm { get; set; }
+        public DateTime LastUpdated { get; set; }
         public string PlacementType { get; set; } = "";
         public string Position { get; set; } = "";
         public string Semester { get; set; } = "";
