@@ -52,11 +52,20 @@ namespace Danielson.Components.Pages.Form {
             NavigationManager.NavigateTo(NavigationManager.Uri, true);
         }
 
-        protected void AddComponentAnswerToForm(ComponentAnswer componentAnswer) => CurrentForm.AddComponentAnswerToForm(componentAnswer);
+        protected void AddComponentAnswerToForm(ComponentAnswer componentAnswer) {
+            CurrentForm.LastUpdated = DateTime.Now;
+            StateHasChanged();
+            CurrentForm.AddComponentAnswerToForm(componentAnswer);
+        }
 
-        protected void AddDomainAnswerToForm(DomainAnswer domainAnswer) => CurrentForm.AddDomainAnswerToForm(domainAnswer);
+        protected void AddDomainAnswerToForm(DomainAnswer domainAnswer) {
+            CurrentForm.LastUpdated = DateTime.Now;
+            StateHasChanged();
+            CurrentForm.AddDomainAnswerToForm(domainAnswer);
+        }
 
         protected async Task ChangePage(DomainEnum? domainEnum, bool finish) {
+            CurrentForm.LastUpdated = DateTime.Now;
             ShowFinal = finish;
             DomainObject = DomainList.Domains.First(d => d.DomainEnum == (finish ? DomainEnum.Four : domainEnum ?? DomainEnum.One));
             StateHasChanged();
@@ -167,6 +176,7 @@ namespace Danielson.Components.Pages.Form {
                 CurrentForm.Title = FormImportInformation.Title;
                 CurrentForm.FinalSummary = FormImportInformation.FinalScoreText;
                 CurrentForm.DateEvaluated = FormImportInformation.DateEvaluated;
+                CurrentForm.LastUpdated = FormImportInformation.LastUpdated;
             }
             CurrentFormTemplate = await FormTemplateAccess.Get(FormImportInformation.FormTemplateInternalLookupString);
             FinalAnswers = FinalAnswerGenerator.GetFinalAnswers(CurrentForm);
@@ -175,6 +185,7 @@ namespace Danielson.Components.Pages.Form {
         }
 
         protected async Task SaveForm() {
+            CurrentForm.LastUpdated = DateTime.Now;
             _ = await ComponentAnswerHandler.Save(CurrentForm);
             var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
             _ = await FormImport.Save(CurrentForm, username);

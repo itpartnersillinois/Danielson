@@ -46,6 +46,7 @@ namespace Danielson.Components.Controls {
             ComponentAnswer.ComponentTitle = Component.Title;
             ComponentAnswer.ComponentDescription = answerDescription;
             ComponentAnswer.DateCompleted = DateTime.Now;
+            ComponentAnswer.LastUpdated = DateTime.Now;
             ComponentAnswer.DomainItem = Component.DomainEnum;
             ComponentAnswer.QualitativeScore = answerText;
             ComponentAnswer.QuantitativeScore = answer;
