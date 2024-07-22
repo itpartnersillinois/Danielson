@@ -141,6 +141,8 @@ namespace Danielson.Components.Pages.Form {
                     StudentId = FormImportInformation.StudentId,
                     StudentEvaluationId = FormImportInformation.StudentEvaluationId,
                     Title = FormImportInformation.Title,
+                    FinalSummary = FormImportInformation.FinalScoreText,
+                    DateEvaluated = FormImportInformation.DateEvaluated,
                     IsActive = true,
                     LastUpdated = DateTime.Now
                 };
@@ -158,6 +160,8 @@ namespace Danielson.Components.Pages.Form {
                 CurrentForm.Student = FormImportInformation.StudentName;
                 CurrentForm.StudentId = FormImportInformation.StudentId;
                 CurrentForm.Title = FormImportInformation.Title;
+                CurrentForm.FinalSummary = FormImportInformation.FinalScoreText;
+                CurrentForm.DateEvaluated = FormImportInformation.DateEvaluated;
             }
             CurrentFormTemplate = await FormTemplateAccess.Get(FormImportInformation.FormTemplateInternalLookupString);
             FinalAnswers = FinalAnswerGenerator.GetFinalAnswers(CurrentForm);
@@ -169,7 +173,7 @@ namespace Danielson.Components.Pages.Form {
             _ = await ComponentAnswerHandler.Save(CurrentForm);
             var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
             _ = await FormImport.Save(CurrentForm, username);
-            await ChangePage(DomainEnum.One, false);
+            await JsRuntime.InvokeVoidAsync("AlertOnScreen");
         }
     }
 }

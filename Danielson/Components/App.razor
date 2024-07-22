@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="app.css" />
     <link rel="stylesheet" href="Danielson.styles.css" />
     <script>
+        let timeoutID;
         function OnScrollEvent() {
             document.documentElement.scrollTop = 0;
         }
@@ -24,6 +25,19 @@
             document.querySelectorAll("details").forEach((detail) => {
                 detail.open = false;
             });
+        }
+        function AlertOnScreen() {
+            var alertItem = document.querySelector('#update-alert');
+            alertItem.className = 'fadein';
+            timeoutID = setTimeout(function () { alertItem.className = 'fadeout'; }, 5000);
+            setTimeout(function () { alertItem.className = ''; }, 5750);
+            return true;
+        }
+        function removeAlertOnScreen() {
+            var alertItem = document.querySelector('#update-alert');
+            alertItem.className = '';
+            clearTimeout(timeoutID);
+            return true;
         }
     </script>
     <HeadOutlet />

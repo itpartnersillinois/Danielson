@@ -1,9 +1,11 @@
 ﻿namespace Danielson.Data.PortalTranslator {
 
     public class FormImportInformation {
+        public DateTime? DateEvaluated { get; set; }
         public string EvaluatedBy => $"{EvaluatorFirstName} {EvaluatorLastName}";
         public string EvaluatorFirstName { get; set; } = "";
         public string EvaluatorLastName { get; set; } = "";
+        public string FinalScoreText { get; set; } = "";
         public string FormTemplateInternalLookupString { get; set; } = "";
         public bool IsMidterm { get; set; }
         public string PlacementType { get; set; } = "";
