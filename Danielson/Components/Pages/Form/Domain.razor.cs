@@ -43,7 +43,10 @@ namespace Danielson.Components.Pages.Form {
         protected NavigationManager NavigationManager { get; set; } = default!;
 
         public bool AreAllComponentsAnswered() {
-            ComponentsNotAnswered = DomainList.Domains.SelectMany(d => d.Components).Where(c => !CurrentForm.ComponentAnswers.ToList().Select(ca => ca.ComponentOrder).Contains(c.ComponentOrder)).Select(c => c.Title).ToList();
+            ComponentsNotAnswered = [];
+            foreach (var domain in DomainList.Domains) {
+                ComponentsNotAnswered.AddRange(domain.Components.Where(c => !CurrentForm.ComponentAnswers.Where(ca => ca.DomainItem == domain.DomainEnum).Select(ca => ca.ComponentOrder).Contains(c.ComponentOrder)).Select(c => c.Title));
+            }
             return ComponentsNotAnswered.Count == 0;
         }
 
