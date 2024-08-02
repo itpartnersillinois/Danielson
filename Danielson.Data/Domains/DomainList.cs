@@ -35,7 +35,7 @@ namespace Danielson.Data.Domains {
                     new() {
                         DomainEnum = DomainEnum.One,
                         ComponentOrder = 4,
-                        Title = "Component 1d: Using Resources to Support Studentss",
+                        Title = "Component 1d: Using Resources to Support Students",
                         Code = "1d",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher makes deliberate decisions in the use of instructional materials and other resources to meet individual student needs and support student autonomy and intellectual engagement.",
                     },
@@ -170,7 +170,7 @@ namespace Danielson.Data.Domains {
                         ComponentOrder = 4,
                         Title = "Component 4d: Contributing to School Community and Culture",
                         Code = "4d",
-                        ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher takes a leadership role in defining, modeling, and holding self and peers accountable to the values and intellectual life of the school, leading with an emphasis on meetings the needs of students and families who have been marginalized.",
+                        ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher takes a leadership role in defining, modeling, and holding self and peers accountable to the values and intellectual life of the school, leading with an emphasis on meeting the needs of students and families who have been marginalized.",
                     },
                     new() {
                         DomainEnum = DomainEnum.Four,
