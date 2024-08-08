@@ -1,7 +1,9 @@
-﻿namespace Danielson.Data.Answers {
+﻿using Microsoft.AspNetCore.Components;
+
+namespace Danielson.Data.Domains {
 
     public class AnswerObject {
-        public string Description { get; set; } = "";
+        public MarkupString Description { get; set; } = (MarkupString)"";
         public bool NotObserved { get; set; }
         public int NumberColumns { get; set; }
         public string QualitativeAnswer { get; set; } = "";

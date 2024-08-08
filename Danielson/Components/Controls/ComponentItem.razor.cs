@@ -36,7 +36,7 @@ namespace Danielson.Components.Controls {
 
         protected override async Task OnInitializedAsync() {
             // TODO Need to review for more variations
-            NumberColumns = AnswerList.Answers.Count(a => (!a.NotObserved || ShowNotObserved) && a.NumberColumns > 0) * 2;
+            NumberColumns = Component.Answers.Count(a => (!a.NotObserved || ShowNotObserved) && a.NumberColumns > 0) * 2;
         }
 
         protected async Task SaveAnswer(int? answer, string answerText, string answerDescription) {
