@@ -2,7 +2,7 @@
 
     public static class AnswerList {
 
-        public static List<AnswerObject> Answers = [
+        public static List<AnswerObject> GenerateAnswers(List<string> items) => [
             new() {
                 Description = "The component was not observed.",
                 QualitativeAnswer = "Not Observed",
@@ -11,35 +11,35 @@
                 NotObserved = true
             },
             new() {
-                Description = "The teacher lacks sufficient knowledge of content and pedagogy to support student learning of the content.",
+                Description = items[0],
                 QualitativeAnswer = "Needs Improvement",
                 QuantitativeAnswer = 1,
                 NumberColumns = 1,
                 NotObserved = false
             },
             new() {
-                Description = "The teachers’ understanding of content and pedagogy supports student learning of the content.",
+                Description = items[1],
                 QualitativeAnswer = "Novice",
                 QuantitativeAnswer = 2,
                 NumberColumns = 2,
                 NotObserved = false
             },
             new() {
-                Description = "The teachers’ understanding of content and pedagogy supports student learning of the content.",
+                Description = items[1],
                 QualitativeAnswer = "Intermediate",
                 QuantitativeAnswer = 3,
                 NumberColumns = 0,
                 NotObserved = false
             },
             new() {
-                Description = "The teachers’ understanding of content and pedagogy supports student learning of the content.",
+                Description = items[2],
                 QualitativeAnswer = "Advanced",
                 QuantitativeAnswer = 4,
                 NumberColumns = 2,
                 NotObserved = false
             },
             new() {
-                Description = "The teachers’ understanding of content and pedagogy supports student learning of the content.",
+                Description = items[2],
                 QualitativeAnswer = "Exceptional",
                 QuantitativeAnswer = 5,
                 NumberColumns = 0,

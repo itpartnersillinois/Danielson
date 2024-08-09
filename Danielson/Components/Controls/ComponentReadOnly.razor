@@ -1,0 +1,19 @@
+﻿<div class="danielson-component">
+    <h3>@Component.Title</h3>
+    @if (ConsiderationValues != null)
+    {
+        <details>
+            <summary>Considerations</summary>
+            <ul>
+                @foreach (var consideration in ConsiderationValues)
+                {
+                    <li>@consideration</li>
+                }
+            </ul>
+        </details>
+    }
+</div>
+<div class="danielson-component-options">
+    <h4 class="title data-required">@Component.Code Continuum of Practice</h4>
+    <p>@Component.ContinuumOfPracticeHtml</p>
+</div>
