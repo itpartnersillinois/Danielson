@@ -1,7 +1,9 @@
 ﻿using Danielson.Data.DataAccess;
 using Danielson.Data.DataModels;
 using Danielson.Data.Domains;
+using Danielson.Data.EditingRules;
 using Danielson.Data.FinalAnswers;
+using Danielson.Data.Login;
 using Danielson.Data.PortalTranslator;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -10,6 +12,8 @@ using Microsoft.JSInterop;
 namespace Danielson.Components.Pages.Form {
 
     public partial class Domain {
+        private bool _areAllComponentsAnsweredProcessed = false;
+
         public List<string> ComponentsNotAnswered { get; set; } = default!;
         public Data.DataModels.Form CurrentForm { get; set; } = default!;
         public FormTemplate CurrentFormTemplate { get; set; } = default!;
@@ -22,6 +26,7 @@ namespace Danielson.Components.Pages.Form {
         public int FormId { get; set; }
 
         public FormImportInformation FormImportInformation { get; set; } = default!;
+        public bool IsReadOnly { get; set; }
         public bool ShowFinal { get; set; }
 
         [Inject]
@@ -42,16 +47,35 @@ namespace Danielson.Components.Pages.Form {
         [Inject]
         protected NavigationManager NavigationManager { get; set; } = default!;
 
+        [Inject]
+        protected UserAccess UserAccess { get; set; } = default!;
+
         public bool AreAllComponentsAnswered() {
-            ComponentsNotAnswered = [];
-            foreach (var domain in DomainList.Domains) {
-                ComponentsNotAnswered.AddRange(domain.Components.Where(c => !CurrentForm.ComponentAnswers.Where(ca => ca.DomainItem == domain.DomainEnum).Select(ca => ca.ComponentOrder).Contains(c.ComponentOrder)).Select(c => c.Title));
+            if (!_areAllComponentsAnsweredProcessed) {
+                ComponentsNotAnswered = [];
+                if (CurrentForm.ShowComponents) {
+                    foreach (var domain in DomainList.Domains) {
+                        ComponentsNotAnswered.AddRange(domain.Components.Where(c => !CurrentForm.ComponentAnswers.Where(ca => ca.DomainItem == domain.DomainEnum).Select(ca => ca.ComponentOrder).Contains(c.ComponentOrder)).Select(c => c.Title));
+                    }
+                } else {
+                    foreach (var domain in DomainList.Domains) {
+                        if (string.IsNullOrWhiteSpace(CurrentForm.DomainAnswers.FirstOrDefault(da => da.DomainItem == domain.DomainEnum)?.NextSteps)) {
+                            ComponentsNotAnswered.Add(domain.Title + " Next Steps");
+                        }
+                        if (string.IsNullOrWhiteSpace(CurrentForm.DomainAnswers.FirstOrDefault(da => da.DomainItem == domain.DomainEnum)?.Strengths)) {
+                            ComponentsNotAnswered.Add(domain.Title + " Strengths");
+                        }
+                    }
+                }
+                _areAllComponentsAnsweredProcessed = true;
             }
             return ComponentsNotAnswered.Count == 0;
         }
 
-        public void ChangeFormType(bool isMidterm) {
+        public async Task ChangeFormType(bool isMidterm) {
             CurrentForm.IsMidterm = isMidterm;
+            var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
+            _ = await FormImport.Save(CurrentForm, username);
             NavigationManager.NavigateTo(NavigationManager.Uri, true);
         }
 
@@ -70,6 +94,9 @@ namespace Danielson.Components.Pages.Form {
         protected async Task ChangePage(DomainEnum? domainEnum, bool finish) {
             CurrentForm.LastUpdated = DateTime.Now;
             ShowFinal = finish;
+            var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
+            _ = await FormImport.Save(CurrentForm, username);
+            _areAllComponentsAnsweredProcessed = false;
             DomainObject = DomainList.Domains.First(d => d.DomainEnum == (finish ? DomainEnum.Four : domainEnum ?? DomainEnum.One));
             StateHasChanged();
             await JsRuntime.InvokeVoidAsync("CollapseAll");
@@ -183,6 +210,10 @@ namespace Danielson.Components.Pages.Form {
             }
             CurrentFormTemplate = await FormTemplateAccess.Get(FormImportInformation.FormTemplateInternalLookupString);
             FinalAnswers = FinalAnswerGenerator.GetFinalAnswers(CurrentForm);
+            var roleType = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
+            _ = Enum.TryParse(roleType, out RoleEnum role);
+            IsReadOnly = ReadOnlyGenerator.IsReadOnly(CurrentForm, role);
+
             StateHasChanged();
             await base.OnInitializedAsync();
         }
@@ -193,6 +224,7 @@ namespace Danielson.Components.Pages.Form {
             var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
             _ = await FormImport.Save(CurrentForm, username);
             await JsRuntime.InvokeVoidAsync("AlertOnScreen");
+            NavigationManager.NavigateTo(UserAccess.TargetUrl, true);
         }
     }
 }

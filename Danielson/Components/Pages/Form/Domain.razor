@@ -3,11 +3,11 @@
 
 @if (DomainObject != null && CurrentForm != null && FormImportInformation != null)
 {
-    <PageTitle>@FormImportInformation.Title | Danielson Form | Illinois</PageTitle>
+    <PageTitle>@FormImportInformation.Title | Evaluation Form | CoTE Portal | Illinois</PageTitle>
     <div class="danielson-name">
         <h1>@FormImportInformation.Title</h1>
         <FormHeader FormId="CurrentForm.AssignmentId" IsMidterm="CurrentForm.IsMidterm" EvaluatedBy="@FormImportInformation.EvaluatedBy" EvaluationDate="@CurrentForm.DateEvaluatedString"
-                    FormType="@CurrentForm.FormType" Semester="@CurrentForm.SemesterDate" OnChangeCallback="ChangeFormType"></FormHeader>
+                    FormType="@CurrentForm.FormType" Semester="@CurrentForm.SemesterDate" IsReadOnly="@IsReadOnly" OnChangeCallback="ChangeFormType"></FormHeader>
     </div>
 }
 @if (DomainObject != null && CurrentForm != null && CurrentFormTemplate != null && !ShowFinal)
@@ -26,14 +26,18 @@
         </div>
     </div>
     <div class="danielson-components @DomainObject.DomainEnum.ToString()">
-        @if (CurrentForm.ShowComponents)
+        @foreach (var component in DomainObject.Components)
         {
-            @foreach (var component in DomainObject.Components)
+            @if (CurrentForm.ShowComponents)
             {
-                <ComponentItem Component="component" FormId="CurrentForm.Id" ShowNotObserved="@(CurrentForm.ShowNotObserved && CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ConsiderationValues="@CurrentFormTemplate.ConsiderationValues(DomainObject.DomainEnum, component.ComponentOrder)" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
+                <ComponentItem Component="component" FormId="CurrentForm.Id" ShowNotObserved="@(CurrentForm.ShowNotObserved || CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" ConsiderationValues="@CurrentFormTemplate.ConsiderationValues(DomainObject.DomainEnum, component.ComponentOrder)" ComponentAnswer="@CurrentForm.GetComponentAnswer(DomainObject.DomainEnum, component.ComponentOrder)" IsReadOnly="@IsReadOnly" OnChangeCallback="AddComponentAnswerToForm"></ComponentItem>
+            }
+            else
+            {
+                <ComponentReadOnly Component="component" ConsiderationValues="@CurrentFormTemplate.ConsiderationValues(DomainObject.DomainEnum, component.ComponentOrder)"></ComponentReadOnly>
             }
         }
-        <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
+        <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" IsReadOnly="@IsReadOnly" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
     </div>
     <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
     <div class="danielson-button-footer">
@@ -66,70 +70,41 @@
     }
 
     <div class="danielson-final">
-        @if (CurrentForm.ShowComponents)
+        @if (!AreAllComponentsAnswered())
         {
-            @if (AreAllComponentsAnswered())
-            {
-                <div>
-                    <label for="final-summary" class="data-required">Final Summary</label>
-                    <select id="final-summary" aria-required="true" @bind="CurrentForm.FinalSummary">
-                        <option value="">Select</option>
-                        @foreach (var final in FinalAnswers)
-                        {
-                            <option value="@final">@final</option>
-                        }
-                    </select>
-                    <p>You must select a final summary to submit.</p>
-                </div>
-                <div>
-                    <label for="final-signature" class="data-required">Signature</label>
-                    <input id="final-signature" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
-                    <p>You must sign to submit.</p>
-                </div>
-                <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
-                <div>
-                    <button class="il-button il-theme-white" @onclick="SaveForm">Submit</button>
-                </div>
-            }
-            else
-            {
-                <div class="danielson-answer" style="margin-bottom: 20px;">
-                    <p class="title-alert">Not all components have been answered. Please complete all components before selecting a final summary and signing.</p>
-                    <ul>
-                        @foreach (var componentTitle in ComponentsNotAnswered)
-                        {
-                            <li>@componentTitle</li>
-                        }
-                    </ul>
-
-                </div>
-                <div>
-                    <label for="final-summary" class="data-required">Final Summary</label>
-                    <select id="final-summary" disabled="true" @bind="CurrentForm.FinalSummary">
-                        <option value="">Select</option>
-                        @foreach (var final in FinalAnswers)
-                        {
-                            <option value="@final">@final</option>
-                        }
-                    </select>
-                    <p>You must select a final summary to submit.</p>
-                </div>
-                <div>
-                    <label for="final-signature" class="data-required">Signature</label>
-                    <input id="final-signature" disabled type="checkbox" checked="@CurrentForm.IsSigned"> <span>@FormImportInformation?.EvaluatedBy</span>
-                    <p>You must sign to submit.</p>
-                </div>
-                <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
-                <div>
-                    <button class="il-button il-theme-white" disabled @onclick="SaveForm" style="background-color: var(--il-gray-1); color: black; border: 2px solid var(--il-button-border-color);">Submit</button>
-                </div>
-            }
-        } else {
-            <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
-            <div>
-                <button class="il-button il-theme-white" @onclick="SaveForm">Submit</button>
+            <div class="danielson-answer" style="margin-bottom: 20px;">
+                <p class="title-alert">Not all components have been answered. Please complete all components before selecting a final summary and signing.</p>
+                <ul>
+                    @foreach (var componentTitle in ComponentsNotAnswered)
+                    {
+                        <li>@componentTitle</li>
+                    }
+                </ul>
             </div>
         }
+        @if (CurrentForm.ShowComponents)
+        {
+            <div>
+                <label for="final-summary" class="data-required">Final Summary</label>
+                <select id="final-summary" disabled="@(!AreAllComponentsAnswered())" readonly="@IsReadOnly" aria-required="true" @bind="CurrentForm.FinalSummary">
+                    <option value="">Select</option>
+                    @foreach (var final in FinalAnswers)
+                    {
+                        <option value="@final">@final</option>
+                    }
+                </select>
+                <p>You must select a final summary to submit.</p>
+            </div>
+        }
+        <div>
+            <label for="final-signature" class="data-required">Signature</label>
+            <input id="final-signature" disabled="@(!AreAllComponentsAnswered())" readonly="@IsReadOnly" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
+            <p>You must sign to submit.</p>
+        </div>
+        <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
+        <div>
+            <button class="il-button il-theme-white" @onclick="SaveForm" disabled="@(!AreAllComponentsAnswered())">Submit</button>
+        </div>
         <div id="update-alert" role="alert"><span id="update-alert-message">Danielson Form has been submitted</span><button onclick="removeAlertOnScreen();">X</button></div>
     </div>
 }

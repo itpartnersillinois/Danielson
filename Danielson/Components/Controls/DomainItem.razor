@@ -2,10 +2,10 @@
 <div class="strengths-next-steps">
     <div>
         <label for="domain-strengths">Strengths:</label>
-        <textarea id="domain-strengths" @bind="DomainAnswer.Strengths" @bind:event="onchange" @bind:after="SaveAnswer"></textarea>
+        <textarea id="domain-strengths" readonly="@IsReadOnly" @bind="DomainAnswer.Strengths" @bind:event="onchange" @bind:after="SaveAnswer"></textarea>
     </div>
     <div>
         <label for="domain-next-steps">Next Steps:</label>
-        <textarea id="domain-next-steps" @bind="DomainAnswer.NextSteps" @bind:event="onchange" @bind:after="SaveAnswer"></textarea>
+        <textarea id="domain-next-steps" readonly="@IsReadOnly" @bind="DomainAnswer.NextSteps" @bind:event="onchange" @bind:after="SaveAnswer"></textarea>
     </div>
 </div>
