@@ -4,24 +4,31 @@
 <PageTitle>Add / Edit Form Template</PageTitle>
 <h1>Add / Edit Form Template</h1>
 
-<p>This is to handle form template infomration -- what considerations and final summary options the end user sees. </p>
+<p>This page is to manage considerations text for domain components for specific placement evaluation form templates. </p>
 
 <div>
-    Title (for your reference): <br />
-    <input type="text" @bind="FormTemplate.Title" class="form-control" style="width: 100%; border-radius: 5px; padding: 10px; font: 16px / 18px var(--il-source-sans); border: thin var(--il-blue) solid;" />
+    <label for="formTitle">Template Title (for your reference):</label> <br />
+    <input id="formTitle" type="text" @bind="FormTemplate.Title" class="form-control" style="width: 100%; border-radius: 5px; padding: 10px; font: 16px / 18px var(--il-source-sans); border: thin var(--il-blue) solid;" />
 </div>
 
 <div>
-    Internal Lookup String (this is an internal value; please contact IT to determine what this should be): <br />
-    <input type="text" @bind="FormTemplate.InternalLookupString" class="form-control" style="width: 100%; border-radius: 5px; padding: 10px; font: 16px / 18px var(--il-source-sans); border: thin var(--il-blue) solid;" />
+    <label for="InternalLookupString">Internal Lookup String </label> <span id="InternalLookupString-desc">(this is an internal value used to associate an evaluation with a specific considerations template; please contact IT to determine what this should be):</span> <br />
+    <input id="InternalLookupString" type="text" @bind="FormTemplate.InternalLookupString" aria-describedby="InternalLookupString-desc" class="form-control" style="width: 100%; border-radius: 5px; padding: 10px; font: 16px / 18px var(--il-source-sans); border: thin var(--il-blue) solid;" />
 </div>
 
 <h2>Considerations</h2>
+<p>When adding or editing consideration text use the following rules:</p>
+<ul>
+    <li>Put each consideration on a single and separate line.</li>
+    <li>Do not use numbers, astericks, or bullets to put them in a list. These will be automatically added as a bulletted list to the form.</li>
+    <li>Do not forget to save your changes using the Save Changes button at the bottom of the page.</li>
+</ul>
+<p><em>Note:</em> If you need to add, remove, or change other component related text, please contact IT.</p>
 @foreach (var domain in DomainList.Domains.OrderBy(d => d.DomainEnum))
 {
     <h3>@domain.Title</h3>
-    <p>Put each consideration on a single line. Do not use numbers, astericks, or bullets to put them in a list. These will be automatically added as a bulletted list to the form.</p>
-    <p>If you need to add, remove, or change components, please contact IT.</p>
+    
+    
 
     @foreach (var component in domain.Components.OrderBy(c => c.ComponentOrder))
     {
