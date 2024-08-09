@@ -10,6 +10,9 @@ namespace Danielson.Components.Controls {
         public DomainAnswer DomainAnswer { get; set; } = default!;
 
         [Parameter]
+        public bool IsReadOnly { get; set; }
+
+        [Parameter]
         public EventCallback<DomainAnswer> OnChangeCallback { get; set; }
 
         [Inject]

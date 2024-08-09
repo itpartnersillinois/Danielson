@@ -21,6 +21,9 @@ namespace Danielson.Components.Controls {
         public bool IsMidterm { get; set; }
 
         [Parameter]
+        public bool IsReadOnly { get; set; }
+
+        [Parameter]
         public EventCallback<bool> OnChangeCallback { get; set; }
 
         [Parameter]

@@ -1,6 +1,19 @@
 ﻿<details class="danielson-answer-@DomainAnswer.DomainItem.ToString().ToLower()">
     <summary>@Title</summary>
-    @foreach (var component in ComponentAnswers) {
+    @if (!AreAllCompnentsAnswered && ShowErrors)
+    {
+        <div class="danielson-answer">
+            <p class="title-alert">Not all components have been answered</p>
+            <ul>
+                @foreach (var componentTitle in ComponentsNotChosen)
+                {
+                    <li>@componentTitle</li>
+                }
+            </ul>
+        </div>
+    }
+    @foreach (var component in ComponentAnswers)
+    {
         <div class="danielson-answer">
             <p class="title">@component.ComponentTitle</p>
             <div class="table">
@@ -15,18 +28,6 @@
                     <div>@component.ComponentDescription</div>
                 </div>
             </div>
-        </div>
-    }
-    @if (!AreAllCompnentsAnswered && ShowErrors)
-    {
-        <div class="danielson-answer">
-        <p class="title-alert">Not all components have been answered</p>
-        <ul>
-        @foreach (var componentTitle in ComponentsNotChosen)
-        {
-            <li>@componentTitle</li>
-        }
-        </ul>
         </div>
     }
     <div class="danielson-answer">
