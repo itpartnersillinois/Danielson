@@ -134,7 +134,7 @@ AnswerText = [
  AnswerText = [
 "There is little evidence of explicit modeling, instruction, or guidance related to positive student behavior. ",
 "Positive behaviors are modeled by the teacher and occasionally taught explicitly. ",
-"Students display positive behaviors, which are modeled by the teachers and reinforced to promote reflection and recalibration rather than compliance.  "
+"Students display positive behaviors, which are modeled by teachers and reinforced to promote reflection and recalibration rather than compliance.  "
 ]
                    },
                     new() {
