@@ -1,33 +1,29 @@
 ﻿@page "/"
-<PageTitle>Home</PageTitle>
+<PageTitle>Manage Evaluation Considerations Templates | CoTE Portal | Illinois</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
 
 <AuthorizeView>
     <Authorized>
-        <p>@context.User.Identity?.Name</p>
+        <h1>Manage Evaluation Considerations Templates</h1>
+        <p>Edit or add templates of considerations text for domain components.</p>
+        
+        @if (FormTemplates != null)
+        {
+            <h2>Evaluation Form Considerations Templates</h2>
+            <p>The default template is used for all programs that do not have a template of their own.</p>
+            <ul>
+                @foreach (var formTemplate in FormTemplates)
+                {
+                    <li><a href="/Admin/EditFormTemplate/@formTemplate.Id">Edit <strong>@formTemplate.Title</strong> Template</a></li>
+                }
+                <li><a href="/Admin/EditFormTemplate">Add New Form Considerations Template</a></li>
+            </ul>
+
+        }
     </Authorized>
     <NotAuthorized>
-        <p>Not logged in</p>
+
+        <p>You are not logged in. Log into the CoTE portal to continue.</p>
     </NotAuthorized>
 </AuthorizeView>
 
-<p><a href="/Account/LoginPassthrough">Generic Login Page</a></p>
-
-<h2>Testing accessing a form</h2>
-
-<p><a href="/Form/Domain/34295">Form ID #34295</a> (for testing purposes only)</p>
-
-@if (FormTemplates != null)
-{
-    <h2>Form Templates</h2>
-    <ul>
-        @foreach (var formTemplate in FormTemplates) {
-            <li><a href="/Admin/EditFormTemplate/@formTemplate.Id">Edit <strong>@formTemplate.Title</strong> Template</a></li>
-        }
-        <li><a href="/Admin/EditFormTemplate">Add New Form Template</a></li>
-    </ul>
-    
-}
