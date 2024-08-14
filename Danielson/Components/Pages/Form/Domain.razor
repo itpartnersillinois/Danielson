@@ -1,5 +1,5 @@
 ﻿@page "/Form/Domain/{FormId:int}"
-@attribute [Authorize(Roles = "Student,Supervisor,CooperatingTeacher,Admin,CoteStaff")]
+@attribute [Authorize(Roles = "Student,Supervisor,CooperatingTeacher,Admin,ProgramStaff,CoteStaff")]
 
 @if (DomainObject != null && CurrentForm != null && FormImportInformation != null)
 {
