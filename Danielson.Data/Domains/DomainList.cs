@@ -121,7 +121,7 @@ AnswerText = [
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students have a voice and play an active role in designing and adjusting routines and procedures that actively create a respectful learning environment and support the growth of each community member.",
 AnswerText = [
 "Student learning and development are hindered by a lack of routines or inefficient classroom procedures.  ",
-    "Classroom routines and procedures, established or managed primarily by the teacher and taught explicitly to students.",
+    "Classroom routines and procedures, established or managed primarily by the teacher and taught explicitly to students, support opportunities for student learning and development.",
 "Shared routines and efficient procedures are largely student-directed and maximize opportunities for student learning and development.  "
 ]
                     },
@@ -132,7 +132,7 @@ AnswerText = [
                         Code = "2d",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students consistently and independently display positive behaviors and seek opportunities to build a better classroom community.",
  AnswerText = [
-"There is little evidence of explicit modeling, instruction, or guidance related to positive student behavior. ",
+"There is little evidence of explicit modeling, instruction, or guidance related to positive student behaviors. ",
 "Positive behaviors are modeled by the teacher and occasionally taught explicitly. ",
 "Students display positive behaviors, which are modeled by teachers and reinforced to promote reflection and recalibration rather than compliance.  "
 ]
@@ -254,8 +254,8 @@ AnswerText = [
                         Code = "4c",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher’s frequent and ongoing engagement of families and communities demonstrates a clear value for the role they play in student learning and is focused on forging partnerships that further the academic and personal success of each and every student.",
 AnswerText = [
-"There is no system for documenting student progress, the system is ineffective and inefficient, or it does not provide relevant information to students and those who support them. ",
-"The teacher documents some aspects of student progress in a manner that is accessible to students and those who support them. ",
+"The teacher does not engage students’ families or the community, engages them infrequently, or does so disrespectfully. ",
+"The teacher makes some efforts to engage families and communities and does so in a respectful manner. ",
 "The teacher engages students’ families and communities in a respectful and culturally responsive manner, making information readily available and inviting participation in the intellectual life of the classroom."
 ]
                     },
