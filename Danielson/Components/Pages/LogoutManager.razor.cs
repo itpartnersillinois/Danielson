@@ -1,6 +1,8 @@
 ﻿using Danielson.Data;
+using Danielson.Data.DataModels;
 using Danielson.Data.Login;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 namespace Danielson.Components.Pages {
@@ -15,10 +17,13 @@ namespace Danielson.Components.Pages {
 
         [Inject]
         protected UserAccess UserAccess { get; set; } = default!;
-
+        [Inject]
+        protected AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
         protected override async Task OnInitializedAsync() {
             await SignInManager.SignOutAsync();
-            NavigationManager.NavigateTo(UserAccess.TargetUrl);
+            var roleType = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
+            _ = Enum.TryParse(roleType, out RoleEnum role);
+            NavigationManager.NavigateTo(UserAccess.TargetUrl[role]);
         }
     }
 }

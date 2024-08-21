@@ -224,7 +224,9 @@ namespace Danielson.Components.Pages.Form {
             var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
             _ = await FormImport.Save(CurrentForm, username);
             await JsRuntime.InvokeVoidAsync("AlertOnScreen");
-            NavigationManager.NavigateTo(UserAccess.TargetUrl, true);
+            var roleType = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
+            _ = Enum.TryParse(roleType, out RoleEnum role);
+            NavigationManager.NavigateTo(UserAccess.TargetUrl[role], true);
         }
     }
 }
