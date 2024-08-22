@@ -14,6 +14,8 @@ namespace Danielson.Components.Pages.Form {
     public partial class Domain {
         private bool _areAllComponentsAnsweredProcessed = false;
 
+        private RoleEnum _currentRole = RoleEnum.None;
+
         public List<string> ComponentsNotAnswered { get; set; } = default!;
         public Data.DataModels.Form CurrentForm { get; set; } = default!;
         public FormTemplate CurrentFormTemplate { get; set; } = default!;
@@ -79,11 +81,9 @@ namespace Danielson.Components.Pages.Form {
             NavigationManager.NavigateTo(NavigationManager.Uri, true);
         }
 
-        public async Task<bool> IsFormSigned() {
-            var roleType = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
-            _ = Enum.TryParse(roleType, out RoleEnum role);
+        public bool IsFormSigned() {
             var rolesAbleToUnsign = new List<RoleEnum> { RoleEnum.Admin, RoleEnum.CoteStaff, RoleEnum.ProgramStaff };
-            return (CurrentForm.IsSigned && !string.IsNullOrWhiteSpace(CurrentForm.FinalSummary)) || rolesAbleToUnsign.Contains(role);
+            return (CurrentForm.IsSigned && !string.IsNullOrWhiteSpace(CurrentForm.FinalSummary)) || rolesAbleToUnsign.Contains(_currentRole);
         }
 
         protected void AddComponentAnswerToForm(ComponentAnswer componentAnswer) {
@@ -218,9 +218,8 @@ namespace Danielson.Components.Pages.Form {
             CurrentFormTemplate = await FormTemplateAccess.Get(FormImportInformation.FormTemplateInternalLookupString);
             FinalAnswers = FinalAnswerGenerator.GetFinalAnswers(CurrentForm);
             var roleType = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
-            _ = Enum.TryParse(roleType, out RoleEnum role);
-            IsReadOnly = ReadOnlyGenerator.IsReadOnly(CurrentForm, role);
-
+            _ = Enum.TryParse(roleType, out _currentRole);
+            IsReadOnly = ReadOnlyGenerator.IsReadOnly(CurrentForm, _currentRole);
             StateHasChanged();
             await base.OnInitializedAsync();
         }
