@@ -101,7 +101,7 @@
             <input id="final-signature" disabled="@(!AreAllComponentsAnswered())" readonly="@IsReadOnly" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
             <p>You must sign to submit.</p>
         </div>
-        <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
+            <div>Last changed: @CurrentForm.LastUpdatedText</div>
         <div>
             <button class="il-button il-theme-white" @onclick="SaveForm" disabled="@(!AreAllComponentsAnswered())">Submit</button>
         </div>

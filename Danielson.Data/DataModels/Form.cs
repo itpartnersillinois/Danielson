@@ -42,6 +42,8 @@ namespace Danielson.Data.DataModels {
         public bool IsMidterm { get; set; }
         public bool IsSigned => DateEvaluated.HasValue;
 
+        public string LastUpdatedText => LastUpdated <= DateTime.Parse("1/1/2020") ? "N/A" : LastUpdated.ToString("f");
+
         public string PlacementType { get; set; } = "";
 
         public string Position { get; set; } = "";

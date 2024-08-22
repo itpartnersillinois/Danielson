@@ -79,6 +79,13 @@ namespace Danielson.Components.Pages.Form {
             NavigationManager.NavigateTo(NavigationManager.Uri, true);
         }
 
+        public async Task<bool> IsFormSigned() {
+            var roleType = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
+            _ = Enum.TryParse(roleType, out RoleEnum role);
+            var rolesAbleToUnsign = new List<RoleEnum> { RoleEnum.Admin, RoleEnum.CoteStaff, RoleEnum.ProgramStaff };
+            return (CurrentForm.IsSigned && !string.IsNullOrWhiteSpace(CurrentForm.FinalSummary)) || rolesAbleToUnsign.Contains(role);
+        }
+
         protected void AddComponentAnswerToForm(ComponentAnswer componentAnswer) {
             CurrentForm.LastUpdated = DateTime.Now;
             StateHasChanged();
