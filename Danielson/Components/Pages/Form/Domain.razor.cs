@@ -83,7 +83,7 @@ namespace Danielson.Components.Pages.Form {
 
         public bool IsFormSigned() {
             var rolesAbleToUnsign = new List<RoleEnum> { RoleEnum.Admin, RoleEnum.CoteStaff, RoleEnum.ProgramStaff };
-            return (CurrentForm.IsSigned && !string.IsNullOrWhiteSpace(CurrentForm.FinalSummary)) || rolesAbleToUnsign.Contains(_currentRole);
+            return CurrentForm.IsSigned || rolesAbleToUnsign.Contains(_currentRole);
         }
 
         protected void AddComponentAnswerToForm(ComponentAnswer componentAnswer) {
