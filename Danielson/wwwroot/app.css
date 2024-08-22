@@ -212,6 +212,17 @@ fieldset {
         margin-top: 20px;
     }
 
+@media (max-width: 800px) {
+    .il-formatted details {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .danielson-name > h1 {
+        margin-bottom: 20px;
+    }
+}
+
 .danielson-components.One .danielson-component {
     background: #ECF1F7;
 }
@@ -235,6 +246,25 @@ fieldset {
     line-height: 30px;
     text-decoration-line: underline;
     margin-top: 20px;
+}
+
+@media (max-width: 800px) {
+    .danielson-name {
+        display: block;
+    }
+
+    .danielson-title {
+        display: block;
+    }
+
+        .danielson-title ul {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .danielson-title > div {
+            margin-left: 0;
+        }
 }
 
 .first, .second {
@@ -322,6 +352,12 @@ fieldset {
         font-size: 1.2rem;
         font-family: var(--il-font-sans);
     }
+
+@media (max-width: 800px) {
+    .strengths-next-steps {
+        display: block;
+    }
+}
 
 .danielson-answer {
     margin-top: 10px;

@@ -86,7 +86,7 @@
         {
             <div>
                 <label for="final-summary" class="data-required">Final Summary</label>
-                <select id="final-summary" disabled="@(!AreAllComponentsAnswered())" readonly="@IsReadOnly" aria-required="true" @bind="CurrentForm.FinalSummary">
+                <select id="final-summary" disabled="@(!AreAllComponentsAnswered())" readonly="@IsReadOnly" aria-required="true" @bind="CurrentForm.FinalSummary" style="width: 350px;">
                     <option value="">Select</option>
                     @foreach (var final in FinalAnswers)
                     {
@@ -101,9 +101,9 @@
             <input id="final-signature" disabled="@(!AreAllComponentsAnswered())" readonly="@IsReadOnly" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
             <p>You must sign to submit.</p>
         </div>
-        <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
+            <div>Last changed: @CurrentForm.LastUpdatedText</div>
         <div>
-            <button class="il-button il-theme-white" @onclick="SaveForm" disabled="@(!AreAllComponentsAnswered())">Submit</button>
+            <button class="il-button il-theme-white" @onclick="SaveForm" disabled="@(!(AreAllComponentsAnswered() && IsFormSigned()))">Submit</button>
         </div>
         <div id="update-alert" role="alert"><span id="update-alert-message">Evaluation Form has been submitted</span><button onclick="removeAlertOnScreen();">X</button></div>
     </div>
