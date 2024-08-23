@@ -16,11 +16,11 @@ namespace Danielson.Data.Domains {
                         ComponentOrder = 1,
                         Title = "Component 1a: Applying Knowledge of Content and Pedagogy",
                         Code = "1a",
-                        ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teachers’ understanding of content and pedagogy fosters deeper learning, student agency, and intellectual dispositions such as curiosity, reasoning, and reflection.",
+                        ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher’s understanding of content and pedagogy fosters deeper learning, student agency, and intellectual dispositions such as curiosity, reasoning, and reflection.",
                         AnswerText = [
                             "The teacher lacks sufficient knowledge of content and pedagogy to support student learning of the content.",
-                            "The teachers’ understanding of content and pedagogy partially supports student learning of the content.",
-                            "The teachers’ understanding of content and pedagogy supports student learning of the content.",
+                            "The teacher’s understanding of content and pedagogy partially supports student learning of the content.",
+                            "The teacher’s understanding of content and pedagogy supports student learning of the content.",
                          ]
                     },
                     new() {
@@ -185,7 +185,7 @@ AnswerText = [
                         ComponentOrder = 3,
                         Title = "Component 3c: Engaging Students in Learning",
                         Code = "3c",
-                        ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students take initiative to increase the challenge or complexity of learning experiences; they think critically about a variety of issues and offere solutions; and they make suggestions for modifications that increase meaning and relevance.",
+                        ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students take initiative to increase the challenge or complexity of learning experiences; they think critically about a variety of issues and offer solutions; and they make suggestions for modifications that increase meaning and relevance.",
 AnswerText = [
 "Learning experiences do not require active intellectual engagement by students. ",
 "Learning experiences partially engage students intellectually; the activities require students to do some thinking. ",
@@ -221,7 +221,7 @@ AnswerText = [
             new() {
                 DomainEnum = DomainEnum.Four,
                 Title = "Domain 4: Principled Teaching",
-                DescriptionHtml = (MarkupString)"The components of <strong>Domain 4: Principled Teaching</strong> capture and reflect the practices of educators that extend beyond their classrooms or any single learning experience. These activities are critical to preserving and enhancing the profession and to the success of students. Teaching is a purposedriven profession. It is a calling. Those who take up the work have a lasting and profound impact on the lives of students. Their purpose, and the purpose of education more broadly, is not solely to impart academic knowledge; it is the intellectual and moral development of human beings who will themselves flourish and help create a just and flourishing society.",
+                DescriptionHtml = (MarkupString)"The components of <strong>Domain 4: Principled Teaching</strong> capture and reflect the practices of educators that extend beyond their classrooms or any single learning experience. These activities are critical to preserving and enhancing the profession and to the success of students. Teaching is a purpose-driven profession. It is a calling. Those who take up the work have a lasting and profound impact on the lives of students. Their purpose, and the purpose of education more broadly, is not solely to impart academic knowledge; it is the intellectual and moral development of human beings who will themselves flourish and help create a just society.",
                 Components = [
                     new() {
                         DomainEnum = DomainEnum.Four,
@@ -268,7 +268,7 @@ AnswerText = [
 AnswerText = [
 "The teacher is not an active member of the school community or contributes negatively to the culture of learning and values of the school. ",
 "The teacher makes some contributions to the school culture, supporting professional learning and upholding the values of the school. ",
-"The teacher takes initiative in contributing to and leading events, programs, or activities that further the culture of learning in the school and bring the values of the school to life through modeling and positive action.  "
+"The teacher takes initiative in contributing to and leading events, programs, or activities that further the culture of learning in the school and brings the values of the school to life through modeling and positive action.  "
 ]
                     },
                     new() {
