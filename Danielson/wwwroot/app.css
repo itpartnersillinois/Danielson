@@ -14,15 +14,23 @@ textarea.admin-textarea {
 }
 
 .il-formatted input[type="checkbox"] {
-    border-radius: 50%;
-    height: 12px;
-    width: 12px;
-    vertical-align: baseline;
-    border: 1px solid #777;
+    visibility: hidden;
 }
 
-    .il-formatted input[type="checkbox"]:checked {
-        background-color: black;
+    .il-formatted input[type="checkbox"]:before {
+        height: 12px;
+        width: 12px;
+        margin-right: 2px;
+        content: " ";
+        display: inline-block;
+        vertical-align: baseline;
+        border: 1px solid black;
+        visibility: visible;
+        border-radius: 50%;
+    }
+
+    .il-formatted input[type="checkbox"]:checked:before {
+        background: var(--il-alma-mater);
     }
 
 .il-formatted input:focus, .il-formatted textarea:focus, .il-formatted select:focus, .il-formatted input:focus-visible, .il-formatted textarea:focus-visible, .il-formatted select:focus-visible, .il-formatted input:hover, .il-formatted textarea:hover, .il-formatted select:hover {
