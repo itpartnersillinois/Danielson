@@ -13,6 +13,18 @@ textarea.admin-textarea {
     width: 600px;
 }
 
+.il-formatted input[type="checkbox"] {
+    border-radius: 50%;
+    height: 12px;
+    width: 12px;
+    vertical-align: baseline;
+    border: 1px solid #777;
+}
+
+    .il-formatted input[type="checkbox"]:checked {
+        background-color: black;
+    }
+
 .il-formatted input:focus, .il-formatted textarea:focus, .il-formatted select:focus, .il-formatted input:focus-visible, .il-formatted textarea:focus-visible, .il-formatted select:focus-visible, .il-formatted input:hover, .il-formatted textarea:hover, .il-formatted select:hover {
     background: var(--il-cloud);
     outline: 3px solid var(--il-altgeld);
