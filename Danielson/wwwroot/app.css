@@ -14,7 +14,7 @@ textarea.admin-textarea {
 }
 
 .il-formatted input[type="checkbox"] {
-    visibility: hidden;
+    appearance: none;
 }
 
     .il-formatted input[type="checkbox"]:before {
