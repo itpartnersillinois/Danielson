@@ -99,6 +99,11 @@ fieldset {
         padding: 10px;
     }
 
+    fieldset.fieldset-x.fieldset-readonly div {
+        --iled-border-color: #929292;
+        padding: 2px 10px;
+    }
+
     fieldset.fieldset-x label {
         display: block;
         font-weight: 700;
@@ -288,7 +293,7 @@ fieldset {
 }
 
 .first, .second {
-    border: thin solid black;
+    border: thin solid var(--iled-border-color, black);
 }
 
     .first.first-1 {
