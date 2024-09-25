@@ -34,7 +34,7 @@
             }
             else
             {
-                <ComponentReadOnly Component="component" ConsiderationValues="@CurrentFormTemplate.ConsiderationValues(DomainObject.DomainEnum, component.ComponentOrder)"></ComponentReadOnly>
+                <ComponentReadOnly Component="component" ConsiderationValues="@CurrentFormTemplate.ConsiderationValues(DomainObject.DomainEnum, component.ComponentOrder)" ShowNotObserved="@(CurrentForm.ShowNotObserved || CurrentForm.IsMidterm)" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer"></ComponentReadOnly>
             }
         }
         <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" IsReadOnly="@IsReadOnly" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
