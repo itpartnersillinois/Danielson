@@ -37,7 +37,6 @@ namespace Danielson.Components.Controls {
         private FormAccess FormAccess { get; set; } = default!;
 
         protected override async Task OnInitializedAsync() {
-            // TODO Need to review for more variations
             NumberColumns = Component.Answers.Count(a => (!a.NotObserved || ShowNotObserved) && a.NumberColumns > 0) * 2;
         }
 
