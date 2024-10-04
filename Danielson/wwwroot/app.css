@@ -51,6 +51,11 @@ textarea.admin-textarea {
         outline: none;
     }
 
+.il-formatted input[type="checkbox"]:disabled, .il-formatted input[type="checkbox"]:disabled:hover {
+    border: none;
+    background: white;
+}
+
 .il-formatted .data-required:before {
     content: '*';
     font-size: 1rem;
