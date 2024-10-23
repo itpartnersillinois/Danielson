@@ -60,10 +60,10 @@ namespace Danielson.Data.PortalTranslator {
                     });
         }
 
-        private static string GetFormDomainNextSteps(Form form, DomainEnum domain) => form.DomainAnswers.SingleOrDefault(da => da.DomainItem == domain)?.NextSteps ?? "";
+        private static string GetFormDomainNextSteps(Form form, DomainEnum domain) => form.DomainAnswers.Where(da => da.IsActive).FirstOrDefault(da => da.DomainItem == domain)?.NextSteps ?? "";
 
-        private static string GetFormDomainStrengths(Form form, DomainEnum domain) => form.DomainAnswers.SingleOrDefault(da => da.DomainItem == domain)?.Strengths ?? "";
+        private static string GetFormDomainStrengths(Form form, DomainEnum domain) => form.DomainAnswers.Where(da => da.IsActive).FirstOrDefault(da => da.DomainItem == domain)?.Strengths ?? "";
 
-        private static int GetFormDomainValue(Form form, DomainEnum domain, int order) => form.ComponentAnswers.SingleOrDefault(ca => ca.DomainItem == domain && ca.ComponentOrder == order)?.QuantitativeScore ?? 0;
+        private static int GetFormDomainValue(Form form, DomainEnum domain, int order) => form.ComponentAnswers.Where(da => da.IsActive).FirstOrDefault(ca => ca.DomainItem == domain && ca.ComponentOrder == order)?.QuantitativeScore ?? 0;
     }
 }
