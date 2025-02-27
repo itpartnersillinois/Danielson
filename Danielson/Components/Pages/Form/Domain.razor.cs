@@ -29,6 +29,8 @@ namespace Danielson.Components.Pages.Form {
 
         public FormImportInformation FormImportInformation { get; set; } = default!;
         public bool IsReadOnly { get; set; }
+
+        public bool IsStudent => _currentRole == RoleEnum.Student;
         public bool ShowFinal { get; set; }
 
         [Inject]
