@@ -102,7 +102,7 @@
                     </ul>
                 </div>
             }
-            @if (CurrentForm.ShowComponents)
+            @if (CurrentForm.ShowComponents || !IsStudent)
             {
                 <div>
                     <label for="final-summary" class="data-required">Final Summary</label>
