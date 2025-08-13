@@ -7,7 +7,6 @@ namespace Danielson.Data.Domains {
         public List<ComponentObject> Components { get; set; } = [];
         public MarkupString DescriptionHtml { get; set; } = default!;
         public DomainEnum DomainEnum { get; set; }
-
         public string Title { get; set; } = "";
     }
 }

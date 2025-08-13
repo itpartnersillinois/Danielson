@@ -11,6 +11,7 @@ namespace Danielson.Data.Domains {
         public int ComponentOrder { get; set; }
         public MarkupString ContinuumOfPracticeHtml { get; set; } = default;
         public DomainEnum DomainEnum { get; set; }
+        public MarkupString ElementsOfSuccessHtml { get; set; } = default!;
         public string Title { get; set; } = "";
     }
 }
