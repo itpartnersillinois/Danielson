@@ -1,5 +1,12 @@
 ﻿<div class="danielson-component">
 <h3>@Component.Title</h3>
+@if (Component.ElementsOfSuccessHtml.Value != "")
+{
+    <details>
+        <summary>Elements of Success</summary>
+        @Component.ElementsOfSuccessHtml
+    </details>
+}
 @if (ConsiderationValues != null)
 {
     <details>

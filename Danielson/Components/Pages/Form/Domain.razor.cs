@@ -16,7 +16,7 @@ namespace Danielson.Components.Pages.Form {
 
         private RoleEnum _currentRole = RoleEnum.None;
 
-        public List<string> ComponentsNotAnswered { get; set; } = default!;
+        public List<Tuple<string, DomainEnum>> ComponentsNotAnswered { get; set; } = default!;
         public Data.DataModels.Form CurrentForm { get; set; } = default!;
         public FormTemplate CurrentFormTemplate { get; set; } = default!;
 
@@ -59,15 +59,15 @@ namespace Danielson.Components.Pages.Form {
                 ComponentsNotAnswered = [];
                 if (CurrentForm.ShowComponents) {
                     foreach (var domain in DomainList.Domains) {
-                        ComponentsNotAnswered.AddRange(domain.Components.Where(c => !CurrentForm.ComponentAnswers.Where(ca => ca.DomainItem == domain.DomainEnum).Select(ca => ca.ComponentOrder).Contains(c.ComponentOrder)).Select(c => c.Title));
+                        ComponentsNotAnswered.AddRange(domain.Components.Where(c => !CurrentForm.ComponentAnswers.Where(ca => ca.DomainItem == domain.DomainEnum).Select(ca => ca.ComponentOrder).Contains(c.ComponentOrder)).Select(c => new Tuple<string, DomainEnum>(c.Title, c.DomainEnum)));
                     }
                 } else {
                     foreach (var domain in DomainList.Domains) {
                         if (string.IsNullOrWhiteSpace(CurrentForm.DomainAnswers.FirstOrDefault(da => da.DomainItem == domain.DomainEnum)?.NextSteps)) {
-                            ComponentsNotAnswered.Add(domain.Title + " Next Steps");
+                            ComponentsNotAnswered.Add(new Tuple<string, DomainEnum>(domain.Title + " Next Steps", domain.DomainEnum));
                         }
                         if (string.IsNullOrWhiteSpace(CurrentForm.DomainAnswers.FirstOrDefault(da => da.DomainItem == domain.DomainEnum)?.Strengths)) {
-                            ComponentsNotAnswered.Add(domain.Title + " Strengths");
+                            ComponentsNotAnswered.Add(new Tuple<string, DomainEnum>(domain.Title + " Strengths", domain.DomainEnum));
                         }
                     }
                 }
@@ -133,6 +133,10 @@ namespace Danielson.Components.Pages.Form {
                 default:
                     break;
             }
+        }
+
+        protected async Task ChangePageOnFinal(DomainEnum domainEnum) {
+            await ChangePage(domainEnum, false);
         }
 
         protected async Task ChangePagePrevious() {

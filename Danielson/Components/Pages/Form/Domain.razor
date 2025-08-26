@@ -66,7 +66,7 @@
     </div>
     @foreach (var domain in DomainList.Domains)
     {
-        <DomainReview DomainEnum="domain.DomainEnum" Form="CurrentForm" Title="@domain.Title" ShowErrors="CurrentForm.ShowComponents" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer"></DomainReview>
+        <DomainReview DomainEnum="domain.DomainEnum" Form="CurrentForm" Title="@domain.Title" ShowErrors="CurrentForm.ShowComponents" ShowQuantitativeAnswer="@CurrentForm.ShowQuantitativeAnswer" OnEdit="ChangePageOnFinal"></DomainReview>
     }
 
     @if (IsReadOnly)
@@ -83,8 +83,8 @@
                 <div>
                     Signed by @FormImportInformation?.EvaluatedBy
                 </div>
+                <div>Date Signed: @CurrentForm.DateEvaluatedString</div>
             }
-            <div>Last changed: @CurrentForm.LastUpdatedText</div>
         </div>
     }
     else
@@ -97,24 +97,29 @@
                     <ul>
                         @foreach (var componentTitle in ComponentsNotAnswered)
                         {
-                            <li>@componentTitle</li>
+                            <li>@componentTitle.Item1 <a @onclick="e => ChangePageOnFinal(componentTitle.Item2)">Edit domain @componentTitle.Item2.ToString()</a></li>
                         }
                     </ul>
                 </div>
             }
             @if (CurrentForm.ShowComponents || !IsStudent)
             {
-                <div>
-                    <label for="final-summary" class="data-required">Final Summary</label>
-                    <select id="final-summary" disabled="@(!AreAllComponentsAnswered())" readonly="@IsReadOnly" aria-required="true" @bind="CurrentForm.FinalSummary" style="width: 350px;">
-                        <option value="">Select</option>
-                        @foreach (var final in FinalAnswers)
-                        {
-                            <option value="@final">@final</option>
-                        }
-                    </select>
-                    <p>You must select a final summary to submit.</p>
-                </div>
+                if (IsStudent)
+                {
+                    <div>Final Summary: @CurrentForm.FinalSummary</div>
+                } else  {
+                    <div>
+                        <label for="final-summary" class="data-required">Final Summary</label>
+                        <select id="final-summary" readonly="@IsReadOnly" aria-required="true" @bind="CurrentForm.FinalSummary" style="width: 350px;">
+                            <option value="">Select</option>
+                            @foreach (var final in FinalAnswers)
+                            {
+                                <option value="@final">@final</option>
+                            }
+                        </select>
+                        <p>You must select a final summary to submit.</p>
+                    </div>
+                }
             }
             <div>
                 <label for="final-signature" class="data-required">Signature</label>

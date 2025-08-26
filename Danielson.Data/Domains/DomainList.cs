@@ -17,6 +17,7 @@ namespace Danielson.Data.Domains {
                         Title = "Component 1a: Applying Knowledge of Content and Pedagogy",
                         Code = "1a",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher’s understanding of content and pedagogy fosters deeper learning, student agency, and intellectual dispositions such as curiosity, reasoning, and reflection.",
+                        ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
                         AnswerText = [
                             "The teacher lacks sufficient knowledge of content and pedagogy to support student learning of the content.",
                             "The teacher’s understanding of content and pedagogy partially supports student learning of the content.",
@@ -28,7 +29,8 @@ namespace Danielson.Data.Domains {
                         ComponentOrder = 2,
                         Title = "Component 1b: Knowing and Valuing Students",
                         Code = "1b",
-                        ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher’s knowledge of students is extensive and fosters student learning and development to support academic and personal success.",
+                        ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher's knowledge of students is extensive and fosters student learning and development to support academic and personal success.",
+                        ElementsOfSuccessHtml = (MarkupString)"<<p><strong>Respect for Students’ Identities</strong></p><p>Students’ lived experiences and funds of knowledge are the foundation for the development of identity, purpose, intellect, and character.</p> <p><strong>Understanding of Students’ Current Knowledge and Skills</strong></p> <p>Learning experiences reflect what students bring and are designed with their current knowledge and skills in mind.</p> <p><strong>Knowledge of Whole Child Development</strong></p> <p>Students' cognitive, physical, social, and emotional development are all addressed in the design of learning environments and experiences to promote student success and autonomy. </p> <p><strong>Knowledge of the Learning Process</strong></p> <p>and Learning Differences Learning requires active intellectual engagement and appropriate support aligned to students' individual differences and needs.</p>",
                         AnswerText = [ "The teacher lacks sufficient knowledge of students to support student learning or development.  ",
 "The teacher’s knowledge of students’ identities, as well as their strengths and needs partially supports learning and development.  ",
 "The teacher’s knowledge of students supports learning and development, and enables the teacher to build upon student assets.   "
@@ -40,6 +42,7 @@ namespace Danielson.Data.Domains {
                         Title = "Component 1c: Setting Instructional Outcomes",
                         Code = "1c",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Instructional outcomes represent high-level learning of important content and support student autonomy, curiosity, and intellectual risk-taking.",
+                        ElementsOfSuccessHtml = (MarkupString)"<p><strong>Value and Relevance</strong></p> <p> Instructional outcomes represent ambitious learning of important content and meaningful opportunities to support student learning and development.</p> <p><strong>Alignment to Grade-Level Standards</strong></p> <p>Instructional outcomes reflect appropriate grade-level standards and communicate high expectations for each student.</p> <p><strong>Clarity of Purpose</strong></p> <p> Instructional outcomes clearly define what will be learned, why it is important, and how students will develop and demonstrate mastery of content and skills.</p> <p><strong>Integration of Multiple Aspects of Student Development</strong></p> <p> Instructional outcomes integrate academic and social-emotional development to complement and build on one another.</p>",
                         AnswerText = [
 "Instructional outcomes are not identified, are not rigorous, or are inappropriate.   ",
 "Instructional outcomes are moderately rigorous and are appropriate for most students in the class.   ",
@@ -52,6 +55,7 @@ namespace Danielson.Data.Domains {
                         Title = "Component 1d: Using Resources Effectively",
                         Code = "1d",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher makes deliberate decisions in the use of instructional materials and other resources to meet individual student needs and support student autonomy and intellectual engagement.",
+                        ElementsOfSuccessHtml = (MarkupString)"<p><strong>Instructional Materials</strong></p><p> Teachers utilize high-quality instructional materials to ensure access to rigorous content and support specific student needs, furthering engagement and mastery.</p> <p><strong> Technology and Digital Resources</strong></p><p> Technological and digital resources support personalized instruction, equitable learning, engagement, exploration, connection, and student development.</p> <p><strong> Supports for Students</strong></p><p> Teachers seek and provide additional aligned resources and supports that make content and curriculum materials accessible to students and address their individual needs.</p>",
                         AnswerText = [
 "The teacher is not aware of, or does not appropriately or effectively use instructional materials and other resources to support student learning and development.   ",
 "The teacher understands and uses instructional materials and other resources to support student learning and development, but these resources represent only a narrow band of what is available.    ",
@@ -64,6 +68,7 @@ namespace Danielson.Data.Domains {
                         Title = "Component 1e: Planning Coherent Instruction",
                         Code = "1e",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Learning experiences prioritize the needs of individual students, ensure all students can meet the intended outcomes, and support student assumption of responsibility for learning.  ",
+                        ElementsOfSuccessHtml = (MarkupString)"<p><strong>Tasks and Activities</strong></p><p> Tasks and activities are specifically matched to learning outcomes, encourage higher-level thinking and student agency, and create authentic opportunities to engage with meaningful content. </p> <p><strong>Flexible Learning</strong></p><p> Multiple strategies and approaches are tailored to individual student needs to create the appropriate level of challenge and support for each student. </p> <p><strong>Student Collaboration</strong></p><p> Student groups are an essential component of learning and development, and are organized thoughtfully to maximize opportunities and build on students’ strengths.</p> <p><strong>Structure and Flow</strong></p><p> Lesson and unit plans are well structured and flow from one to the next to support student learning and development.</p>",
                         AnswerText = [
 "The design of learning experiences does not support student engagement with important content. ",
 "Learning experiences are somewhat coherent in structure, within and across lessons, partially supporting students to meet the intended outcomes. ",
@@ -76,6 +81,7 @@ namespace Danielson.Data.Domains {
                         Title = "Component 1f: Designing and Analyzing Assessments",
                         Code = "1f",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students will have the opportunity to demonstrate mastery of content and analyze their own progress through multiple, flexible assessments.",
+                        ElementsOfSuccessHtml = (MarkupString)"<p><strong> Congruence with Instructional Outcomes</strong></p><p> Aligned assessments provide accurate, clear evidence and allow for the analysis of student understanding and mastery of instructional outcomes. </p> <p><strong>Criteria and Standards</strong></p><p> Criteria and standards for assessment are appropriate and aligned, clearly communicated, and whenever possible have been developed with student input. </p> <p><strong>Planning Formative Assessments</strong></p><p> Teachers plan formative assessments to monitor student progress toward instructional outcomes, make needed adjustments, and support students to monitor their own learning. </p> <p><strong>Analysis and Application</strong></p><p> Teachers consistently use assessment data to direct planning and preparation and to support individualized student instruction.</p>",
                         AnswerText = [
 "There is no plan for assessment or the assessments will not provide evidence that students have learned the intended outcomes. ",
 "Assessments will partially help the teacher know that students have learned or are learning the intended outcomes. ",
@@ -95,6 +101,7 @@ namespace Danielson.Data.Domains {
                         Title = "Component 2a: Cultivating Respectful and Affirming Environments",
                         Code = "2a",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students play an active role in creating learning environments characterized by a sense of community, where each member feels safe, valued, and connected.",
+                        ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
                         AnswerText = [
 "Students do not feel safe and valued; learning environments are characterized by negativity, disrespect, inappropriateness, insensitivity, and/or unresolved conflict. ",
 "Learning environments are partially characterized by caring and respectful interactions. ",
@@ -107,7 +114,8 @@ namespace Danielson.Data.Domains {
                         Title = "Component 2b: Fostering a Culture for Learning",
                         Code = "2b",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students play an active role in establishing a culture that consistently fosters dialogue, reflection, and growth, allowing all students to experience success.",
-AnswerText = [
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
+                        AnswerText = [
 "The culture of the class is not conducive to learning and does not support development. ",
 "The culture of the class is partially conducive to learning and development. ",
 "The culture of the class is characterized by high expectations and supports students’ learning and development.  "
@@ -119,7 +127,8 @@ AnswerText = [
                         Title = "Component 2c: Maintaining Purposeful Environments",
                         Code = "2c",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students have a voice and play an active role in designing and adjusting routines and procedures that actively create a respectful learning environment and support the growth of each community member.",
-AnswerText = [
+                        ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
+                        AnswerText = [
 "Student learning and development are hindered by a lack of routines or inefficient classroom procedures.  ",
     "Classroom routines and procedures, established or managed primarily by the teacher and taught explicitly to students, support opportunities for student learning and development.",
 "Shared routines and efficient procedures are largely student-directed and maximize opportunities for student learning and development.  "
@@ -131,7 +140,8 @@ AnswerText = [
                         Title = "Component 2d: Supporting Positive Student Behavior",
                         Code = "2d",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students consistently and independently display positive behaviors and seek opportunities to build a better classroom community.",
- AnswerText = [
+ ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
+                        AnswerText = [
 "There is little evidence of explicit modeling, instruction, or guidance related to positive student behaviors. ",
 "Positive behaviors are modeled by the teacher and occasionally taught explicitly. ",
 "Students display positive behaviors, which are modeled by teachers and reinforced to promote reflection and recalibration rather than compliance.  "
@@ -143,7 +153,8 @@ AnswerText = [
                         Title = "Component 2e: Organizing Spaces for Learning",
                         Code = "2e",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Learning spaces are thoughtfully co-designed and modified as needed by members of the learning community to address the needs of individuals and create collaborative, joyful spaces for all to learn and grow.",
-AnswerText = [
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
+                        AnswerText = [
 "Learning spaces are unsafe, inaccessible, and/or not conducive to learning and development. ",
 "Learning spaces are safe and accessible; the arrangement and use of resources partially support student learning and development. ",
 "Learning spaces are thoughtfully designed to address the needs of individual learners within the context of shared experiences.  "
@@ -162,7 +173,8 @@ AnswerText = [
                         Title = "Component 3a: Communicating About Purpose and Content",
                         Code = "3a",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Communication about purpose and content is rich, nuanced, and relevant to students inviting them to think critically and contribute intellectually; it encourages curiosity and supports student autonomy.",
-AnswerText = [
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
+                        AnswerText = [
 "Communication about purpose and content is unclear or confusing and hinders student learning.  ",
 "Communication about purpose and content is mostly clear and accurate; it partially supports learning. ",
 "Communication about purpose and content is accurate and clear to students; it supports their active engagement in learning experiences and models effective use of language.  "
@@ -174,7 +186,8 @@ AnswerText = [
                         Title = "Component 3b: Using Questioning and Discussion Techniques",
                         Code = "3b",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students intentionally use questioning and discussion to develop their own and others’ thinking, reasoning skills, and habits of reflection.",
-AnswerText = [
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
+                        AnswerText = [
 "Questioning and discussion are absent, low-level, or do not support learning and development. ",
 "Questioning and discussion, primarily framed and led by the teacher, are used to support student learning and development. ",
 "Questioning and discussion, framed or led by the teacher and students, effectively support critical thinking, reasoning, and reflection.  "
@@ -186,7 +199,8 @@ AnswerText = [
                         Title = "Component 3c: Engaging Students in Learning",
                         Code = "3c",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students take initiative to increase the challenge or complexity of learning experiences; they think critically about a variety of issues and offer solutions; and they make suggestions for modifications that increase meaning and relevance.",
-AnswerText = [
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
+                        AnswerText = [
 "Learning experiences do not require active intellectual engagement by students. ",
 "Learning experiences partially engage students intellectually; the activities require students to do some thinking. ",
 "Learning experiences support curiosity and exploration and encourage higher-order thinking; students engage in multiple ways and represent their ideas and responses through multiple means.  "
@@ -198,6 +212,7 @@ AnswerText = [
                         Title = "Component 3d: Using Assessment for Learning",
                         Code = "3d",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students take initiative to analyze their own progress against a clear standard in order to achieve the outcome and identify new opportunities and challenges.",
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
 AnswerText = [
 "Formative assessment is not used during instruction or is not aligned to the instructional purpose of the lesson. ",
 "Formative assessment partially supports student learning and development. ",
@@ -210,6 +225,7 @@ AnswerText = [
                         Title = "Component 3e: Responding Flexibly to Student Needs",
                         Code = "3e",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Based on self-monitoring and reflection, students voice their needs, ask questions, and make suggestions that lead to adjustments and modifications or spark new learning opportunities.",
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
 AnswerText = [
 "The teacher makes no adjustments to learning experiences, even when warranted, and is not responsive to student needs.  ",
 "The teacher makes some adjustments to learning experiences and is responsive to student needs with partial success.  ",
@@ -229,6 +245,7 @@ AnswerText = [
                         Title = "Component 4a: Engaging in Reflective Practice",
                         Code = "4a",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher consistently engages in reflective practice based on multiple sources of evidence that results in the exploration of new ideas and approaches focused on supporting students who need it most.",
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
 AnswerText = [
 "The teacher does not appear to engage in reflective practice or misjudges the success of instruction.  ",
 "The teacher’s reflective practice leads to some accurate assessment of student success of instruction but does not follow through with analysis and changes to practice.  ",
@@ -241,6 +258,7 @@ AnswerText = [
                         Title = "Component 4b: Documenting Student Progress",
                         Code = "4b",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: Students monitor progress toward mastery and their own attainment of learning and development goals; they regularly analyze and discuss their progress with the teacher and their families.",
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
 AnswerText = [
 "There is no system for documenting student progress or the system is ineffective at communicating progress to students and families. ",
 "The teacher documents some aspects of student progress in a manner that is accessible to students and families. ",
@@ -253,6 +271,7 @@ AnswerText = [
                         Title = "Component 4c: Engaging Families and Communities",
                         Code = "4c",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher’s frequent and ongoing engagement of families and communities demonstrates a clear value for the role they play in student learning and is focused on forging partnerships that further the academic and personal success of each and every student.",
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
 AnswerText = [
 "The teacher does not engage students’ families or the community, engages them infrequently, or does so disrespectfully. ",
 "The teacher makes some efforts to engage families and communities and does so in a respectful manner. ",
@@ -265,6 +284,7 @@ AnswerText = [
                         Title = "Component 4d: Contributing to School Community and Culture",
                         Code = "4d",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher takes a leadership role in defining, modeling, and holding self and peers accountable to the values and intellectual life of the school, leading with an emphasis on meeting the needs of students and families.",
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
 AnswerText = [
 "The teacher is not an active member of the school community or contributes negatively to the culture of learning and values of the school. ",
 "The teacher makes some contributions to the school culture, supporting professional learning and upholding the values of the school. ",
@@ -277,6 +297,7 @@ AnswerText = [
                         Title = "Component 4e: Growing and Developing Professionally",
                         Code = "4e",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher appropriately exercises autonomy to direct professional learning for themselves and their peers, taking a leadership role in the school, setting direction, and supporting colleagues to engage in inquiry and innovation.",
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
 AnswerText = [
 "The teacher does not engage in professional inquiry or learning focused on developing knowledge, skills, and mindsets, or does so reluctantly. ",
 "The teacher engages in professional inquiry and learning focused on developing knowledge, skills, and mindsets individually and with colleagues that is typically arranged or directed by others. ",
@@ -289,6 +310,7 @@ AnswerText = [
                         Title = "Component 4f: Acting in Service of Students",
                         Code = "4f",
                         ContinuumOfPracticeHtml = (MarkupString)"Distinguished: The teacher is a leader in the school in defining and upholding high standards of ethical practice and modeling wise decision-making that honors the inherent worth and dignity of each and every student and prioritizes their needs.",
+ElementsOfSuccessHtml = (MarkupString)"<p><strong>Disciplinary Expertise</strong></p> <p>Teachers have deep knowledge of the disciplines they teach, including structures, central concepts and skills, prerequisite relationships, and methods of inquiry.</p> <p><strong>Pedagogical Content Knowledge</strong></p> <p>Teachers make content accessible to students by understanding and addressing preconceptions, presenting ideas in comprehensible and powerful ways, and thoughtfully implementing the most effective pedagogical approaches.</p> <p><strong>Knowledge of Interdisciplinary Relationships and Skills</strong></p> <p>Teachers make interdisciplinary connections to scaffold learning, support engagement, and build essential knowledge and skills that cross disciplines and support student learning in multiple contexts.</p>",
 AnswerText = [
 "The teacher acts unethically and does not understand the needs of students or make decisions in their best interest. ",
 "The teacher acts ethically and attempts to make deliberate decisions in the best interest of students, families, and colleagues.  ",
