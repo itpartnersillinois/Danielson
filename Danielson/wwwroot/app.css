@@ -234,13 +234,20 @@ fieldset {
     .il-formatted .danielson-component details summary {
         background: transparent;
         margin: 0;
-        padding-bottom: 0;
-        padding-left: 0;
+        padding: 0;
     }
 
     .il-formatted .danielson-component details ul {
         margin-top: 20px;
     }
+
+.il-formatted details > p:first-of-type {
+    padding-top: 20px;
+}
+
+.danielson-component h3 {
+    padding-bottom: 20px;
+}
 
 @media (max-width: 800px) {
     .il-formatted details {
