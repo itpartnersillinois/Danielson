@@ -12,7 +12,12 @@ Currently, none. We do development on local machines.
 
 ## How to deploy to production/development: 
 
-## How to set up locally: 
+## How to set up locally:
+
+1. Go to the test instance of the COTE Portal. Find what you need and click on the "Edit" button.
+2. Run the following SQL statement to get the GUID `SELECT TOP 50 [Guid],[Email],[Role],[StudentEvaluationId],[Username],[LastUpdated] FROM [CTE].[danielson].[User] ORDER BY LastUpdated DESC`
+3. Go to /Account/LoginPassthrough/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx, inserting the GUID.
+
 
 ## Notes (error logging, external tools, links, etc.): 
 

@@ -39,7 +39,6 @@
         }
         <DomainItem DomainAnswer="@CurrentForm.GetDomainAnswer(DomainObject.DomainEnum)" IsReadOnly="@IsReadOnly" OnChangeCallback="AddDomainAnswerToForm"></DomainItem>
     </div>
-    <div>Last changed: @CurrentForm.LastUpdated.ToShortDateString() @CurrentForm.LastUpdated.ToShortTimeString()</div>
     <div class="danielson-button-footer">
         <button class="il-button il-theme-white" @onclick="ChangePagePrevious" style="float: left;">Previous</button>
         <button class="il-button il-theme-white" @onclick="ChangePageNext" style="float: right;">Next</button>
@@ -72,14 +71,11 @@
     @if (IsReadOnly)
     {
         <div class="danielson-final">
-            @if (CurrentForm.ShowComponents)
-            {
-                <div>
-                    Final Summary: @CurrentForm.FinalSummary
-                </div>
-            }
             @if (CurrentForm.IsSigned && !string.IsNullOrWhiteSpace(FormImportInformation?.EvaluatedBy))
             {
+                <div>
+                    Final Summary: @(CurrentForm.FinalSummary == "" ? "N/A" : CurrentForm.FinalSummary)
+                </div>
                 <div>
                     Signed by @FormImportInformation?.EvaluatedBy
                 </div>
@@ -97,16 +93,16 @@
                     <ul>
                         @foreach (var componentTitle in ComponentsNotAnswered)
                         {
-                            <li>@componentTitle.Item1 <a @onclick="e => ChangePageOnFinal(componentTitle.Item2)">Edit domain @componentTitle.Item2.ToString()</a></li>
+                            <li>@componentTitle.Item1 (<a @onclick="e => ChangePageOnFinal(componentTitle.Item2)" aria-label="Edit @componentTitle.Item1">Edit Domain</a>)</li>
                         }
                     </ul>
                 </div>
             }
             @if (CurrentForm.ShowComponents || !IsStudent)
             {
-                if (IsStudent)
+                if (IsStudent || !FinalAnswers.Any())
                 {
-                    <div>Final Summary: @CurrentForm.FinalSummary</div>
+                    <div>Final Summary: @(CurrentForm.FinalSummary == "" ? "N/A" : CurrentForm.FinalSummary)</div>
                 } else  {
                     <div>
                         <label for="final-summary" class="data-required">Final Summary</label>
@@ -126,7 +122,6 @@
                 <input id="final-signature" disabled="@(!AreAllComponentsAnswered())" aria-required="true" type="checkbox" checked="@CurrentForm.IsSigned" @onchange="CheckFinal"> <span>@FormImportInformation?.EvaluatedBy</span>
                 <p>You must sign to submit.</p>
             </div>
-            <div>Last changed: @CurrentForm.LastUpdatedText</div>
             <div>
                 <button class="il-button il-theme-white" @onclick="SaveForm" disabled="@(!(AreAllComponentsAnswered() && IsFormSigned()))">Submit</button>
             </div>
