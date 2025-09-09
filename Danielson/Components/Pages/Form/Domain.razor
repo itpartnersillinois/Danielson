@@ -93,7 +93,7 @@
                     <ul>
                         @foreach (var componentTitle in ComponentsNotAnswered)
                         {
-                            <li>@componentTitle.Item1 (<a @onclick="e => ChangePageOnFinal(componentTitle.Item2)" aria-label="Edit @componentTitle.Item1">Edit Domain</a>)</li>
+                            <li>@componentTitle.Item1 (<a @onclick="e => ChangePageOnFinal(componentTitle.Item2)">Edit Domain @((int)componentTitle.Item2)</a>)</li>
                         }
                     </ul>
                 </div>
