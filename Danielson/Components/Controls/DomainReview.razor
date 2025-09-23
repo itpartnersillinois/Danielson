@@ -1,5 +1,6 @@
 ﻿<details class="danielson-answer-@DomainAnswer.DomainItem.ToString().ToLower()">
     <summary>@Title</summary>
+    <p><a @onclick="e => Edit(DomainEnum)">Edit @Title</a></p>
     @if (!AreAllCompnentsAnswered && ShowErrors)
     {
         <div class="danielson-answer">
