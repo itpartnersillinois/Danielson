@@ -5,6 +5,7 @@
         public string EvaluatedBy => $"{EvaluatorFirstName} {EvaluatorLastName}";
         public string EvaluatorFirstName { get; set; } = "";
         public string EvaluatorLastName { get; set; } = "";
+        public string EvaluatorUsername { get; set; } = "";
         public string FinalScoreText { get; set; } = "";
         public string FormTemplateInternalLookupString { get; set; } = "";
         public bool IsMidterm { get; set; }
