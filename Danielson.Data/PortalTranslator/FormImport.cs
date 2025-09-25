@@ -16,14 +16,14 @@ namespace Danielson.Data.PortalTranslator {
             return connection.QuerySingle<FormImportInformation>("[danielson].usp_get_evaluation @evaluation_id", new { evaluation_id = id });
         }
 
-        public async Task<int> Save(Form form, string username) {
+        public async Task<int> Save(Form form, string username, string evaluatorUsername) {
             using var connection = new SqlConnection(_connectionString);
-            return await connection.ExecuteAsync("[danielson].[usp_update_evaluation] @evaluation_id, @evaluation_cte_stu_id, @modified_by, @evaluator_netid, @isMidterm, @domain1_a, @domain1_b, @domain1_c, @domain1_d, @domain1_e, @domain1_f, @domain1_strengths, @domain1_next_steps, @domain2_a, @domain2_b, @domain2_c, @domain2_d, @domain2_e, @domain2_strengths, @domain2_next_steps, @domain3_a, @domain3_b, @domain3_c, @domain3_d, @domain3_e, @domain3_strengths, @domain3_next_steps, @domain4_a, @domain4_b, @domain4_c, @domain4_d, @domain4_e, @domain4_f, @domain4_strengths, @domain4_next_steps, @summary, @signature",
+            return await connection.ExecuteAsync("[danielson].[usp_update_evaluation] @evaluation_id, @evaluation_cte_stu_id, @modified_by, @evaluator_netid, @isMidterm, @domain1_a, @domain1_b, @domain1_c, @domain1_d, @domain1_e, @domain1_f, @domain1_strengths, @domain1_next_steps, @domain2_a, @domain2_b, @domain2_c, @domain2_d, @domain2_e, @domain2_strengths, @domain2_next_steps, @domain3_a, @domain3_b, @domain3_c, @domain3_d, @domain3_e, @domain3_strengths, @domain3_next_steps, @domain4_a, @domain4_b, @domain4_c, @domain4_d, @domain4_e, @domain4_f, @domain4_strengths, @domain4_next_steps, @summary, @signature, @evaluation_date",
                     new {
                         evaluation_id = form.StudentEvaluationId,
                         evaluation_cte_stu_id = form.StudentId,
                         modified_by = username,
-                        evaluator_netid = form.Email, // TODO change to username when we get this
+                        evaluator_netid = !form.IsSigned ? "" : (string.IsNullOrWhiteSpace(evaluatorUsername) ? form.Email : evaluatorUsername),
                         isMidterm = form.IsMidterm,
                         domain1_a = GetFormDomainValue(form, DomainEnum.One, 1),
                         domain1_b = GetFormDomainValue(form, DomainEnum.One, 2),
@@ -56,7 +56,8 @@ namespace Danielson.Data.PortalTranslator {
                         domain4_strengths = GetFormDomainStrengths(form, DomainEnum.Four),
                         domain4_next_steps = GetFormDomainNextSteps(form, DomainEnum.Four),
                         summary = form.FinalSummary,
-                        signature = form.IsSigned
+                        signature = form.IsSigned,
+                        evaluation_date = form.DateEvaluated
                     });
         }
 
