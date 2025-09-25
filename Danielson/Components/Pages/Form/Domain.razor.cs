@@ -79,7 +79,7 @@ namespace Danielson.Components.Pages.Form {
         public async Task ChangeFormType(bool isMidterm) {
             CurrentForm.IsMidterm = isMidterm;
             var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
-            _ = await FormImport.Save(CurrentForm, username);
+            _ = await FormImport.Save(CurrentForm, username, FormImportInformation?.EvaluatorUsername ?? "");
             NavigationManager.NavigateTo(NavigationManager.Uri, true);
         }
 
@@ -104,7 +104,7 @@ namespace Danielson.Components.Pages.Form {
             CurrentForm.LastUpdated = DateTime.Now;
             ShowFinal = finish;
             var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
-            _ = await FormImport.Save(CurrentForm, username);
+            _ = await FormImport.Save(CurrentForm, username, FormImportInformation?.EvaluatorUsername ?? "");
             _areAllComponentsAnsweredProcessed = false;
             DomainObject = DomainList.Domains.First(d => d.DomainEnum == (finish ? DomainEnum.Four : domainEnum ?? DomainEnum.One));
             StateHasChanged();
@@ -234,7 +234,7 @@ namespace Danielson.Components.Pages.Form {
             CurrentForm.LastUpdated = DateTime.Now;
             _ = await ComponentAnswerHandler.Save(CurrentForm);
             var username = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "";
-            _ = await FormImport.Save(CurrentForm, username);
+            _ = await FormImport.Save(CurrentForm, username, FormImportInformation?.EvaluatorUsername ?? "");
             await JsRuntime.InvokeVoidAsync("AlertOnScreen");
             var roleType = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
             _ = Enum.TryParse(roleType, out RoleEnum role);
