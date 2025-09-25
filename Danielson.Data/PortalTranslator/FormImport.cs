@@ -23,7 +23,7 @@ namespace Danielson.Data.PortalTranslator {
                         evaluation_id = form.StudentEvaluationId,
                         evaluation_cte_stu_id = form.StudentId,
                         modified_by = username,
-                        evaluator_netid = string.IsNullOrWhiteSpace(evaluatorUsername) && form.IsSigned ? form.Email : evaluatorUsername,
+                        evaluator_netid = !form.IsSigned ? "" : (string.IsNullOrWhiteSpace(evaluatorUsername) ? form.Email : evaluatorUsername),
                         isMidterm = form.IsMidterm,
                         domain1_a = GetFormDomainValue(form, DomainEnum.One, 1),
                         domain1_b = GetFormDomainValue(form, DomainEnum.One, 2),
