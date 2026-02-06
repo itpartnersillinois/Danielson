@@ -4,7 +4,35 @@
 
 @if (HttpContext is null)
 {
-    <p>Loading...</p>
+    @* <p>Loading...</p> *@
+
+    <!-- Fullscreen overlay -->
+    <div class="bc-overlay" aria-hidden="false"></div>
+
+    <!-- Centered dialog -->
+    <div class="bc-modal"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="bc-title"
+         aria-describedby="bc-desc"
+         @onkeydown="HandleKeyDown"
+         tabindex="-1"
+         ref="ModalRef">
+
+        @if (!string.IsNullOrWhiteSpace(Title))
+        {
+            <h2 id="bc-title" class="bc-title">@Title</h2>
+        }
+
+        <div id="bc-desc" class="bc-message">
+            @Message
+        </div>
+
+        <button class="bc-btn" @onclick="ConfirmAndNavigate">
+            @ButtonText
+        </button>
+    </div>
+
 }
 else
 {
@@ -12,6 +40,34 @@ else
 }
 
 @code {
+
+    private ElementReference ModalRef;
+
+    // The message shown in the modal.
+    [Parameter, EditorRequired]
+    public string Message { get; set; } = "You are about to leave this page and proceed to THE login page at CoTE Portal.";//default!;
+
+    // Optional title for screen readers and visual context.
+    [Parameter]
+    public string? Title { get; set; } = "Login Expired";
+
+    // Label for the single action button (default: "Continue").
+    [Parameter]
+    public string ButtonText { get; set; } = "Continue";
+
+    /// Controls whether the modal is visible and blocking.
+    [Parameter] public bool IsOpen { get; set; } = true;
+
+
+    // If true, pressing Escape will also confirm and navigate. Default false to enforce “static until click”.
+    [Parameter]
+    public bool ConfirmOnEscape { get; set; } = false;
+
+    // The URL to navigate to when the button is clicked.
+    [Parameter, EditorRequired]
+    public string RedirectUrl { get; set; } = "https://cote.illinois.edu/cote-portal-access";
+
+    // Application HttpContext, if available (null in interactive mode).
     [CascadingParameter]
     private HttpContext? HttpContext { get; set; }
 
@@ -22,7 +78,47 @@ else
             // If this code runs, we're currently rendering in interactive mode, so there is no HttpContext.
             // The identity pages need to set cookies, so they require an HttpContext. To achieve this we
             // must transition back from interactive mode to a server-rendered page.
-            NavigationManager.Refresh(forceReload: true);
+
+            // Lock or unlock background scroll whenever the modal opens/closes
+            ToggleBodyScroll(true);
         }
     }
+
+    private void HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (ConfirmOnEscape && e.Key == "Escape")
+        {
+            // Gets confirmation
+
+            // Optional: clear scroll lock pre-navigation
+            ToggleBodyScroll(false);
+
+            // NavigationManager.Refresh(forceReload: true); Temporary change to prevent infinite reload loop.
+            NavigationManager.NavigateTo(RedirectUrl, forceLoad: true);
+        }
+    }
+
+    private void ConfirmAndNavigate()
+    {
+        // Optional: clear scroll lock pre-navigation
+        ToggleBodyScroll(false);
+
+        // NavigationManager.Refresh(forceReload: true); Temporary change to prevent infinite reload loop.
+        NavigationManager.NavigateTo(RedirectUrl, forceLoad: true);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // Move focus to dialog for accessibility
+        await Task.Yield();
+        try { await ModalRef.FocusAsync(); } catch { /* no-op */ }
+    }
+
+
+    private static void ToggleBodyScroll(bool block)
+    {
+        // We toggle an attribute on <html> to avoid requiring JS interop:
+        var attr = block ? "true" : null;
+    }
+
 }
