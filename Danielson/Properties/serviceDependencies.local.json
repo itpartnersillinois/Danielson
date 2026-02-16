@@ -1,10 +1,10 @@
 {
   "dependencies": {
-    "mssql1": {
+    "mssql2": {
       "secretStore": "LocalSecretsFile",
+      "resourceId": null,
       "type": "mssql.onprem",
-      "connectionId": "ConnectionStrings:DefaultConnection",
-      "dynamicId": null
+      "connectionId": "ConnectionStrings:AppConnection"
     }
   }
 }

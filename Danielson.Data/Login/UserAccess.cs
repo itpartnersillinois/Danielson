@@ -21,7 +21,7 @@ namespace Danielson.Data.Login {
             };
 
         public async Task<(string email, string username, RoleEnum role, string studentEvaluationId)> Get(Guid guid) {
-            
+
             var user = await _testRepository.ReadAsync(r => r.Users.FirstOrDefault(u => u.Guid == guid && (_testing || u.IsActive)));
             if (user == null) {
 

@@ -685,7 +685,7 @@ h1:focus {
 }
 
     .bc-btn:hover {
-        background: #1d4ed8;
+        background: #13294B;
     }
     /* blue-700 */
     .bc-btn:active {
@@ -693,7 +693,7 @@ h1:focus {
     }
 
     .bc-btn:focus {
-        outline: 3px solid rgba(37, 99, 235, .35);
+        outline: 3px solid rgba(19, 41, 75, .35);
         outline-offset: 2px;
     }
 

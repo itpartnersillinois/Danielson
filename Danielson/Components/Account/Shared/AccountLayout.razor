@@ -45,11 +45,11 @@ else
 
     // The message shown in the modal.
     [Parameter, EditorRequired]
-    public string Message { get; set; } = "You are about to leave this page and proceed to THE login page at CoTE Portal.";//default!;
+    public string Message { get; set; } = "You are about to leave this page and proceed to the login page at the CoTE Portal.";//default!;
 
     // Optional title for screen readers and visual context.
     [Parameter]
-    public string? Title { get; set; } = "Login Expired";
+    public string? Title { get; set; } = "Login expired";
 
     // Label for the single action button (default: "Continue").
     [Parameter]
@@ -64,7 +64,7 @@ else
     public bool ConfirmOnEscape { get; set; } = false;
 
     // The URL to navigate to when the button is clicked.
-    [Parameter, EditorRequired]
+    [Parameter]
     public string RedirectUrl { get; set; } = "https://cote.illinois.edu/cote-portal-access";
 
     // Application HttpContext, if available (null in interactive mode).

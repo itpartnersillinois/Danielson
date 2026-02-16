@@ -12,7 +12,7 @@ namespace Danielson.Authentication {
         IOptions<IdentityOptions> optionsAccessor) : RevalidatingServerAuthenticationStateProvider(loggerFactory) where TUser : class {
         private readonly IdentityOptions _options = optionsAccessor.Value;
         private readonly IServiceScopeFactory _scopeFactory = scopeFactory;
-        protected override TimeSpan RevalidationInterval => TimeSpan.FromMinutes(30);
+        protected override TimeSpan RevalidationInterval => TimeSpan.FromMinutes(15);
 
         protected override async Task<bool> ValidateAuthenticationStateAsync(
             AuthenticationState authenticationState, CancellationToken cancellationToken) {
