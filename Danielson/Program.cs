@@ -7,6 +7,7 @@ using Danielson.Data.DataAccess;
 using Danielson.Data.DataModels;
 using Danielson.Data.Login;
 using Danielson.Data.PortalTranslator;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,11 +30,18 @@ builder.Services.AddScoped<FormTemplateAccess>();
 builder.Services.AddScoped<FormAccess>();
 builder.Services.AddScoped(s => new FormImport(builder.Configuration.GetConnectionString("AppConnection")));
 
-builder.Services.AddAuthentication(options => {
+builder.Services.AddAuthentication(options =>
+{
     options.DefaultScheme = IdentityConstants.ApplicationScheme;
     options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
 })
 .AddIdentityCookies();
+
+// Setting forced logout to 2 hours - revalidation expiration interval
+builder.Services.Configure<SecurityStampValidatorOptions>(options => options.ValidationInterval = TimeSpan.FromHours(2));
+
+// This ensures the authentication cookie will expire after the specified time, reducing the window for re-authentication after a SignalR circuit break.
+builder.Services.Configure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options =>  options.ExpireTimeSpan = TimeSpan.FromMinutes(20));
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -44,10 +52,6 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();
-
-// Setting revalidation expiration interval to 4 hours
-builder.Services.Configure<SecurityStampValidatorOptions>(options => options.ValidationInterval = TimeSpan.FromHours(4));
-
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 

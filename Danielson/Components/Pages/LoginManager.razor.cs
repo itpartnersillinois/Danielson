@@ -37,9 +37,18 @@ namespace Danielson.Components.Pages {
                 var existingUser = await SignInManager.UserManager.FindByNameAsync(identity.UserName ?? "");
 
                 if (existingUser is null) {
+
+                    if (identity.UserName is null || identity.Email is null) {
+                        // Handle user creation failure
+                        Console.Error.WriteLine("Empty Identity");
+
+                        // Log the user out and redirect
+                        NavigationManager.NavigateTo("/Account/LogoutPassthrough");
+                    }
+
                     var newUser = new ApplicationUser { 
-                        UserName = identity.UserName ?? "", 
-                        Email = identity.Email ?? "",
+                        UserName = identity.UserName, 
+                        Email = identity.Email,
                         EmailConfirmed = true // Assuming email is confirmed since it's coming from a trusted source
                     };
 
