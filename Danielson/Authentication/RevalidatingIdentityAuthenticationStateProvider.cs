@@ -6,21 +6,29 @@ using Microsoft.Extensions.Options;
 
 namespace Danielson.Authentication {
 
-    public class RevalidatingIdentityAuthenticationStateProvider<TUser>(
-        ILoggerFactory loggerFactory,
-        IServiceScopeFactory scopeFactory,
-        IOptions<IdentityOptions> optionsAccessor) : RevalidatingServerAuthenticationStateProvider(loggerFactory) where TUser : class {
+    public class RevalidatingIdentityAuthenticationStateProvider<TUser>(ILoggerFactory loggerFactory, IServiceScopeFactory scopeFactory, IOptions<IdentityOptions> optionsAccessor) 
+        : RevalidatingServerAuthenticationStateProvider(loggerFactory) where TUser 
+        : class {
+
         private readonly IdentityOptions _options = optionsAccessor.Value;
         private readonly IServiceScopeFactory _scopeFactory = scopeFactory;
-        protected override TimeSpan RevalidationInterval => TimeSpan.FromMinutes(15);
+
+        // The RevalidationInterval determines how often the authentication state will be revalidated.
+        protected override TimeSpan RevalidationInterval => TimeSpan.FromMinutes(1);
 
         protected override async Task<bool> ValidateAuthenticationStateAsync(
             AuthenticationState authenticationState, CancellationToken cancellationToken) {
+
             // Get the user manager from a new scope to ensure it fetches fresh data
             var scope = _scopeFactory.CreateScope();
-            try {
+            try
+            {
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TUser>>();
                 return await ValidateSecurityStampAsync(userManager, authenticationState.User);
+            }
+            catch (Exception ex) {
+                Console.WriteLine($"Exception in ValidateAuthenticationStateAsync: {ex.Message}");
+                return false;
             } finally {
                 if (scope is IAsyncDisposable asyncDisposable) {
                     await asyncDisposable.DisposeAsync();
@@ -32,6 +40,7 @@ namespace Danielson.Authentication {
 
         private async Task<bool> ValidateSecurityStampAsync(UserManager<TUser> userManager, ClaimsPrincipal principal) {
             var user = await userManager.GetUserAsync(principal);
+
             if (user == null) {
                 return false;
             } else if (!userManager.SupportsUserSecurityStamp) {
@@ -39,6 +48,10 @@ namespace Danielson.Authentication {
             } else {
                 var principalStamp = principal.FindFirstValue(_options.ClaimsIdentity.SecurityStampClaimType);
                 var userStamp = await userManager.GetSecurityStampAsync(user);
+                
+                Console.WriteLine($"AAB- Security Stamp from Cookie: {principalStamp}");
+                Console.WriteLine($"AAB- Security Stamp from Database: {userStamp}");
+                
                 return principalStamp == userStamp;
             }
         }

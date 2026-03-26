@@ -1,10 +1,11 @@
-﻿using System.Security.Claims;
-using Danielson.Authentication;
+﻿using Danielson.Authentication;
 using Danielson.Data;
 using Danielson.Data.Login;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Danielson.Components.Pages {
 
@@ -25,59 +26,90 @@ namespace Danielson.Components.Pages {
         [Inject]
         protected UserAccess UserAccess { get; set; } = default!;
 
-        protected override async Task OnInitializedAsync() {
+        protected override async Task OnInitializedAsync()
+        {
+            if (!string.IsNullOrWhiteSpace(GuidString))
+            {
+                
+                var (identity, role, studentEvaluationId) = await ((CustomAuthenticationStateProvider)CustomAuthenticationStateProvider).PullManually(Guid.Parse(GuidString));
 
-            if (!string.IsNullOrWhiteSpace(GuidString)) {
-
-                var (identity, role, studentEvaluationId) =
-                    await ((CustomAuthenticationStateProvider)CustomAuthenticationStateProvider)
-                        .PullManually(Guid.Parse(GuidString));
-
-                // Ensure the user exists in the Identity store
-                var existingUser = await SignInManager.UserManager.FindByNameAsync(identity.UserName ?? "");
-
-                if (existingUser is null) {
-
-                    if (identity.UserName is null || identity.Email is null) {
-                        // Handle user creation failure
-                        Console.Error.WriteLine("Empty Identity");
-
-                        // Log the user out and redirect
-                        NavigationManager.NavigateTo("/Account/LogoutPassthrough");
-                    }
-
-                    var newUser = new ApplicationUser { 
-                        UserName = identity.UserName, 
-                        Email = identity.Email,
-                        EmailConfirmed = true // Assuming email is confirmed since it's coming from a trusted source
-                    };
-
-                    var createResult = await SignInManager.UserManager.CreateAsync(newUser);
-
-                    if (!createResult.Succeeded) {
-
-                        // Handle user creation failure
-                        Console.Error.WriteLine($"Failed to create user: {string.Join(", ", createResult.Errors.Select(e => e.Description))}");
-
-                        // Log the user out and redirect
-                        NavigationManager.NavigateTo("/Account/LogoutPassthrough");
-                    }
-
-                    // Add role
-                    await SignInManager.UserManager.AddToRoleAsync(newUser, role);
-
-                    existingUser = newUser;
+                if (string.IsNullOrWhiteSpace(identity.UserName))
+                {
+                    Console.Error.WriteLine("Failed to retrieve user information from database for GUID: " + GuidString);
+                    NavigationManager.NavigateTo("/Account/LogoutPassthrough");
+                    return;
                 }
 
-                // Sign in the persisted user
-                await SignInManager.SignInWithClaimsAsync(
-                    existingUser,
-                    isPersistent: false,
-                    [
-                    new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, role),
-                    new System.Security.Claims.Claim(ClaimConstants.StudentEvaluationId, studentEvaluationId)
-                    ]
-                );
+                var existingUser = await SignInManager.UserManager.FindByNameAsync(identity.UserName);
+
+                if (existingUser != null)
+                {
+
+                    // User already exists, ensure claims are up to date
+                    var existingClaims = await SignInManager.UserManager.GetClaimsAsync(existingUser);
+                    var roleClaim = existingClaims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+                    var studentEvalClaim = existingClaims.FirstOrDefault(c => c.Type == ClaimConstants.StudentEvaluationId);
+
+                    if (roleClaim == null || roleClaim.Value != role)
+                    {
+                        if (roleClaim != null)
+                        {
+                            await SignInManager.UserManager.RemoveClaimAsync(existingUser, roleClaim);
+                        }
+
+                        await SignInManager.UserManager.AddClaimAsync(existingUser, new Claim(ClaimTypes.Role, role));
+
+                    }
+                    if (studentEvalClaim == null || studentEvalClaim.Value != studentEvaluationId)
+                    {
+                        if (studentEvalClaim != null)
+                        {
+                            await SignInManager.UserManager.RemoveClaimAsync(existingUser, studentEvalClaim);
+                        }
+
+                        await SignInManager.UserManager.AddClaimAsync(existingUser, new Claim(ClaimConstants.StudentEvaluationId, studentEvaluationId));
+                    }
+
+                    // Log user
+                    await SignInManager.SignInAsync(existingUser, isPersistent: true);
+
+                    // Update the authentication state to ensure the new claims are included in the user's identity
+                    await SignInManager.RefreshSignInAsync(existingUser);
+
+                } else {
+
+                    // Create a new user in the database if they don't exist
+                    var newUser = new ApplicationUser
+                    {
+                        UserName = identity.UserName,
+                        Email = identity.Email
+                    };
+
+                    var createUser = await SignInManager.UserManager.CreateAsync(newUser);
+
+                    if (!createUser.Succeeded)
+                    {
+                        Console.Error.WriteLine($"Failed to create user: {string.Join(", ", createUser.Errors.Select(e => e.Description))}");
+                        NavigationManager.NavigateTo("/Account/LogoutPassthrough");
+                        return;
+                    }
+
+                    // Store claims in the database
+                    await SignInManager.UserManager.AddClaimAsync(newUser, new Claim(ClaimTypes.Role, role));
+                    await SignInManager.UserManager.AddClaimAsync(newUser, new Claim(ClaimConstants.StudentEvaluationId, studentEvaluationId));
+
+                    // Sign in with the persistent claims
+                    await SignInManager.SignInWithClaimsAsync(
+                        newUser,
+                        isPersistent: true,
+                        [
+                            new(ClaimTypes.Role, role),
+                        new(ClaimConstants.StudentEvaluationId, studentEvaluationId)
+                        ]
+                    );
+
+                }
+
 
                 NavigationManager.NavigateTo("/Form/Domain/" + studentEvaluationId);
             }
