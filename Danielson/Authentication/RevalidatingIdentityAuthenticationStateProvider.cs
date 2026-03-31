@@ -14,7 +14,7 @@ namespace Danielson.Authentication {
         private readonly IServiceScopeFactory _scopeFactory = scopeFactory;
 
         // The RevalidationInterval determines how often the authentication state will be revalidated.
-        protected override TimeSpan RevalidationInterval => TimeSpan.FromMinutes(1);
+        protected override TimeSpan RevalidationInterval => TimeSpan.FromMinutes(20);
 
         protected override async Task<bool> ValidateAuthenticationStateAsync(
             AuthenticationState authenticationState, CancellationToken cancellationToken) {
@@ -48,9 +48,6 @@ namespace Danielson.Authentication {
             } else {
                 var principalStamp = principal.FindFirstValue(_options.ClaimsIdentity.SecurityStampClaimType);
                 var userStamp = await userManager.GetSecurityStampAsync(user);
-                
-                Console.WriteLine($"AAB- Security Stamp from Cookie: {principalStamp}");
-                Console.WriteLine($"AAB- Security Stamp from Database: {userStamp}");
                 
                 return principalStamp == userStamp;
             }

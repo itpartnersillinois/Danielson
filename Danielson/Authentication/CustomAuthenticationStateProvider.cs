@@ -1,6 +1,7 @@
 ﻿using Danielson.Data;
 using Danielson.Data.DataModels;
 using Danielson.Data.Login;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -28,11 +29,9 @@ namespace Danielson.Authentication
             // This method is called by the Blazor framework to get the current authentication state. We override it to add logging and to set the current user.
             // 1-HTTP Context/Cookies: The base implementation checks the current HTTP request's authentication cookie (typically the .AspNetCore.Identity.Application cookie).
             // 2-Claims Principal: It reconstructs a ClaimsPrincipal object from the authenticated user's claims stored in that cookie.
+
             var authState = await base.GetAuthenticationStateAsync();
             var identity = (ClaimsIdentity?) authState.User.Identity;
-
-            Console.WriteLine($"AAB- GetAuthenticationStateAsync - Current user identity: Name={identity?.Name}, IsAuthenticated={identity?.IsAuthenticated}");
-            Console.WriteLine($"AAB- GetAuthenticationStateAsync - Current user claims: {string.Join(", ", authState.User.Claims.Select(c => $"{c.Type}: {c.Value}"))}");
 
             if (identity == null) {
                 return authState;
@@ -47,8 +46,6 @@ namespace Danielson.Authentication
         public async Task<(IdentityUser, string role, string studentEvaluationId)> PullManually(Guid guid) {
             // This method is used to pull the user information from the database manually, bypassing the normal authentication flow.
             var userFromDatabase = await _userAccess.Get(guid);
-
-            Console.WriteLine($"AAB- PullManually - Retrieved user from database: Email={userFromDatabase.email}, Username={userFromDatabase.username}, Role={userFromDatabase.role}, StudentEvaluationId={userFromDatabase.studentEvaluationId}");
 
             var identity = userFromDatabase.username == "" 
                 ? new IdentityUser() 

@@ -37,7 +37,14 @@ builder.Services.AddAuthentication(options => {
 
 // This ensures that the authentication cookie itself will expire after the specified time, which is important for scenarios where the user might be idle
 // for a long period or if the SignalR connection is lost and needs to be re-established.
-builder.Services.Configure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options => options.ExpireTimeSpan = TimeSpan.FromMinutes(3)); //TimeSpan.FromDays(1));
+builder.Services.Configure<CookieAuthenticationOptions>(
+    IdentityConstants.ApplicationScheme, 
+    options => {
+        options.ExpireTimeSpan = TimeSpan.FromHours(2);
+        // With SlidingExpiration enabled, the cookie's expiration time will be reset on each request, effectively keeping the user logged in as long as they are active.
+        options.SlidingExpiration = true;
+    }
+); 
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
