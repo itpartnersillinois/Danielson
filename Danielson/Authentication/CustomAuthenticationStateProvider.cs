@@ -1,7 +1,5 @@
 ﻿using Danielson.Data;
-using Danielson.Data.DataModels;
 using Danielson.Data.Login;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
