@@ -6,6 +6,7 @@ using Danielson.Data.Data;
 using Danielson.Data.DataAccess;
 using Danielson.Data.Login;
 using Danielson.Data.PortalTranslator;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,17 @@ builder.Services.AddAuthentication(options => {
     options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
 })
 .AddIdentityCookies();
+
+// This ensures that the authentication cookie itself will expire after the specified time, which is important for scenarios where the user might be idle
+// for a long period or if the SignalR connection is lost and needs to be re-established.
+builder.Services.Configure<CookieAuthenticationOptions>(
+    IdentityConstants.ApplicationScheme, 
+    options => {
+        options.ExpireTimeSpan = TimeSpan.FromHours(2);
+        // With SlidingExpiration enabled, the cookie's expiration time will be reset on each request, effectively keeping the user logged in as long as they are active.
+        options.SlidingExpiration = true;
+    }
+); 
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -68,3 +80,5 @@ app.MapRazorComponents<App>()
 app.MapAdditionalIdentityEndpoints();
 
 app.Run();
+
+

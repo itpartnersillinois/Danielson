@@ -623,3 +623,81 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+
+/*Pop-up layout test*/
+
+/* Fullscreen darkened overlay */
+.bc-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 10000;
+}
+
+/* Centered modal dialog */
+.bc-modal {
+    position: fixed;
+    z-index: 10001;
+    inset: 0;
+    margin: auto;
+    width: min(92vw, 560px);
+    max-width: 560px;
+    height: min(23vh, 140px);
+    max-height:140px;
+    background: #fff;
+    color: #111;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    padding: 1.25rem 1.25rem 1rem;
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+}
+
+/* Typography */
+.bc-title {
+    justify-self: center;
+    margin: 0 0 .25rem 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #13294B; /* Illini Blue */
+}
+
+.bc-message {
+    justify-self: center;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: #252525; /* il-storm-10 */
+}
+
+/* Single primary button */
+.bc-btn {
+    justify-self: center;
+    appearance: none;
+    border: none;
+    background: #c84113; /* Illini altgeld */
+    color: #fff;
+    font-weight: 600;
+    border-radius: .2rem;
+    padding: .625rem 1rem;
+    cursor: pointer;
+    transition: background .15s ease-in-out, transform .02s ease;
+}
+
+    .bc-btn:hover {
+        background: #13294B;
+    }
+    /* blue-700 */
+    .bc-btn:active {
+        transform: translateY(1px);
+    }
+
+    .bc-btn:focus {
+        outline: 3px solid rgba(19, 41, 75, .35);
+        outline-offset: 2px;
+    }
+
+/* Prevent background pointer interaction even if scroll exists */
+body, html {
+    overscroll-behavior: none;
+}
