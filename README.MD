@@ -4,11 +4,11 @@
 
 ## Production location:
 
-Currently, none.
+CoTE Web Server.
 
 ## Development location: 
 
-Currently, none. We do development on local machines.
+Currently, none. We do development on local machines. Data might be stored in a local database or on the Test SQL Database.
 
 ## How to deploy to production/development: 
 
@@ -42,3 +42,8 @@ Note that the Danielson tables are all built with a [danielson] schema. The Appl
 The form template information is built as a .NET document outside of the database. This is because the form template is fixed for all forms, and adding it to the database seemed like a lot of unneeded complexity.
 
 You can edit these in Danielson.Data/Domains section, under DomainList. 
+
+## Updates to the form answers
+
+### September 2026
+The final summary’s form responses were updated to reflect revised wording in the evaluations. Because validation of the summary’s possible responses is loosely enforced, the change required modifying only `FinalAnswerGenerator.cs`. Previous evaluations remain compatible by displaying their existing responses stored in the database, while new responses will use the revised wording.
