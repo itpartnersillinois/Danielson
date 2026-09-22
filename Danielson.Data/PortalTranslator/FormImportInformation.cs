@@ -20,5 +20,6 @@
         public int StudentId { get; set; }
         public string StudentName { get; set; } = "";
         public string Title { get; set; } = "";
+        public string CreatedDate { get; set; } = "";
     }
 }

@@ -46,4 +46,6 @@ You can edit these in Danielson.Data/Domains section, under DomainList.
 ## Updates to the form answers
 
 ### September 2026
-The final summary’s form responses were updated to reflect revised wording in the evaluations. Because validation of the summary’s possible responses is loosely enforced, the change required modifying only `FinalAnswerGenerator.cs`. Previous evaluations remain compatible by displaying their existing responses stored in the database, while new responses will use the revised wording.
+1. The final summary’s form responses were updated to reflect revised wording in the evaluations. Because validation of the summary’s possible responses is loosely enforced, the change required modifying only `FinalAnswerGenerator.cs` and `Domain.razor.cs`. Previous evaluations remain compatible by displaying their existing responses stored in the database, while new responses will use the revised wording.
+2. The acronym EFE was replaced across the application by Practicum.
+3. The Nomenclature Domain Feedback was replaced by Domain Reflection.
