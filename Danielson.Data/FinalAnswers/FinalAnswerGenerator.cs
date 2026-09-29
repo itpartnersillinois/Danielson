@@ -6,10 +6,6 @@ namespace Danielson.Data.FinalAnswers {
 
         public static List<string> GetFinalAnswers(Form form, string createdDate) {
 
-            Console.WriteLine($"XXXGenerating final answers for form created on {createdDate}.");
-            Console.WriteLine($"YYYGenerating final answers for form created on {DateTime.Parse("8/1/2026")}.");
-
-
             if (DateTime.Parse(createdDate) < DateTime.Parse("8/1/2026"))
             {
                 // Options for Summary Rating were revised on 2026-09. The previous options are commented out below for reference.
