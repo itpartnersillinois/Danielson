@@ -33,7 +33,7 @@ namespace Danielson.Data.DataModels {
 
         public string FormTemplateInternalLookupString { get; set; } = "";
 
-        public string FormType => $"{PlacementType} - {(_position.ContainsKey(Position) ? _position[Position] : "")}";
+        public string FormType => $"{TranslateFormTypeNomenclature(PlacementType)} - {(_position.ContainsKey(Position) ? _position[Position] : "")}";
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -85,5 +85,20 @@ namespace Danielson.Data.DataModels {
         public ComponentAnswer GetComponentAnswer(DomainEnum domain, int componentOrder) => ComponentAnswers == null ? new ComponentAnswer { DomainItem = domain, ComponentOrder = componentOrder, FormId = Id } : ComponentAnswers.FirstOrDefault(x => x.DomainItem == domain && x.ComponentOrder == componentOrder) ?? new ComponentAnswer { DomainItem = domain, ComponentOrder = componentOrder, FormId = Id };
 
         public DomainAnswer GetDomainAnswer(DomainEnum domain) => DomainAnswers == null ? new DomainAnswer { DomainItem = domain, FormId = Id } : DomainAnswers.FirstOrDefault(x => x.DomainItem == domain) ?? new DomainAnswer { DomainItem = domain, FormId = Id };
+
+        // This method was implemented only to Translate the Form Type written in the danielson form for the users. It doesn't change the value saved on the DB.
+        private string TranslateFormTypeNomenclature(string formType)
+        {
+            if (formType == "EFE"){
+                return "Practicum";
+            }
+
+            if (formType == "ST"){
+                return "Student Teaching";
+            }
+
+            return formType;
+        }
+
     }
 }

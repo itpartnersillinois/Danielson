@@ -222,7 +222,7 @@ namespace Danielson.Components.Pages.Form {
                 CurrentForm.LastUpdated = FormImportInformation.LastUpdated;
             }
             CurrentFormTemplate = await FormTemplateAccess.Get(FormImportInformation.FormTemplateInternalLookupString);
-            FinalAnswers = FinalAnswerGenerator.GetFinalAnswers(CurrentForm);
+            FinalAnswers = FinalAnswerGenerator.GetFinalAnswers(CurrentForm, FormImportInformation.CreatedDate);
             var roleType = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
             _ = Enum.TryParse(roleType, out _currentRole);
             IsReadOnly = ReadOnlyGenerator.IsReadOnly(CurrentForm, _currentRole);
